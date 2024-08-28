@@ -16,20 +16,20 @@
              <div class="offcanvas-body">
                <ul class="navbar-nav justify-content-center flex-grow-1">
                  <li class="nav-item mt-2">
-                   <router-link class="nav-link nav-link-hover" aria-current="page" to="/">Home</router-link>
+                   <router-link class="nav-link nav-link-hover" aria-current="page" to="/" :class="{ active: $route.path === '/' }">Home</router-link>
                  </li>
                  <li class="nav-item dropdown mt-2">
-                     <a class="nav-link nav-link-hover" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <a class="nav-link nav-link-hover" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" :class="{ active: isDropdownActive }">
                       Pricing
                       <i class="fas fa-chevron-down"></i>
                      </a>
                      <ul class="dropdown-menu">
-                       <li><router-link to="/newproducts" class="dropdown-item">Hotels</router-link></li>
-                       <li><router-link to="/products" class="dropdown-item">Adventure Roulette</router-link></li>
+                       <li><router-link to="/hotels" class="dropdown-item" :class="{ active: $route.path === '/hotels' }">Hotels</router-link></li>
+                       <li><router-link to="/adventureRoulette" class="dropdown-item" :class="{ active: $route.path === '/adventureRoulette' }">Adventure Roulette</router-link></li>
                      </ul>
                    </li>
                    <li class="nav-item mt-2">
-                     <router-link to="#" class="nav-link" aria-current="page">Gallery</router-link>
+                     <router-link to="/gallery" class="nav-link" aria-current="page">Gallery</router-link>
                    </li>
                    <li class="nav-item mt-2">
                      <router-link to="/about" class="nav-link" aria-current="page">About Us</router-link>
@@ -42,9 +42,11 @@
                    </li>
                </ul>
                
-               <button class="btn-signIn">
+               <router-link to="/signin" class="mt-1 textDecor">
+                <button class="btn-signIn">
                 Sign in
                </button>
+               </router-link>
                
              </div>
      
@@ -53,7 +55,17 @@
        </nav>
  </template>
  
- 
+ <script>
+ export default {
+  computed: {
+    isDropdownActive() {
+      const activeRoutes = ['/hotels', '/adventureRoulette'];
+      return activeRoutes.includes(this.$route.path);
+    }
+  }
+}
+</script>
+
  <style scoped>
 img[alt='logo'] {
     width: 10rem;
@@ -85,6 +97,14 @@ img[alt='logo']:hover {
     padding: 0.1rem;
 }
 
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.textDecor{
+    text-decoration: none;
+}
+
 .nav-link i {
     font-size: 1rem;
 }
@@ -95,7 +115,7 @@ img[alt='logo']:hover {
 
 .btn-signIn {
     background-color: transparent;
-    padding: 0.1rem 1.7rem;
+    padding: 0.3rem 1.7rem;
     border: 1px solid var(--secondary);
     color: var(--secondary);
     border-radius: 0.5rem;
