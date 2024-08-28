@@ -128,6 +128,7 @@ export default {
         align-items: center;
         text-align: center;
         width: 42rem;
+        font-family: "Raleway", sans-serif;
     }
     
     #homeBanner .carousel-caption h1{
