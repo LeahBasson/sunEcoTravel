@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #TopThingsToDoHome{
     display: flex;
     justify-content: space-evenly;
@@ -122,6 +122,10 @@ img[alt='slideImage2']{
     color: var(--secondary);
     font-family: "Poppins", sans-serif;
     font-weight: 500;
+}
+
+.btn-homeTopDest:hover{
+  background-color: var(--awesome);
 }
 
 .alignButton{
