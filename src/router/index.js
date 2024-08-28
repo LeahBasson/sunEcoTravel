@@ -40,7 +40,23 @@ const routes = [
     path: '/signin',
     name: 'signin',
     component: () => import('@/views/SignIn.vue')
+  },
+  {
+    path: '/topDestination',
+    name: 'topDestination',
+    component: () => import('@/views/TopDestination.vue')
+  },
+  {
+    path: '/topstory',
+    name: 'topstory',
+    component: () => import('@/views/TopStory.vue')
+  },
+  {
+    path: '/topthings',
+    name: 'topthings',
+    component: () => import('@/views/TopThingsToDo.vue')
   }
+
 ]
 
 
