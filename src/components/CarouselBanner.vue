@@ -228,8 +228,7 @@ export default {
       }
 
         img[alt='slideImage']{
-        width: 100%;
-        height: 40vh;
+        height: 45vh;
       }
     
       #homeBanner .carousel-caption{

@@ -2,7 +2,10 @@
     <div class="container" id="topDestinationHome">
         <div class="leftContent">
             <h2>Top Destinations</h2>
+            <p>A few destinations made our list, as a remarkable piece of art, the size and scale of which boggles the imagination. While many of the team's picks are remote breathe-in-that-fresh-air kinds of places, our list doesn't skimp on cities where the hustle and bustle is part of the fun. There are never-ending reasons to travel, but many go to seek those awe-inspiring moments that stop them in their tracks, searching for the sights that will stay with them forever.</p>
+            <router-link to="/topDestination" class="alignButton"><button class="btn-homeTopDest">Explore More</button></router-link>
         </div>
+
         <div class="rightContent">
             <div id="carouselExampleCaptions" class="carousel slide">
   <div class="carousel-inner">
@@ -25,6 +28,20 @@
       <div class="carousel-caption d-none d-md-block">
         <h5>Mauritius</h5>
         <p>Known for its beaches, lagoons and reefs.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+        <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/paris1.jpg" class="img-fluid" alt="slideImage2" loading="eager">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Paris</h5>
+        <p>A major European city and a global center for art, fashion, gastronomy and culture.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+        <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/greece4.jpg" class="img-fluid" alt="slideImage2" loading="eager">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Greece</h5>
+        <p>Greece is a country in southeastern Europe with thousands of islands throughout the Aegean and Ionian sea</p>
       </div>
     </div>
   </div>
@@ -51,11 +68,21 @@ export default {
 #topDestinationHome{
     display: flex;
     justify-content: space-evenly;
-    padding-top: 5rem;
+    padding-top: 9rem;
 }
 
 .leftContent{
     width: 40rem;
+}
+
+.leftContent h2{
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+}
+
+.leftContent p{
+   text-align: left;
+   font-family: "Poppins", sans-serif;
 }
 
 .rightContent{
@@ -64,6 +91,74 @@ export default {
 
 #topDestinationHome .carousel-caption{
     background-color: rgba(0, 0, 0, 0.6); 
+    font-family: "Raleway", sans-serif;  
+}
+
+#topDestinationHome .carousel-caption h5 {
+    font-weight: 700;
+}
+
+#topDestinationHome .carousel-caption p {
+    font-weight: 600;
+}
+
+img[alt='slideImage2']{
+        width: 100%;
+        height: 60vh;
+    }
+
+.btn-homeTopDest{
+    background-color: var(--alternative);
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.3rem;
+    color: var(--secondary);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+}
+
+.alignButton{
+    display: flex;
+    text-decoration: none;
+}
+
+@media (width < 999px)
+{
+  #topDestinationHome{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 5rem;
+}
+.leftContent{
+    width: 96%;
+    margin: auto;
+}
+
+.leftContent p{
+   text-align: center;
+}
+
+.rightContent{
+    width: 100%;
+    display: none
+}
+
+.btn-homeTopDest{
+    background-color: var(--alternative);
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.3rem;
+    color: var(--secondary);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    margin: auto;
+}
+
+.alignButton{
+    display: flex;
+    text-decoration: none;
+}
 }
 
 </style>
