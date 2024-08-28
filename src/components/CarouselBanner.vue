@@ -169,13 +169,13 @@ export default {
        font-size: 1.3rem;
     }
 
-    .lnk{
+    .hb-bannerLinks .lnk{
         border: 1px solid var(--secondary);
         padding: 0.2rem 0.5rem;
         border-radius: 0.3rem;
     }
 
-    .lnk:hover{
+    .hb-bannerLinks .lnk:hover{
         background: rgba(255, 255, 255, 0.3);
     }
 

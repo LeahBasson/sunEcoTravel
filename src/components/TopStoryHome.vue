@@ -52,7 +52,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 #ourStoryHome{
     padding-top: 9rem;
 }
@@ -87,6 +87,10 @@ img[alt="cardImage"] {
     color: var(--secondary);
     font-family: "Poppins", sans-serif;
     font-weight: 500;
+}
+
+.btn-ReadMore:hover{
+  background-color: var(--awesome);
 }
 
 @media (width < 999px)
