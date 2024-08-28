@@ -42,11 +42,16 @@
                    </li>
                </ul>
                
-               <router-link to="/signin" class="mt-1 textDecor">
+               <ul class="navbar-nav justify-content-end">
+                <li class="nav-item mt-2">
+                     <router-link to="/bookings" class="nav-link" aria-current="page"><i class="bi bi-suitcase-lg"></i></router-link>
+                   </li>
+                <router-link to="/signin" class="mt-1 textDecor">
                 <button class="btn-signIn">
                 Sign in
                </button>
                </router-link>
+               </ul>
                
              </div>
      
@@ -55,7 +60,7 @@
        </nav>
  </template>
  
- <script>
+ <script >
  export default {
   computed: {
     isDropdownActive() {
@@ -85,8 +90,8 @@ img[alt='logo']:hover {
 
 
 .nav-item {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .nav-link {
@@ -106,11 +111,11 @@ img[alt='logo']:hover {
 }
 
 .nav-link i {
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
 
-.dropdown-item:active {
-    background-color: #5D7599;
+.dropdown-item:hover, .dropdown-item.active  {
+    background-color: var(--awesome) !important;
 }
 
 .btn-signIn {
@@ -134,9 +139,8 @@ img[alt='logo']:hover {
 
     .btn-signIn {
         display: flex;
-        margin-left: 1rem;
         margin-top: 1rem;
-        padding: 0.1rem 1.3rem;
+        padding: 0.3rem 1.3rem;
     }
 
     img[alt='logo'] {
