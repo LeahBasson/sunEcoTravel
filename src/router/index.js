@@ -60,8 +60,12 @@ const routes = [
     path: '/bookings',
     name: 'bookings',
     component: () => import('@/views/BookingsView.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/LoginView.vue')
   }
-
 ]
 
 

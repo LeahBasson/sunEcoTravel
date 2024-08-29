@@ -44,8 +44,11 @@
                
                <ul class="navbar-nav justify-content-end">
                 <li class="nav-item mt-2">
+                  <router-link to="/login" class="nav-link" aria-current="page"><i class="bi bi-person-circle"></i></router-link>
+                </li>
+                <li class="nav-item mt-2 booking">
                      <router-link to="/bookings" class="nav-link" aria-current="page"><i class="bi bi-suitcase-lg"></i></router-link>
-                   </li>
+                </li>
                 <router-link to="/signin" class="mt-1 textDecor">
                 <button class="btn-signIn">
                 Sign in
@@ -131,6 +134,10 @@ img[alt='logo']:hover {
     background-color: var(--awesome);
 }
 
+.booking{
+  margin-right: 2rem;
+}
+
 @media (max-width: 999px) {
     .navbar-nav {
         text-align: left;
@@ -155,6 +162,10 @@ img[alt='logo']:hover {
     .offcanvas {
         background-color: var(--alternative);
     }
+
+    .booking{
+  margin-right: 0rem;
+}
 }
 
 
