@@ -28,6 +28,10 @@
             </div> 
        </div>
       </div>
+
+      <div class="row" id="hotel-heading">
+        <h1>Hotels in Top Destinations</h1> 
+      </div>
   </div>
 </template>
 
@@ -168,6 +172,13 @@ export default {
   transform: translateY(-50%);
   color: var(--primary); /* Adjust color to match your design */
   pointer-events: none; /* Prevent the icon from blocking input clicks */
+}
+
+#hotel-heading h1{
+  text-align: left;
+  font-family: "Raleway", sans-serif;
+  padding-top: 2rem;
+  padding-left: 5rem;
 }
 
 @media (width < 999px)
