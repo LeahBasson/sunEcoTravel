@@ -3,7 +3,7 @@ import { connection as db} from '../config/index.js'
 class Hotels {
     fetchHotels(req, res) {
         try {           //try statement is used to handle errors
-            const strQry = `SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgURL, Amenities, amount
+            const strQry = `SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgUrl, Amenities, amount
             FROM Hotels;
             `
     
@@ -26,7 +26,7 @@ class Hotels {
     recentHotels(req, res) {
         try{
             const strQry = `
-            SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgURL, Amenities, amount
+            SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgUrl, Amenities, amount
             FROM Hotels
             ORDER BY hotelID DESC
             LIMIT 4; 
@@ -50,7 +50,7 @@ class Hotels {
     fetchHotel(req, res) {
             try{
                 const stryQry = `
-                SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgURL, Amenities, amount
+                SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgUrl, Amenities, amount
                 FROM Hotels WHERE hotelID = ${req.params.id};`
                 db.query(stryQry, (err, result) => {
                     if(err) throw new Error('Issue when retrieving a hotel.')
