@@ -1,72 +1,107 @@
 <template>
-    <div class="container">
-        <div class="row" id="AdventureRoulette">
-        <div class="banner-overlay"></div>
-        <div class="banner-image">
-            <div class="banner-content">
-            <h1 class="animate__animated animate__fadeInDown">Let the Adventure Choose You!</h1>
-            <p class="animate__animated animate__fadeInUp">Feeling adventurous? Every 60 seconds, our Adventure Roulette refreshes with a new, thrilling destination. Whether it's a hidden beach, a bustling city, or a serene mountain retreat, you never know where you'll end up.</p>
-            <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
-            </div> 
-       </div>
+  <div class="container">
+    <div class="row" id="AdventureRoulette">
+      <div class="banner-overlay"></div>
+      <div class="banner-image">
+        <div class="banner-content">
+          <h1 class="animate__animated animate__fadeInDown">Let the Adventure Choose You!</h1>
+          <p class="animate__animated animate__fadeInUp">Feeling adventurous? Every 8 seconds, our Adventure Roulette refreshes with a new, thrilling destination. Whether it's a hidden beach, a bustling city, or a serene mountain retreat, you never know where you'll end up.</p>
+          <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
+        </div> 
       </div>
+    </div>
 
-      <div class="row" id="adventureRoulette-heading">
-        <h1>Unleash Spontaneity with Adventure Roulette<span><lord-icon src="https://cdn.lordicon.com/trkmlure.json" trigger="in" delay="1500" state="in-reveal" colors="primary:#000000,secondary:#ff9a00"></lord-icon></span></h1> 
-      </div>
+    <div class="row" id="adventureRoulette-heading">
+      <h1>Unleash Spontaneity with Adventure Roulette
+        <span><lord-icon src="https://cdn.lordicon.com/trkmlure.json" trigger="in" delay="1500" state="in-reveal" colors="primary:#000000,secondary:#ff9a00"></lord-icon></span>
+      </h1> 
+    </div>
 
-      <div class="row" id="adventure-interaction">
-        <form class="adventure-search" role="search">
-          <input class="form-control" type="text" placeholder="Search by destination" id="searchInput" v-model="searchQuery">
-        </form>
-        <button class="price-button">Sort Price</button>
-      </div>
+    <div class="row" id="adventure-interaction">
+      <form class="adventure-search" role="search">
+        <input class="form-control" type="text" placeholder="Search by destination" id="searchInput" v-model="searchQuery">
+      </form>
+      <button class="price-button" @click="toggleSortOrder">{{ sortButtonText }}</button>
+    </div>
 
-      <div class="row" id="adventure-content" v-if="filteredHotels.length">
-          <Card v-for="hotel in filteredHotels" :key="hotel.hotelID" class="card">
-                <template #cardHeader>
-                    <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
-                </template>
-                <template #cardBody>
-                    <h5 class="card-title">{{ hotel.hotelName }}</h5>
-                    <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
-                    <div class="button-wrapper justify-content-between">
-                        
-                            <button class="btn">View</button>
-                        
-                        <button class="btn">Cart</button>
-                    </div>
-                </template>
-        </Card> 
-      </div>
-      <div v-else>
-        <p class="no-results">Product not found</p>
-      </div>
-      <div v-if="!filteredHotels.length && !hotels.length">
+    <div class="row" id="adventure-content" v-if="displayedHotels.length">
+      <Card v-for="hotel in displayedHotels" :key="hotel.hotelID" class="card">
+        <template #cardHeader>
+          <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
+        </template>
+        <template #cardBody>
+          <h5 class="card-title">{{ hotel.hotelName }}</h5>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <div class="button-wrapper justify-content-center">
+            <button class="btn">View</button>
+          </div>
+        </template>
+      </Card>
+    </div>
+    <div v-else-if="searchQuery && !filteredHotels.length">
+      <p class="no-results">Product not found</p>
+    </div>
+    <div v-if="!filteredHotels.length && !hotels.length">
       <Spinner />
     </div>
-
-    </div>
+  </div>
 </template>
 
 <script setup>
- /* eslint-disable */
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
-import { useStore } from 'vuex'
-import { ref, computed, onMounted } from 'vue'
 
 const store = useStore()
-const hotels = computed(() => store.state.hotels || []) 
+const hotels = computed(() => store.state.hotels || [])
 const searchQuery = ref('')
+const sortOrder = ref('default')
+const startIndex = ref(0)
+const itemsPerPage = 6
+const displayedHotels = ref([])
 
 const filteredHotels = computed(() => {
-  const query = searchQuery.value.toLowerCase()
-  return hotels.value.filter(hotel => hotel.hotelName.toLowerCase().includes(query))
+  let filtered = hotels.value.filter(hotel => hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase()))
+  if (sortOrder.value === 'lowToHigh') {
+    filtered = filtered.sort((a, b) => a.amount - b.amount)
+  } else if (sortOrder.value === 'highToLow') {
+    filtered = filtered.sort((a, b) => b.amount - a.amount)
+  }
+  return filtered
 })
 
+function updateDisplayedHotels() {
+  const totalHotels = filteredHotels.value.length
+  displayedHotels.value = filteredHotels.value.slice(startIndex.value, startIndex.value + itemsPerPage)
+  startIndex.value = (startIndex.value + itemsPerPage) % totalHotels
+}
+
+const sortButtonText = computed(() => {
+  if (sortOrder.value === 'lowToHigh') {
+    return 'Price: Low to High'
+  } else if (sortOrder.value === 'highToLow') {
+    return 'Price: High to Low'
+  }
+  return 'Sort Price'
+})
+
+function toggleSortOrder() {
+  if (sortOrder.value === 'default') {
+    sortOrder.value = 'lowToHigh'
+  } else if (sortOrder.value === 'lowToHigh') {
+    sortOrder.value = 'highToLow'
+  } else {
+    sortOrder.value = 'default'
+  }
+  updateDisplayedHotels() 
+}
+
 onMounted(() => {
-  store.dispatch('fetchHotels')
+  store.dispatch('fetchHotels').then(() => {
+    updateDisplayedHotels() 
+    setInterval(updateDisplayedHotels, 8000) // Switch to the next set every 8 seconds
+  })
 })
 
 function scrollDown() {
@@ -76,6 +111,7 @@ function scrollDown() {
   })
 }
 </script>
+
 
 <style scoped>
 #AdventureRoulette{
@@ -183,7 +219,7 @@ lord-icon {
 }
 
 .price-button{
-    width: 10rem;
+    width: 13rem;
     padding: 0.5rem 2rem;
     background-color: var(--alternative);
     border-radius: 0.5rem;
@@ -201,11 +237,11 @@ lord-icon {
 #adventure-content{
     width: 90%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     padding: 0rem;
     margin: auto;
-    gap: 2rem;
+    gap: 4rem;
     padding-top: 4rem;
     font-family: "Poppins", sans-serif;
 }
