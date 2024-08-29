@@ -3,12 +3,12 @@ import { connection as db} from '../config/index.js'
 class Hotels {
     fetchHotels(req, res) {
         try {           //try statement is used to handle errors
-            const strQry = `SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imageURL, Amenities, amount
+            const strQry = `SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgURL, Amenities, amount
             FROM Hotels;
             `
     
             db.query(strQry, (err, results) => {
-                if (err) throw new Error('Unable to fetch all hotels')
+                if (err) throw new Error(err)
                 res.json({
                     status: res.statusCode,
                     results //creates a key and assigns a value to it 
@@ -26,7 +26,7 @@ class Hotels {
     recentHotels(req, res) {
         try{
             const strQry = `
-            SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imageURL, Amenities, amount
+            SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgURL, Amenities, amount
             FROM Hotels
             ORDER BY hotelID DESC
             LIMIT 4; 
@@ -50,7 +50,7 @@ class Hotels {
     fetchHotel(req, res) {
             try{
                 const stryQry = `
-                SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imageURL, Amenities, amount
+                SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgURL, Amenities, amount
                 FROM Hotels WHERE hotelID = ${req.params.id};`
                 db.query(stryQry, (err, result) => {
                     if(err) throw new Error('Issue when retrieving a hotel.')

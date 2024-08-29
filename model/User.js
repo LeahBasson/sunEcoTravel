@@ -48,11 +48,11 @@ class Users {
         try {
             let data = req.body
            
-            data.pwd = await hash(data.pwd, 12 )  //if the salt is bigger than 15 characters it will take long to encrypt & decrypt
+            data.userPass = await hash(data.userPass, 12 )  //if the salt is bigger than 15 characters it will take long to encrypt & decrypt
             //Payload
             let user = {
                 emailAdd: data.emailAdd,
-                pwd: data.pwd
+                userPass: data.userPass
             }
             let strQry = `
             INSERT INTO Users
@@ -129,7 +129,7 @@ class Users {
 
     async login(req, res) {
         try{
-            const { emailAdd, pwd } = req.body
+            const { emailAdd, userPass } = req.body
             const strQry = `
             SELECT userID, firstName, lastName, userAge , Gender, userRole , emailAdd , userPass , userProfile
             FROM Users
@@ -146,11 +146,11 @@ class Users {
                 )
                 } else{
                     const isValidPass = await compare
-                    (pwd, result[0].pwd)
+                    (userPass, result[0].userPass)
                     if (isValidPass) {
                         const token = createToken({
                             emailAdd, 
-                            pwd
+                            userPass
                         })
                         res.json({
                             status: res.statusCode,
@@ -160,7 +160,7 @@ class Users {
                     } else {
                         res.json({
                             status: 401,
-                            msg: 'Invalid password or you have not registered'
+                            msg: 'This email already exists'
                         })
                     }
                 }

@@ -1,5 +1,5 @@
-import { userRouter, express } from './controller/userController.js'
-import { productRouter  } from './controller/productController.js'
+import { userRouter, express } from './controller/UserController.js'
+import { hotelRouter  } from './controller/HotelController.js'
 import path from 'path'
 
 
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     next() //The next() function is called to pass control to the next middleware function in the stack.
 })
 app.use('/user', userRouter) //to get all the endpoints  //Brackets to parse a string
-app.use('/product' , productRouter)
+app.use('/hotel' , hotelRouter)
 
 app.use(
  express.static('./static'),
