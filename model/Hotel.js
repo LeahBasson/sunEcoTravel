@@ -51,9 +51,10 @@ class Hotels {
             try{
                 const stryQry = `
                 SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgUrl, amenities, contactInfo, amount
-                FROM Hotels WHERE hotelID = ${req.params.id};`
+                FROM Hotels 
+                WHERE hotelID = ${req.params.id};`
                 db.query(stryQry, (err, result) => {
-                    if(err) throw new Error(err)
+                    if (err) throw new Error(err.message)
                         res.json({
                        status: res.statusCode,
                        result: result[0]  //result for a single product 
