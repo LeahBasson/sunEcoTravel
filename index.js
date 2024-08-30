@@ -7,6 +7,9 @@ import path from 'path'
 const app = express()
 const port = +process.env.PORT || 4000
 
+//use cors
+app.use(cors());
+
 //Middleware - Middleware is software that lies between an operating system and the applications running on it. 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");  //enables your server to accept requests from any origin.
