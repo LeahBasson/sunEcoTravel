@@ -1,8 +1,8 @@
 <template>
   <div class="container" id="topDestinationHome">
       <div class="leftContent">
-          <h2>Top Destinations</h2>
-          <p>A few destinations made our list, as a remarkable piece of art, the size and scale of which boggles the imagination. While many of the team's picks are remote breathe-in-that-fresh-air kinds of places, our list doesn't skimp on cities where the hustle and bustle is part of the fun. There are never-ending reasons to travel, but many go to seek those awe-inspiring moments that stop them in their tracks, searching for the sights that will stay with them forever.</p>
+          <h2>Hotels in Top Destinations</h2>
+          <p>A few hotels made our list, as a remarkable piece of art, the size and scale of which boggles the imagination. While many of the team's picks are remote breathe-in-that-fresh-air kinds of places, our list doesn't skimp on cities where the hustle and bustle is part of the fun. There are never-ending reasons to travel, but many go to seek those awe-inspiring moments that stop them in their tracks, searching for the sights that will stay with them forever.</p>
           <router-link to="/topDestination" class="alignButton"><button class="btn-homeTopDest">Explore More</button></router-link>
       </div>
 

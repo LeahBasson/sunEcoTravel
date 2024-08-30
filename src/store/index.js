@@ -16,7 +16,8 @@ export default createStore({
     users: null,
     user: null,
     hotels : null,
-    hotel : null
+    hotel : null,
+    recentHotels: null
   },
   getters: {
   },
@@ -32,6 +33,9 @@ export default createStore({
     },
     setHotels(state, value) { 
       state.hotels = value
+    },
+    setRecentHotels(state, value) { 
+      state.recentHotels = value
     }
   },
   actions: {
@@ -50,9 +54,97 @@ export default createStore({
           position: toast.POSITION.BOTTOM_CENTER
         })
       }
-    }
-  },
-  // ===== LOGIN =======
+    },
+
+    async fetchHotel(context, id) {
+      try {
+        const { result, msg } = await (await axios.get(`${apiURL}hotel/${id}`)).data
+        if (result) {
+          context.commit('setHotel', result)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async fetchRecentHotels(context) {
+      console.log(context)
+      try {
+        const res = await axios.get(`${apiURL}hotel/recent`) 
+        const {results, msg} = await res.data
+        if(results) {
+          context.commit('setRecentHotels', results)
+        } else {
+          toast.error(`${ msg }`)  , {  //its going to be success if the request was successful. Its style
+            autoClose: 2000
+          }  //Used to display an error message
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000
+        }) // Toast is used to display an error message
+      }
+    },
+    async addAHotel(context, payload) {
+      try {
+        const { msg } = await (await axios.post(`${apiURL}hotel/add`, payload)).data
+        if (msg) {
+          context.dispatch('fetchHotels')
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    async updateHotel(context, payload) {
+      try {
+        const { msg } = await (await axios.patch(`${apiURL}hotel/${payload.hotelID}`, payload)).data
+        if (msg) {
+          context.dispatch('fetchHotels')
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+
+    async deleteHotel(context, id) {
+      try {
+        const { msg } = await (await axios.delete(`${apiURL}hotel/${id}`)).data
+        if (msg) {
+          context.dispatch('fetchHotels')
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+    // ===== LOGIN =======
   async login(context, payload) {
     try {
       const { msg, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
@@ -82,6 +174,9 @@ export default createStore({
       })
     }
   },
+
+  },
+  
   modules: {
   }
 })

@@ -25,7 +25,7 @@
     </div>
 
     <div class="row" id="adventure-content" v-if="displayedHotels.length">
-      <Card v-for="hotel in displayedHotels" :key="hotel.hotelID" class="card">
+      <Card v-for="hotel in displayedHotels" :key="hotel.hotelID">
         <template #cardHeader>
           <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
         </template>
@@ -33,15 +33,15 @@
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
           <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
           <div class="button-wrapper justify-content-center">
-            <button class="btn">View</button>
+            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btn">View</button></router-link>
           </div>
         </template>
       </Card>
     </div>
     <div v-else-if="searchQuery && !filteredHotels.length">
-      <p class="no-results">Product not found</p>
+      <p class="no-results">Hotel not found</p>
     </div>
-    <div v-if="!filteredHotels.length && !hotels.length">
+    <div v-if="!displayedHotels.length && !hotels.length">
       <Spinner />
     </div>
   </div>
@@ -266,6 +266,10 @@ lord-icon {
   color: var(--secondary);
 }
 
+.btn:hover{
+  background-color: var(--awesome);
+}
+
 .button-wrapper{
   display: flex;
   justify-content: space-between;
@@ -303,7 +307,7 @@ lord-icon {
 }
 
 .adventure-search{
-  width: 97%;
+  width: 100%;
 }
 
 #adventureRoulette-heading{
@@ -321,7 +325,7 @@ lord-icon {
 }
 
 .price-button{
-  width: 87%;
+  width: 95%;
   margin-right: 0rem;
 }
 

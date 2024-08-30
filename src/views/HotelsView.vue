@@ -5,22 +5,19 @@
         <div class="banner-image">
             <div class="banner-content">
             <h1 class="animate__animated animate__fadeInDown">Where do you want to stay ? </h1>
-            <div class="formAlignment">
+            <div class="alignment">
 
               <form class="adventure-search" role="search">
               <div class="input-wrapper">
-                <input class="form-control" type="text" placeholder="Hotel name or destination" id="searchInput">
+                <input class="form-control" type="text" placeholder="Search hotel name" id="searchInput" v-model="searchQuery">
                 <span class="search-icon">
                   <i class="fas fa-search"></i>
                 </span>
               </div>
+              <p v-if="noResults" class="no-results">Hotel doesn't exist</p>
             </form>
-            <form>
-                <div class="calender-form">
-                <flat-pickr v-model="dateRange" :config="dateRangeConfig" placeholder="Check-in | Check-out" class="form-control"/>
-                <i class="fas fa-calendar-alt calendar-icon"></i>
-              </div>
-            </form>
+
+            <button class="btn-findHotel"  @click="findHotels">Find Hotels</button>
             </div>
          
             <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
@@ -29,43 +26,161 @@
        </div>
       </div>
 
+      <div class="row" id="hotel-searched" v-if="showHotels">
+        <Card v-for="hotel in filteredHotels" :key="hotel.hotelID" class="card">
+          <template #cardHeader>
+          <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
+        </template>
+        <template #cardBody>
+          <h5 class="card-title">{{ hotel.hotelName }}</h5>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <div class="button-wrapper justify-content-center">
+            <router-link><button class="btn">View</button></router-link>
+          </div>
+        </template>
+        </Card>
+      </div>
+
       <div class="row" id="hotel-heading">
         <h1>Hotels in Top Destinations</h1> 
       </div>
+
+      <div class="row" id="hotel-content">
+        <div class="hotel-link">
+          <router-link to="/topDestination" class="lnk">See All</router-link>
+        </div>
+
+        <div class="hotel-cards" v-if="hotels">
+          <Card v-for="hotel in hotels.slice(0, 4)" :key="hotel.hotelID" class="card">
+            <template #cardHeader>
+          <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
+        </template>
+        <template #cardBody>
+          <h5 class="card-title">{{ hotel.hotelName }}</h5>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <div class="button-wrapper justify-content-center">
+            <router-link><button class="btn">View</button></router-link>
+          </div>
+        </template>
+          </Card>
+        </div>
+        
+      </div>
+
+      <div class="row" id="hotel-heading2">
+        <h1>Explore a variety of stays</h1> 
+      </div>
+
+      <div class="row" id="hotel-content">
+        <div class="hotel-link">
+          <router-link to="/topDestination" class="lnk">See All</router-link>
+        </div>
+
+        <div class="hotel-cards" v-if="hotels">
+          <Card v-for="hotel in hotels.slice(-4)" :key="hotel.hotelID" class="card">
+            <template #cardHeader>
+          <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
+        </template>
+        <template #cardBody>
+          <h5 class="card-title">{{ hotel.hotelName }}</h5>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <div class="button-wrapper justify-content-center">
+            <button class="btn">View</button>
+          </div>
+        </template>
+          </Card>
+        </div>
+        
+      </div>
+
   </div>
 </template>
 
-<script>
-import FlatPickr from 'vue-flatpickr-component';
-import 'flatpickr/dist/flatpickr.css';
+<script setup>
+import { useStore } from 'vuex'
+import { ref, computed, onMounted, watch } from 'vue'
+// import Spinner from '@/components/Spinner.vue'
+import Card from '@/components/Card.vue'
 
-export default {
-  components: { FlatPickr },
-  data() {
-    return {
-      dateRange: null, // Holds the selected date range
-      dateRangeConfig: {
-        mode: 'range',
-        dateFormat: 'Y-m-d',
-        onChange: this.handleDateChange
-      }
-    };
-  },
-  methods: {
-    handleDateChange(selectedDates) {
-      if (selectedDates.length === 2) {
-        console.log('Check-In Date:', selectedDates[0]);
-        console.log('Check-Out Date:', selectedDates[1]);
-      }
-    }
+const store = useStore()
+
+const searchQuery = ref('')
+const showHotels = ref(false)
+const loading = ref(true) // To handle loading state
+
+const hotels = computed(() => store.state.hotels)
+
+// Computed property to filter hotels based on search query
+const filteredHotels = computed(() => {
+  // Ensure hotels is not null or undefined before filtering
+  if (hotels.value && Array.isArray(hotels.value)) {
+    return hotels.value.filter(hotel =>
+      hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase())
+    );
   }
-};
+  return []; // Return an empty array if hotels is null or not an array
+});
+
+
+// Computed property to determine if there are no results
+const noResults = computed(() => {
+  return filteredHotels.value.length === 0 && searchQuery.value.trim() !== ''
+})
+
+// Function to handle the "Find Hotels" button click
+function findHotels() {
+  if (searchQuery.value.trim()) {
+    if (!noResults.value) {
+      showHotels.value = true
+      // Scroll down to the hotel-searched div
+      setTimeout(() => {
+        const hotelSearchedElement = document.getElementById('hotel-searched')
+        if (hotelSearchedElement) {
+          window.scrollTo({
+            top: hotelSearchedElement.offsetTop,
+            behavior: 'smooth'
+          })
+        }
+      }, 300)
+    } else {
+      showHotels.value = false
+    }
+  } else {
+    showHotels.value = false
+  }
+}
+
+// Watcher to hide the hotel-searched div and no-results message when the search query is emptied
+watch(searchQuery, (newQuery) => {
+  if (!newQuery.trim()) {
+    showHotels.value = false
+  }
+})
+
+// Fetch hotels on component mount
+onMounted(async () => {
+  await store.dispatch('fetchHotels')
+  loading.value = false // Update loading state
+})
+
+// Handle additional scrolling functionality
+function scrollDown() {
+  window.scrollTo({
+    top: document.getElementById('hotel-heading').offsetTop,
+    behavior: 'smooth'
+  })
+}
 </script>
+
 
 <style scoped>
 #hotelBanner{
   position: relative;
   z-index: 1;
+}
+
+.text{
+  color: var(--alternative);
 }
 
 .banner-image{
@@ -89,7 +204,7 @@ export default {
   position: relative;
   z-index: 2;
   width: 64rem;
-  margin: 13rem auto 13rem;
+  margin: 14rem auto 14rem;
   color: var(--secondary);
   font-family: "Raleway", sans-serif;
   /* background-color: pink; */
@@ -122,9 +237,17 @@ export default {
   background: rgba(255, 255, 255, 0.3); 
 }
 
+.alignment{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: auto;
+}
+
 .adventure-search {
   position: relative;
   width: 20rem;
+  margin-top: 2rem;
 }
 
 .input-wrapper {
@@ -146,39 +269,110 @@ export default {
 .search-icon {
   position: absolute;
   top: 50%;
-  left: 10px; /* Adjust to position the icon */
+  left: 10px;
   transform: translateY(-50%);
   color: var(--primary);
   font-size: 1rem;
 }
 
-.formAlignment{
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  padding-top: 2rem;
-}
-
-.calender-form{
-  width: 14rem;
-  position: relative;
-}
-
-.calendar-icon {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  color: var(--primary); /* Adjust color to match your design */
-  pointer-events: none; /* Prevent the icon from blocking input clicks */
-}
-
 #hotel-heading h1{
   text-align: left;
   font-family: "Raleway", sans-serif;
-  padding-top: 2rem;
-  padding-left: 5rem;
+  padding-top: 6rem;
+  padding-left: 5.4rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+#hotel-heading2 h1{
+  text-align: left;
+  font-family: "Raleway", sans-serif;
+  padding-top: 6rem;
+  padding-left: 5.4rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.btn-findHotel{
+  background-color: var(--alternative);
+  color: var(--secondary);
+  width: 10rem;
+  height: 2.4rem;
+  margin-top: 2rem;
+  border: none;
+  border-radius: 0.3rem;
+  font-weight: 600;
+}
+ 
+.btn-findHotel:hover{
+  background-color: var(--awesome);
+}
+
+.hotel-link{
+  display: flex;
+  justify-content: end;
+  width: 95%;
+  order: 1;
+}
+
+.hotel-link .lnk{
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.hotel-link .lnk:hover{
+  color: var(--alternative);
+}
+
+#hotel-searched{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding-top: 3rem;
+}
+
+.hotel-cards .card{
+  border: 1px solid var(--borderColor);
+  border-radius: 0.5rem;
+  padding: 0;
+}
+
+.card-title {
+  color: var(--primary);
+}
+
+.lead{
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.btn{
+  background-color: var(--alternative);
+  color: var(--secondary);
+}
+
+.btn:hover{
+  background-color: var(--awesome);
+}
+
+.hotel-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hotel-cards{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 90%;
+  padding-top: 1rem;
+  gap: 3rem;
+  margin: auto;
+  order: 2;
 }
 
 @media (width < 999px)
@@ -196,6 +390,47 @@ export default {
     font-size: 0.8rem;
     margin: 6rem auto 6rem;
   }
+
+  #hotel-heading h1{
+    text-align: center;
+    padding-left: 0rem;
+    padding-top: 2rem;
+  }
+
+  #hotel-heading2 h1{
+    text-align: center;
+    padding-left: 0rem;
+    padding-top: 2rem;
+  }
+
+  .adventure-search {
+ width: 100%;
+}
+
+.alignment{
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0rem;
+  margin: auto;
+}
+
+.btn-findHotel{
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.hotel-link {
+  order: 2;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.hotel-cards{
+  order: 1;
+}
  
 }
 
