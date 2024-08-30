@@ -15,7 +15,7 @@ hotelRouter.get('/recent', (req, res) => {
     hotels.recentHotels(req, res) 
 })
 
-hotelRouter.get ('/:id', verifyAToken, (req, res) => {
+hotelRouter.get ('/:id', (req, res) => {
     hotels.fetchHotel(req, res)
 })
 
