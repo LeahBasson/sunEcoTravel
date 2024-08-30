@@ -38,23 +38,23 @@ bookingRouter.get('/:uid', verifyAToken, (req, res) => {
     bookings.fetchBookings(req, res)
 })
 
-bookingRouter.get ('/:id/:bookingID', verifyAToken, (req, res) => {
+bookingRouter.get ('/:uid/:bookingID', verifyAToken, (req, res) => {
     bookings.fetchBooking(req, res)
 })
 
-bookingRouter.post('/:id', (req, res) => {
+bookingRouter.post('/:uid', (req, res) => {
     bookings.addBooking(req, res)
 })
 
-bookingRouter.patch('/:id/:bookingID', verifyAToken, (req, res) => {
+bookingRouter.patch('/:uid/:bookingID', verifyAToken, (req, res) => {
     bookings.updateBooking(req, res)
 })
 
-bookingRouter.delete('/:id/:bookingID', verifyAToken, (req, res) => {
+bookingRouter.delete('/:uid/:bookingID', verifyAToken, (req, res) => {
     users.deleteBooking(req, res)
 })
 
-bookingRouter.delete('/:id', verifyAToken, (req, res) => {
+bookingRouter.delete('/:uid', verifyAToken, (req, res) => {
     users.deleteBookings(req, res)
 })
 
