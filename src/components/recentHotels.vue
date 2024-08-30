@@ -13,7 +13,7 @@
               <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
               <div class="button-wrapper justify-content-center">
                 <router-link >
-                  <button class="btn">View</button>
+                  <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btn">View</button></router-link>
                 </router-link>
               </div>
             </template>
