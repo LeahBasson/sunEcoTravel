@@ -53,7 +53,7 @@ class Hotels {
                 SELECT hotelID, hotelName, hotelDescription, hotelAdd, country, city, imgUrl, Amenities, amount
                 FROM Hotels WHERE hotelID = ${req.params.id};`
                 db.query(stryQry, (err, result) => {
-                    if(err) throw new Error('Issue when retrieving a hotel.')
+                    if(err) throw new Error(err)
                         res.json({
                        status: res.statusCode,
                        result: result[0]  //result for a single product 
