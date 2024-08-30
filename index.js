@@ -1,6 +1,7 @@
 import { userRouter, express } from './controller/UserController.js'
 import { hotelRouter  } from './controller/HotelController.js'
 import path from 'path'
+import cors from 'cors';
 
 
 //Create an express app 
