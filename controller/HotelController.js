@@ -19,15 +19,15 @@ hotelRouter.get ('/:id', (req, res) => {
     hotels.fetchHotel(req, res)
 })
 
-hotelRouter.post('/add', verifyAToken, (req, res) => {
+hotelRouter.post('/add', (req, res) => {
     hotels.addHotel(req, res)
 })
 
-hotelRouter.patch('/:id', verifyAToken, (req, res) => {
+hotelRouter.patch('/:id', (req, res) => {
     hotels.updateHotel(req, res)
 })
 
-hotelRouter.delete('/:id', verifyAToken, (req, res) => {
+hotelRouter.delete('/:id', (req, res) => {
     hotels.deleteHotel(req, res)
 })
 
