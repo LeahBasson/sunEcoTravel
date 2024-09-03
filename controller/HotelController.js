@@ -27,7 +27,7 @@ hotelRouter.patch('/:id', (req, res) => {
     hotels.updateHotel(req, res)
 })
 
-hotelRouter.delete('/:id', (req, res) => {
+hotelRouter.delete('/:id', verifyAToken, (req, res) => {
     hotels.deleteHotel(req, res)
 })
 
