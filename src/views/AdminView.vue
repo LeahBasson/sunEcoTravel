@@ -44,7 +44,7 @@
                     </td>
                     <td>
                       <div class="adminButtons">
-                        <button class="table-button"><i class="bi bi-pen-fill"></i></button>
+                        <button class="table-button" data-bs-toggle="modal" :data-bs-target="'#updateHotelModal' + hotel.hotelID"><i class="bi bi-pen-fill"></i></button>
                         <button class="table-button" @click="deleteHotel(hotel.hotelID)"><i class="bi bi-trash-fill"></i></button>
                       </div>
                     </td>
@@ -55,29 +55,108 @@
                   <Spinner />
                 </div>
              </table>
-            </div>
+    </div>
 
     </div>
 
+    <div v-for="hotel in hotels" :key="hotel.hotelID">
+      <UpdateHotelModal :hotel='hotel'>
+                
+      </UpdateHotelModal> 
+
+    </div>
+    
+
+    <!----------------- Users Table --------------------->
+
+    <div class="row" id="admin-hotels">
+      <h1 class="admin-heading">Users Table</h1>
+    
+    <div class="adminButtons">
+        <button class="admin-button" @click="sortUserNameAsc">Sorting Alphabetically</button>
+      
+        <button type="button" class="admin-button" data-bs-toggle="modal" data-bs-target="#addUserModal">
+          Add New User
+        </button>
+    </div>
+
+    <AddUserModal />
+    <div class="tableContainer2">
+              <table>
+                <thead>
+                 <th>First name</th>
+                 <th>Last Name</th>
+                 <th>Gender</th>
+                 <th>Email address</th>
+                 <th>User profile</th>
+                 <th>Actions</th>
+                </thead>
+                <tbody v-if="users">
+                  <tr v-for="user in users" :key="user.userID">
+                    <td>
+                      {{ user.firstName }}
+                    </td>
+                    <td>
+                      {{ user.lastName }}
+                    </td>
+                    <td>
+                      {{ user.Gender }}
+                    </td>
+                    <td>
+                      {{ user.emailAdd }}
+                    </td>
+                    <td>
+                      <img :src="user.userProfile" :alt="user.firstName" loading="eager" class="img-fluid adminImages">
+                    </td>
+                    <td>
+                      <div class="adminButtons">
+                        <button class="table-button" data-bs-toggle="modal" :data-bs-target="'#updateUserModal' + user.userID"><i class="bi bi-pen-fill"></i></button>
+                        <button class="table-button" @click="deleteUser(user.userID)"><i class="bi bi-trash-fill"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                   
+                </tbody>
+                <div v-else>
+                  <Spinner />
+                </div>
+             </table>
+    </div>
+
+    </div>
 
     </div>
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
 import { computed, onMounted } from 'vue';
-import Spinner from '@/components/Spinner.vue';
+import { useStore } from 'vuex';
+import UpdateHotelModal from '@/components/UpdateHotelModal.vue';
 import AddHotelModel from '@/components/AddHotelModel.vue';
+import AddUserModal from '@/components/AddUserModal.vue';
 
 const store = useStore();
 const hotels = computed(() => store.state.hotels);
+const users = computed(() => store.state.users);
 
-function sortByNameAsc() {
-  hotels.value.sort((a, b) => a.hotelName.localeCompare(b.hotelName));
+function fetchHotels() {
+  store.dispatch('fetchHotels');
+}
+
+function fetchUsers() {
+  store.dispatch('fetchUsers');
 }
 
 function deleteHotel(hotelID) {
   store.dispatch('deleteHotel', hotelID);
+}
+
+function deleteUser(userID) {
+  store.dispatch('deleteUser', userID);
+}
+
+function sortByNameAsc() {
+  hotels.value.sort((a, b) => a.hotelName.localeCompare(b.hotelName));
 }
 
 function scrollDown() {
@@ -88,10 +167,10 @@ function scrollDown() {
 }
 
 onMounted(() => {
-  store.dispatch('fetchHotels');
+  fetchHotels();
+  fetchUsers();
 });
 </script>
-
 
 <style scoped>
 #AdventureRoulette{
@@ -257,7 +336,7 @@ table{
 }
 
 table{
-  width: 79%;
+  width: 85%;
   margin: auto;
   margin-top: 2rem;
 }
@@ -320,14 +399,14 @@ td:before {
 .tableContainer .total-row td:before { content: ""; }
 
 /* Users Table Mobile */
-/* .tableContainer2 td:nth-of-type(1):before { content: "Firstname"; }
-.tableContainer2 td:nth-of-type(2):before { content: "Lastname"; }
+.tableContainer2 td:nth-of-type(1):before { content: "First name"; }
+.tableContainer2 td:nth-of-type(2):before { content: "Last name"; }
 .tableContainer2 td:nth-of-type(3):before { content: "Gender"; }
-.tableContainer2 td:nth-of-type(4):before { content: "User Profile"; }
-.tableContainer2 td:nth-of-type(5):before { content: "Email Address"; }
+.tableContainer2 td:nth-of-type(4):before { content: "Email address"; }
+.tableContainer2 td:nth-of-type(5):before { content: "User profile"; }
 .tableContainer2 td:nth-of-type(6):before { content: "Actions"; }
 .tableContainer2 .total-row td:before { content: ""; }
-.tableContainer2 .total-row td:before { content: ""; } */
+.tableContainer2 .total-row td:before { content: ""; }
 
 
 }
