@@ -5,7 +5,7 @@
       <div class="banner-image">
         <div class="banner-content">
           <h1 class="animate__animated animate__fadeInDown">Let the Adventure Choose You!</h1>
-          <p class="animate__animated animate__fadeInUp">Feeling adventurous? Every 8 seconds, our Adventure Roulette refreshes with a new, thrilling destination. Whether it's a hidden beach, a bustling city, or a serene mountain retreat, you never know where you'll end up.</p>
+          <p class="animate__animated animate__fadeInUp">Feeling adventurous? Every 8 seconds, our Adventure Roulette refreshes with a new, thrilling destination. For explorers who like spontaneous adventures try it now, you never know where you'll end up.</p>
           <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
         </div> 
       </div>
@@ -19,11 +19,12 @@
 
     <div class="row" id="adventure-interaction">
       <form class="adventure-search" role="search">
-        <input class="form-control" type="text" placeholder="Search by destination" id="searchInput" v-model="searchQuery">
+        <input class="form-control" type="text" placeholder="Search by destination" id="searchInput" v-model="searchQuery" @input="performSearch">
       </form>
       <button class="price-button" @click="toggleSortOrder">{{ sortButtonText }}</button>
     </div>
 
+    <!-- Display hotels -->
     <div class="row" id="adventure-content" v-if="displayedHotels.length">
       <Card v-for="hotel in displayedHotels" :key="hotel.hotelID">
         <template #cardHeader>
@@ -38,9 +39,13 @@
         </template>
       </Card>
     </div>
+
+    <!-- No results message -->
     <div v-else-if="searchQuery && !filteredHotels.length">
-      <p class="no-results">Hotel not found</p>
+      <p class="no-results">Hotel doesn't exist</p>
     </div>
+
+    <!-- Spinner for loading -->
     <div v-if="!displayedHotels.length && !hotels.length">
       <Spinner />
     </div>
@@ -62,12 +67,20 @@ const itemsPerPage = 6
 const displayedHotels = ref([])
 
 const filteredHotels = computed(() => {
-  let filtered = hotels.value.filter(hotel => hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase()))
+  let filtered = hotels.value
+
+  // Apply search filter if searchQuery is not empty
+  if (searchQuery.value) {
+    filtered = filtered.filter(hotel => hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase()))
+  }
+
+  // Apply sorting
   if (sortOrder.value === 'lowToHigh') {
     filtered = filtered.sort((a, b) => a.amount - b.amount)
   } else if (sortOrder.value === 'highToLow') {
     filtered = filtered.sort((a, b) => b.amount - a.amount)
   }
+
   return filtered
 })
 
@@ -97,6 +110,16 @@ function toggleSortOrder() {
   updateDisplayedHotels() 
 }
 
+function performSearch() {
+  if (searchQuery.value === '') {
+    // If the search query is empty, reset the displayed hotels to the full list
+    updateDisplayedHotels()
+  } else {
+    // Otherwise, filter based on the search query
+    displayedHotels.value = filteredHotels.value.slice(0, itemsPerPage)
+  }
+}
+
 onMounted(() => {
   store.dispatch('fetchHotels').then(() => {
     updateDisplayedHotels() 
@@ -111,7 +134,6 @@ function scrollDown() {
   })
 }
 </script>
-
 
 <style scoped>
 #AdventureRoulette{
@@ -285,49 +307,54 @@ lord-icon {
     width: 80%;
   }
 
-  .scroll-btn {
-    display: none;
+  .scroll-btn{
+    font-size: 1.4rem;
+  }
+  
+  .banner-content{
+    margin-top: 5rem;
   }
 
-  .banner-content{
+  #adventure-content{
+    flex-direction: column;
+  }
+
+  #adventure-content .card img{
     width: 100%;
-    font-size: 0.8rem;
-    margin: 6rem auto 6rem;
+    height: 13rem;
+    object-fit: cover;
+  }
+
+  #adventure-content .card{
+    margin-top: 2rem;
   }
 
   #adventure-interaction{
-    display: flex;
-    width: 90%;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    margin: auto;
-    padding-top: 4rem;
-    gap: 1rem;
-}
-
-.adventure-search{
-  width: 100%;
-}
-
-#adventureRoulette-heading{
-    display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    padding-top: 4rem;
+    gap: 2rem;
+  }
+
+  .price-button{
+    margin: 0;
+  }
+
+  .banner-content{
     width: 90%;
-    margin: auto;
-}
+  }
 
-lord-icon {
-   display: none;
-}
+  .banner-content h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
 
-.price-button{
-  width: 95%;
-  margin-right: 0rem;
-}
+  .banner-content p{
+    font-size: 1rem;
+    text-align: center;
+  }
 
+  #adventureRoulette-heading h1 {
+    text-align: center;
+  }
 }
 </style>

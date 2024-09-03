@@ -51,7 +51,7 @@
                 </li>
                 <router-link to="/signin" class="mt-1 textDecor">
                 <button class="btn-signIn">
-                Sign in
+                Sign up
                </button>
                </router-link>
                </ul>

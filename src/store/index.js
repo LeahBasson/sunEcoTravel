@@ -92,7 +92,7 @@ export default createStore({
         }) // Toast is used to display an error message
       }
     },
-    async addAHotel(context, payload) {
+    async addHotel(context, payload) {
       try {
         const { msg } = await (await axios.post(`${apiURL}hotel/add`, payload)).data
         if (msg) {
@@ -174,6 +174,29 @@ export default createStore({
       })
     }
   },
+  async addUser(context, payload) {
+    try {
+      const { msg, err, token } = await (await axios.post(`${apiURL}user/register`, payload)).data
+      if (token) {
+        context.dispatch('fetchUsers')
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+        router.push({ name: 'login' })
+      } else {
+        toast.error(`${err}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+    }
+  }
 
   },
   
