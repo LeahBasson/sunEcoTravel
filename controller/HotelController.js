@@ -1,7 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { hotels } from '../model/index.js'  //importing the object that will be used.
-import { verifyAToken } from '../middleware/AuthenticateUser.js'
 
 const hotelRouter = express.Router()
 
@@ -27,7 +26,7 @@ hotelRouter.patch('/:id', (req, res) => {
     hotels.updateHotel(req, res)
 })
 
-hotelRouter.delete('/:id', verifyAToken, (req, res) => {
+hotelRouter.delete('/:id', (req, res) => { 
     hotels.deleteHotel(req, res)
 })
 
