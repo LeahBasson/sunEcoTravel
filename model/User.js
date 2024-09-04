@@ -62,7 +62,7 @@ class Users {
                     // Email already exists
                     return res.json({
                         status: 400,
-                        err: 'This email has already been taken'
+                        msg: 'This email has already been taken'
                     });
                 }
     
