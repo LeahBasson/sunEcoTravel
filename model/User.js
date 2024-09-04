@@ -46,39 +46,59 @@ class Users {
 
     async registerUser(req, res) {
         try {
-            let data = req.body
-           
-            data.userPass = await hash(data.userPass, 12 )  //if the salt is bigger than 15 characters it will take long to encrypt & decrypt
-            //Payload
-            let user = {
-                emailAdd: data.emailAdd,
-                userPass: data.userPass
-            }
-            let strQry = `
-            INSERT INTO Users
-            SET ? ;   
-            `  // or you can use this VALUES (?, ? , ?, ?)
-            db.query(strQry, [data], (err) =>{
-                if(err) {
-                    res.json({
-                        status: res.statusCode,
-                        msg: 'This email has already been taken'
-                    })
-                } else{
-                    const token = createToken(user)
-                    res.json({
-                        token,
-                        msg: 'You are now registered'
-                    })
+            let data = req.body;
+            
+            // Check if the email already exists
+            let emailCheckQry = 'SELECT * FROM Users WHERE emailAdd = ?';
+            db.query(emailCheckQry, [data.emailAdd], async (err, results) => {
+                if (err) {
+                    return res.json({
+                        status: 500,
+                        msg: 'Internal Server Error'
+                    });
                 }
-            })
-        } catch(e) {
+    
+                if (results.length > 0) {
+                    // Email already exists
+                    return res.json({
+                        status: 400,
+                        msg: 'This email has already been taken'
+                    });
+                }
+    
+                // If email doesn't exist, proceed with registration
+                data.userPass = await hash(data.userPass, 12);
+    
+                let strQry = `
+                    INSERT INTO Users
+                    SET ?;
+                `;
+                db.query(strQry, [data], (err) => {
+                    if (err) {
+                        res.json({
+                            status: res.statusCode,
+                            msg: 'There was an error registering the user'
+                        });
+                    } else {
+                        const token = createToken({
+                            emailAdd: data.emailAdd,
+                            userPass: data.userPass
+                        });
+                        res.json({
+                            token,
+                            msg: 'You are now registered'
+                        });
+                    }
+                });
+            });
+        } catch (e) {
             res.json({
-                status: 400, // Mistake on the clients side (Maybe syntax error)
-                msg: e.message //The error message from the if statement
-        })
+                status: 400,
+                msg: e.message
+            });
         }
     }
+    
     
     async updateUser(req, res) {
         try {
