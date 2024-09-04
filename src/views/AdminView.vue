@@ -133,6 +133,51 @@
 
     </div>
 
+    <!----------------- Bookings Table --------------------->
+    <div class="row" id="admin-hotels">
+      <h1 class="admin-heading">Bookings Table</h1>
+
+    <div class="tableContainer3">
+              <table>
+                <thead>
+                 <th>Booking ID</th>
+                 <th>User ID</th>
+                 <th>Number of rooms</th>
+                 <th>Check In Date</th>
+                 <th>Check Out Date</th>
+                 <th>Amount</th>
+                </thead>
+                <tbody v-if="bookings">
+                  <tr v-for="booking in bookings" :key="booking.bookingID">
+                    <td>
+                      {{ booking.bookingID }}
+                    </td>
+                    <td>
+                      {{ booking.userID }}
+                    </td>
+                    <td>
+                      {{ booking.numberOfRooms }}
+                    </td>
+                    <td>
+                      {{ booking.checkInDate }}
+                    </td>
+                    <td>
+                      {{ booking.checkOutDate }}
+                    </td>
+                    <td>
+                      {{ booking.totalPrice }}
+                    </td>
+                  </tr>
+                   
+                </tbody>
+                <div v-else>
+                  <Spinner />
+                </div>
+             </table>
+    </div>
+
+    </div>
+
     </div>
 </template>
 
@@ -148,6 +193,7 @@ import UpdateUserModal from '@/components/UpdateUserModal.vue';
 const store = useStore();
 const hotels = computed(() => store.state.hotels);
 const users = computed(() => store.state.users);
+const bookings = computed(() => store.state.bookings);
 
 function fetchHotels() {
   store.dispatch('fetchHotels');
@@ -155,6 +201,10 @@ function fetchHotels() {
 
 function fetchUsers() {
   store.dispatch('fetchUsers');
+}
+
+function fetchBookings() {
+  store.dispatch('fetchBookings');
 }
 
 function deleteHotel(hotelID) {
@@ -183,6 +233,7 @@ function scrollDown() {
 onMounted(() => {
   fetchHotels();
   fetchUsers();
+  fetchBookings()
 });
 </script>
 
@@ -421,6 +472,16 @@ td:before {
 .tableContainer2 td:nth-of-type(6):before { content: "Actions"; }
 .tableContainer2 .total-row td:before { content: ""; }
 .tableContainer2 .total-row td:before { content: ""; }
+
+/* Bookings Table Mobile */
+.tableContainer3 td:nth-of-type(1):before { content: "Booking ID"; }
+.tableContainer3 td:nth-of-type(2):before { content: "User ID"; }
+.tableContainer3 td:nth-of-type(3):before { content: "Number of rooms"; }
+.tableContainer3 td:nth-of-type(4):before { content: "Check in date"; }
+.tableContainer3 td:nth-of-type(5):before { content: "Check out date"; }
+.tableContainer3 td:nth-of-type(6):before { content: "Amount"; }
+.tableContainer3 .total-row td:before { content: ""; }
+.tableContainer3 .total-row td:before { content: ""; }
 
 
 }

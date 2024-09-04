@@ -35,7 +35,6 @@
                     <h3>Explore</h3>
                     <router-link class="textDecor text-white" to="/topDestination"><p>Top Destinations</p></router-link>
                     <router-link class="textDecor text-white" to="/topstory"><p>Top Stories</p></router-link>
-                    <router-link class="textDecor text-white" to="/topthings"><p>Top Things To Do</p></router-link>
                    </div>  
                 </div>
             </div>
@@ -200,6 +199,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     padding-top: 2rem;
+    width: 100%;
 }
 
 .footerContent .rightContent{
@@ -222,9 +222,9 @@ export default {
 }
 
 .footerContent .form-control{
-    width: 15rem;
     padding: 0.5rem 0.3rem;
     font-size: 0.9rem;
+    width: 100%;
 }
 
 #contactForm{
@@ -234,12 +234,12 @@ export default {
     padding-top: 1rem;
     gap: 0.1rem;
     margin: auto;
-  
+    width: 85%;
 }
 
 .button1{
     font-size: 0.9rem;
-    width: 15rem;
+    width: 100%;
 }
 
 .contact-label{

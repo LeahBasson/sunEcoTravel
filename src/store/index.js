@@ -17,7 +17,9 @@ export default createStore({
     user: null,
     hotels : null,
     hotel : null,
-    recentHotels: null
+    recentHotels: null,
+    bookings: null,
+    booking: null
   },
   getters: {
   },
@@ -36,6 +38,12 @@ export default createStore({
     },
     setRecentHotels(state, value) { 
       state.recentHotels = value
+    },
+    setBookings(state, value) {
+      state.bookings = value;
+    },
+    setBooking(state, value) {
+      state.booking = value;
     }
   },
   actions: {
@@ -145,35 +153,46 @@ export default createStore({
       }
     },
     // ===== LOGIN =======
-  async login(context, payload) {
-    try {
-      const { msg, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
-
-      if (result) {
-        toast.success(`${msg}😎`, {
+    async login({ commit }, payload) {
+      try {
+        const response = await axios.post(`${apiURL}user/login`, payload)
+        const { msg, result, token } = response.data
+  
+        if (result) {
+          toast.success(`${msg} 😎`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+  
+          // Commit user details to Vuex store
+          commit('setUser', {
+            msg,
+            result
+          })
+  
+          // Save token and user data in cookies
+          cookies.set('LegitUser', { token, msg, result })
+  
+          // Apply token for authenticated requests
+          applyToken(token)
+  
+          // Return user ID or necessary info for redirection
+          return result.userID  // Ensure your API response includes userID or adjust accordingly
+        } else {
+          toast.error(msg, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+          return null
+        }
+      } catch (e) {
+        toast.error(e.message, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
-        context.commit('setUser', {
-          msg,
-          result
-        })
-        cookies.set('LegitUser', { token, msg, result })
-        applyToken(token)
-        router.push({ name: 'account' })
-      } else {
-        toast.error(`${msg}`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        })
+        return null
       }
-    } catch (e) {
-      toast.error(`${e.message}`, {
-        autoClose: 2000,
-        position: toast.POSITION.BOTTOM_CENTER
-      })
-    }
-  },
+    },
   // ==== User ========
   async fetchUsers(context) {
     try {
@@ -267,7 +286,25 @@ export default createStore({
         position: toast.POSITION.BOTTOM_CENTER
       })
     }
-  }
+  },
+  async fetchBookings(context, uid) {
+    try {
+      const { results, msg } = await (await axios.get(`${apiURL}user/${uid}/booking`)).data
+      if (results) {
+        context.commit('setBookings', results)
+      } else {
+        toast.error(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+    }
+  },
 
   },
   

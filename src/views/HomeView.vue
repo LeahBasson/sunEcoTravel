@@ -4,7 +4,6 @@
     <CarouselBanner />
     <TopDestinationHome />
     <TopStoryHome />
-    <TopThingsToDoHome />
     <recentHotels />
    </section>
  </div>  
@@ -14,7 +13,6 @@
 import CarouselBanner from '@/components/CarouselBanner.vue';
 import TopDestinationHome from '@/components/TopDestinationHome.vue';
 import TopStoryHome from '@/components/TopStoryHome.vue';
-import TopThingsToDoHome from '@/components/TopThingsToDoHome.vue';
 import recentHotels from '@/components/recentHotels.vue'
 
 export default {
@@ -24,7 +22,6 @@ export default {
     CarouselBanner,
     TopDestinationHome,
     TopStoryHome,
-    TopThingsToDoHome,
     recentHotels
   }
   

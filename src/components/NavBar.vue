@@ -34,7 +34,7 @@
                    <li class="nav-item mt-2">
                      <router-link to="/about" class="nav-link" aria-current="page">About Us</router-link>
                    </li>
-                   <li class="nav-item mt-2">
+                   <li class="nav-item mt-2" v-if="isAdmin">
                      <router-link to="/admin" class="nav-link" aria-current="page">Admin</router-link>
                    </li>
                    <li class="nav-item mt-2">
@@ -66,10 +66,20 @@
  <script >
  export default {
   computed: {
+    isAdmin() {
+      return this.$store.state.user?.role === 'admin'; // Adjust based on your user object structure
+    },
+    watch: {
+    '$store.state.user': function(newUser) {
+      // React to user changes if necessary
+      // For example, you might want to trigger reactivity or force a re-render
+      console.log('User state has changed:', newUser);
+    }
+  },
     isDropdownActive() {
       const activeRoutes = ['/hotels', '/adventureRoulette'];
       return activeRoutes.includes(this.$route.path);
-    }
+    },
   }
 }
 </script>

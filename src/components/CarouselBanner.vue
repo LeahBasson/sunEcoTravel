@@ -39,10 +39,9 @@
     <div class="carousel-item">
          <div class="overlay"></div>
          <div class="carousel-caption">
-        <h1 class="animate__animated animate__fadeInDown">Explore some of our
-            Top Things To Do</h1>
+        <h1 class="animate__animated animate__fadeInDown">Read some of our Top Stories</h1>
         <p class="animate__animated animate__fadeInUp">Find your perfect adventure.</p>
-        <router-link to="/topthings"><button class="hb-button animate__animated animate__fadeInUp">Explore Now</button></router-link>
+        <router-link to="/topstory"><button class="hb-button animate__animated animate__fadeInUp">Explore Now</button></router-link>
         <div class="hb-bannerLinks animate__animated animate__fadeInUp">
         <a class="lnk text-white" href="mailto:your-email@example.com" alt="outlook icon" target="_blank"><i class="bi bi-envelope"></i></a>
         <a class="lnk text-white" href="https://www.linkedin.com/in/leah-basson-23a4192a0" alt="linkedin icon" target="_blank"><i class="bi bi-linkedin"></i></a>

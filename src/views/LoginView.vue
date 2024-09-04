@@ -31,17 +31,36 @@
 <script setup>
 import { useStore } from 'vuex'
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
 const store = useStore()
-/* Use reactive when defining a reference or dynamic data type.
-And use ref for primitive data types
-*/
+const router = useRouter()
+
 const payload = reactive({
     emailAdd: '',
     userPass: ''
 })
-function login() {
-    store.dispatch('login', payload)
+
+async function login() {
+    try {
+        // Check that payload contains required parameters
+        if (!payload.emailAdd || !payload.userPass) {
+            throw new Error('Email or password missing')
+        }
+
+        // Dispatch the login action
+        const userID = await store.dispatch('login', payload)
+        
+        if (!userID) {
+            throw new Error('Failed to retrieve user ID')
+        }
+
+        // Navigate to the account page after successful login
+        router.push({ name: 'account', params: { id: userID } })
+    } catch (error) {
+        // Handle login error (e.g., show an error message)
+        console.error('Login failed:', error.message)
+    }
 }
 </script>
 
