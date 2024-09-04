@@ -34,7 +34,7 @@ userRouter.post('/login', (req, res) => {
     users.login(req, res)
 })
 // Booking
-bookingRouter.get('/:uid', verifyAToken, (req, res) => {
+bookingRouter.get('/:uid', (req, res) => {
     bookings.fetchBookings(req, res)
 })
 
