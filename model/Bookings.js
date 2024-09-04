@@ -3,10 +3,10 @@ import { connection as db } from '../config/index.js';
 class Bookings {
     fetchBookings(req, res) {
         const strQry = `
-            SELECT b.bookingID, b.hotelID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.totalPrice, u.username
+            SELECT b.bookingID, b.hotelID, b.roomID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.totalPrice
             FROM Bookings b
             INNER JOIN Users u ON b.userID = u.userID
-            INNER JOIN Hotels h ON b.hotelID = h.hotel_id
+            INNER JOIN Hotels h ON b.hotelID = h.hotelID
         `;
 
         db.query(strQry, (err, results) => {
@@ -26,13 +26,13 @@ class Bookings {
     fetchBooking(req, res) {
         try{
             const stryQry = `
-            SELECT b.bookingID, b.hotelID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.totalPrice, u.username
+            SELECT b.bookingID, b.hotelID, b.roomID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.totalPrice
             FROM Bookings b
-            INNER JOIN Users u ON b.userID = u.userID
-            INNER JOIN Hotels h ON b.hotelID = h.hotel_id
-            WHERE userID = ${req.params.id} AND bookingID = ${req.params.id};`
+            INNER JOIN Users u ON b.userID = ${req.params.uid}
+            INNER JOIN Hotels h ON b.hotelID = h.hotelID
+            WHERE u.userID = ${req.params.uid} AND b.bookingID = ${req.params.bookingID};`
             db.query(stryQry, (err, result) => {
-                if (err) throw new Error('Issue when fetching a booking.')
+                if (err) throw new Error(err.message)
                     res.json({
                    status: res.statusCode,
                    result: result[0]  //result for a single product 

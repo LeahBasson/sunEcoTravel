@@ -8,8 +8,6 @@ import cors from 'cors';
 const app = express()
 const port = +process.env.PORT || 4000
 
-//use cors
-app.use(cors());
 
 //Middleware - Middleware is software that lies between an operating system and the applications running on it. 
 app.use((req, res, next) => {
@@ -21,16 +19,18 @@ app.use((req, res, next) => {
     res.header("Access-Control-Expose-Headers", "Authorization");
     next() //The next() function is called to pass control to the next middleware function in the stack.
 })
-app.use('/user', userRouter) //to get all the endpoints  //Brackets to parse a string
-app.use('/hotel' , hotelRouter)
 
 app.use(
- express.static('./static'),
- express.json(), 
- express.urlencoded({
-    extended:true
-}))
-
+    express.static('./static'),
+    express.json(), 
+    express.urlencoded({
+        extended:true
+    }))
+ //use cors
+app.use(cors());
+   
+app.use('/user', userRouter) //to get all the endpoints  //Brackets to parse a string
+app.use('/hotel' , hotelRouter)
 //Endpoint // the get endpoint allows you to retrieve something
 app.get('^/$|/booking', (req, res) => {
     res.status(200).sendFile(path.resolve('./static/html/index.html'))

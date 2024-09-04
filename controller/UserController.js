@@ -5,10 +5,9 @@ import { bookings } from '../model/index.js'
 import { verifyAToken } from '../middleware/AuthenticateUser.js'
 
 const userRouter = express.Router()
-const bookingRouter = express.Router()
+
 
 userRouter.use(bodyParser.json())
-bookingRouter.use(bodyParser.json())
 
 userRouter.get('/', (req, res) => {
     users.fetchUsers(req, res)
@@ -34,32 +33,31 @@ userRouter.post('/login', (req, res) => {
     users.login(req, res)
 })
 // Booking
-bookingRouter.get('/:uid', (req, res) => {
+userRouter.get('/:uid/booking', (req, res) => {
     bookings.fetchBookings(req, res)
 })
 
-bookingRouter.get ('/:uid/:bookingID', verifyAToken, (req, res) => {
+userRouter.get ('/:uid/booking/:bookingID', (req, res) => {
     bookings.fetchBooking(req, res)
 })
 
-bookingRouter.post('/:uid', (req, res) => {
+userRouter.post('/:uid/:bookingID', (req, res) => {
     bookings.addBooking(req, res)
 })
 
-bookingRouter.patch('/:uid/:bookingID', verifyAToken, (req, res) => {
+userRouter.patch('/:uid/:bookingID', verifyAToken, (req, res) => {
     bookings.updateBooking(req, res)
 })
 
-bookingRouter.delete('/:uid/:bookingID', verifyAToken, (req, res) => {
+userRouter.delete('/:uid/:bookingID', verifyAToken, (req, res) => {
     users.deleteBooking(req, res)
 })
 
-bookingRouter.delete('/:uid', verifyAToken, (req, res) => {
+userRouter.delete('/:uid', verifyAToken, (req, res) => {
     users.deleteBookings(req, res)
 })
 
 export {
     express,
-    userRouter,
-    bookingRouter
+    userRouter
 }
