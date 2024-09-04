@@ -133,10 +133,10 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .close-button{
 background-color: var(--alternative);
-border: 1px solid var(--primary);
+border: none;
 border-radius: 0.5rem;
 width: 10rem;
 padding: 0.5rem;
@@ -144,6 +144,7 @@ font-family: "Poppins", sans-serif;
 font-weight: bold;
 margin-left: 0.5rem;
 margin-right: 0.5rem;
+color: var(--secondary);
 }
 
 .close-button:hover, .save-button:hover, .admin-button:hover{
@@ -153,7 +154,7 @@ background-color: var(--awesome);
 
 .save-button{
 background-color: var(--alternative);
-border: 1px solid var(--primary);
+border: none;
 border-radius: 0.5rem;
 width: 10rem;
 padding: 0.5rem;
@@ -161,6 +162,7 @@ font-family: "Poppins", sans-serif;
 font-weight: bold;
 margin-left: 0.5rem;
 margin-right: 0.5rem;
+color: var(--secondary);
 }
 
 .form-label{
@@ -170,5 +172,22 @@ display: flex;
 .modal-footer{
 display: flex;
 justify-content: space-between;
+}
+
+@media (width < 999px) {
+ .close-button{
+   margin: auto;
+   width: 100%;
+ }
+
+ .save-button{
+   margin: auto;
+   margin-top: 1rem;
+   width: 100%;
+ }
+
+ .form-control::placeholder{
+    font-size: 0.9rem;
+ }
 }
 </style>

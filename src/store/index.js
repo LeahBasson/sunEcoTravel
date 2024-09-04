@@ -160,7 +160,7 @@ export default createStore({
         })
         cookies.set('LegitUser', { token, msg, result })
         applyToken(token)
-        router.push({ name: 'hotels' })
+        router.push({ name: 'account' })
       } else {
         toast.error(`${msg}`, {
           autoClose: 2000,
@@ -213,16 +213,10 @@ export default createStore({
   },
   async addUser(context, payload) {
     try {
-      const { msg, err, token } = await (await axios.post(`${apiURL}user/register`, payload)).data
-      if (token) {
+      const { msg } = await (await axios.post(`${apiURL}user/register`, payload)).data
+      if (msg) {
         context.dispatch('fetchUsers')
         toast.success(`${msg}`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        })
-        router.push({ name: 'login' })
-      } else {
-        toast.error(`${err}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
@@ -257,6 +251,10 @@ export default createStore({
       const { msg, err } = await (await axios.delete(`${apiURL}user/${id}`)).data
       if (msg) {
         context.dispatch('fetchUsers')
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
       } else {
         toast.error(`${err}`, {
           autoClose: 2000,

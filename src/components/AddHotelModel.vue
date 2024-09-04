@@ -124,7 +124,7 @@ function addHotel() {
 </script>
 
 
-<style>
+<style scoped>
 .close-button{
  background-color: var(--alternative);
  border: none;
@@ -165,14 +165,16 @@ function addHotel() {
  justify-content: space-between;
 }
 
-@media (width < 290px) {
+@media (width < 999px) {
  .close-button{
    margin: auto;
+   width: 100%;
  }
 
  .save-button{
    margin: auto;
    margin-top: 1rem;
+   width: 100%;
  }
 
  .form-control::placeholder{

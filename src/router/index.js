@@ -70,6 +70,11 @@ const routes = [
     path: '/hotelDetails/:id',
     name: 'hotelDetails',
     component: () => import('@/views/HotelDetails.vue')
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import('@/views/AccountView.vue')
   }
 ]
 

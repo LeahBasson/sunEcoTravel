@@ -51,9 +51,11 @@
                   </tr>
                    
                 </tbody>
-                <div v-else>
-                  <Spinner />
-                </div>
+                <tbody v-else>
+                  <tr>
+                    <Spinner />
+                  </tr> 
+                </tbody>
              </table>
     </div>
 
@@ -124,6 +126,12 @@
     </div>
 
     </div>
+    <div v-for="user in users" :key="user.userID">
+      <UpdateUserModal :user='user'>
+                
+      </UpdateUserModal> 
+
+    </div>
 
     </div>
 </template>
@@ -134,6 +142,8 @@ import { useStore } from 'vuex';
 import UpdateHotelModal from '@/components/UpdateHotelModal.vue';
 import AddHotelModel from '@/components/AddHotelModel.vue';
 import AddUserModal from '@/components/AddUserModal.vue';
+import Spinner from '@/components/Spinner.vue';
+import UpdateUserModal from '@/components/UpdateUserModal.vue';
 
 const store = useStore();
 const hotels = computed(() => store.state.hotels);
@@ -157,6 +167,10 @@ function deleteUser(userID) {
 
 function sortByNameAsc() {
   hotels.value.sort((a, b) => a.hotelName.localeCompare(b.hotelName));
+}
+
+function sortUserNameAsc() {
+  users.value.sort((a, b) => a.firstName.localeCompare(b.firstName));
 }
 
 function scrollDown() {
@@ -318,7 +332,7 @@ table{
   }
 
   .admin-button{
-  width: 90%;
+  width: 85%;
   margin: auto;
 }
 

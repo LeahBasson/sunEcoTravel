@@ -64,6 +64,9 @@
         </template>
           </Card>
         </div>
+        <div v-else>
+          <Spinner />
+        </div>
         
       </div>
 
@@ -90,6 +93,9 @@
         </template>
           </Card>
         </div>
+        <div v-else>
+          <Spinner />
+        </div>
         
       </div>
 
@@ -99,7 +105,7 @@
 <script setup>
 import { useStore } from 'vuex'
 import { ref, computed, onMounted, watch } from 'vue'
-// import Spinner from '@/components/Spinner.vue'
+import Spinner from '@/components/Spinner.vue'
 import Card from '@/components/Card.vue'
 
 const store = useStore()

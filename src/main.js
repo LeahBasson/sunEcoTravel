@@ -8,4 +8,5 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
+
 createApp(App).use(store).use(router).mount('#app')

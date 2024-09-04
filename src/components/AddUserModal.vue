@@ -33,7 +33,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="emailAdd" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="emailAdd" placeholder="Enter user role" v-model="emailAdd">
+                    <input type="email" class="form-control" id="emailAdd" placeholder="Enter user role" v-model="emailAdd" required>
                   </div>
                   <div class="mb-3">
                     <label for="userPass" class="form-label">User password</label>
@@ -74,7 +74,40 @@ const userPass = ref('');
 const userProfile = ref('');
 
 function addUser() {
-  if (!firstName.value || !lastName.value || !userAge.value || !Gender.value || !emailAdd.value || !userPass.value || !userProfile.value) {
+  // Regular expression to check if the name contains only letters and spaces
+  const namePattern = /^[A-Za-z\s]+$/;
+
+  // Validate that the names are not empty and contain only letters
+  if (!firstName.value || !namePattern.test(firstName.value)) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "First name must contain only letters",
+    });
+    return;
+  }
+
+  if (!lastName.value || !namePattern.test(lastName.value)) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Last name must contain only letters",
+    });
+    return;
+  }
+
+  // Check if the email contains "@gmail.com"
+  if (!emailAdd.value.includes('@gmail.com')) {
+    Swal.fire({
+      icon: "error",
+      title: "Invalid Email",
+      text: "Please enter a valid Gmail address ending with '@gmail.com'.",
+    });
+    return;
+  }
+
+  // Check if other fields are filled
+  if (!userAge.value || !Gender.value || !userPass.value || !userProfile.value) {
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -83,17 +116,19 @@ function addUser() {
     return;
   }
 
+  // Create user object
   const user = {
     firstName: firstName.value,
     lastName: lastName.value,
     userAge: userAge.value,
     Gender: Gender.value,
-    userRole: userRole.value, // Including userRole in the object if needed
+    userRole: userRole.value,
     emailAdd: emailAdd.value,
     userPass: userPass.value,
     userProfile: userProfile.value
   };
 
+  // Dispatch action to add user
   store.dispatch('addUser', user).then(() => {
     // Clear form fields
     firstName.value = '';
@@ -114,10 +149,12 @@ function addUser() {
     document.body.classList.remove('modal-open');
   });
 }
+
+
 </script>
   
   
-  <style>
+  <style scoped>
   .close-button{
    background-color: var(--alternative);
    border: none;
@@ -158,19 +195,21 @@ function addUser() {
    justify-content: space-between;
   }
   
-  @media (width < 290px) {
-   .close-button{
-     margin: auto;
-   }
-  
-   .save-button{
-     margin: auto;
-     margin-top: 1rem;
-   }
-  
-   .form-control::placeholder{
-      font-size: 0.9rem;
-   }
-  }
+  @media (width < 999px) {
+ .close-button{
+   margin: auto;
+   width: 100%;
+ }
+
+ .save-button{
+   margin: auto;
+   margin-top: 1rem;
+   width: 100%;
+ }
+
+ .form-control::placeholder{
+    font-size: 0.9rem;
+ }
+}
   </style>
   
