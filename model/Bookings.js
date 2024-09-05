@@ -79,7 +79,7 @@ class Bookings {
             WHERE userID = ${req.params.uid} AND bookingID = ${req.params.bookingID};
             `  
             db.query (strQry, [req.body], (err) => {
-                if (err) throw new Error (err)
+                if (err) throw new Error ('Unable to update booking.')
                     res.json({
                         status: res.statusCode,
                         msg: 'Booking was updated.'
