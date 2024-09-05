@@ -18,6 +18,13 @@
                     <p class="lead"><span class="fw-bold">Country</span>: {{ hotel.country }}</p>
                     <p class="lead"><span class="fw-bold">City</span>: {{ hotel.city }}</p>
                     <p class="lead"><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+
+                    <!-- Booking Inputs -->
+                    <div class="row">
+                        <input type="date" v-model="checkInDate" placeholder="Check-in Date" class="form-control" />
+                        <input type="date" v-model="checkOutDate" placeholder="Check-out Date" class="form-control" />
+                        <input type="number" v-model="numberOfRooms" min="1" placeholder="Number of Rooms" class="form-control" />
+                    </div>
                 </template>
             </Card>
         </div>
@@ -32,8 +39,8 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
@@ -43,8 +50,18 @@ const store = useStore()
 const route = useRoute()
 const router = useRouter()
 
+// Reactive variables for booking inputs
+const checkInDate = ref('')
+const checkOutDate = ref('')
+const numberOfRooms = ref(1)
+
 const hotel = computed(() => store.state.hotel)
-const user = computed(() => store.state.user) // assuming you have a user object in Vuex store
+
+// Computed property for user
+const user = computed(() => {
+  console.log('Current user:', store.state.user)
+  return store.state.user
+})
 
 onMounted(() => {
     store.dispatch('fetchHotel', route.params.id)
@@ -52,21 +69,28 @@ onMounted(() => {
 
 const handleBooking = async () => {
     if (user.value) {  // Check if user is logged in
-        // User is logged in, proceed with booking
+        if (!checkInDate.value || !checkOutDate.value || !numberOfRooms.value) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Missing Information',
+                text: 'Please fill in the check-in, check-out dates, and number of rooms.'
+            })
+            return
+        }
+
         const booking = {
             hotelID: hotel.value.hotelID,
-            checkInDate: new Date().toISOString(), // Replace with actual check-in date
-            checkOutDate: new Date().toISOString(), // Replace with actual check-out date
-            numberOfRooms: 1,  // Replace with actual room count
-            totalPrice: hotel.value.amount,
-            userID: user.value._id // Include userID in the booking
+            checkInDate: checkInDate.value,
+            checkOutDate: checkOutDate.value,
+            numberOfRooms: numberOfRooms.value,
+            totalPrice: hotel.value.amount * numberOfRooms.value, 
+            userID: user.value.userID 
         }
 
         try {
             await store.dispatch('addBooking', booking)
             router.push('/bookings')
         } catch (error) {
-            // Show an error message if booking fails
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -74,7 +98,6 @@ const handleBooking = async () => {
             })
         }
     } else {
-        // User is not logged in, prompt them to log in
         Swal.fire({
             icon: 'warning',
             title: 'Login Required',
@@ -85,15 +108,15 @@ const handleBooking = async () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // Store the intended route and redirect to login
-                sessionStorage.setItem('redirectAfterLogin', '/bookings')
+                sessionStorage.setItem('redirectAfterLogin', route.fullPath)
                 router.push('/login')
             }
         })
     }
 }
 
-
 </script>
+
 
 <style scoped>
 .card{

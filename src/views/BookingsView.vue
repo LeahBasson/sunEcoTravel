@@ -37,8 +37,7 @@
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useCookies } from 'vue3-cookies'
-// Import a date formatting library if needed
-// import { format } from 'date-fns'
+import router from '@/router';
 
 const store = useStore()
 const { cookies } = useCookies()
@@ -46,23 +45,18 @@ const { cookies } = useCookies()
 const bookings = computed(() => store.state.bookings || [])
 
 onMounted(() => {
-  const userId = cookies.get('LegitUser')?.result?.userID
+  const userId = cookies.get('LegitUser')?.result?.userID;
   if (userId) {
     store.dispatch('fetchBookings', userId)
       .catch(error => {
-        // Handle errors here
-        console.error('Error fetching bookings:', error)
-        // Optionally show a notification or alert
-      })
+        console.error('Error fetching bookings:', error);
+      });
+  } else {
+    // Redirect to login if the user is not logged in
+    router.push({ name: 'login' });
   }
-})
+});
 
-// Function to format dates, if needed
-const formatDate = (date) => {
-  // Use a date formatting library or custom formatting here
-  // return format(new Date(date), 'MM/dd/yyyy')
-  return new Date(date).toLocaleDateString() // Example formatting
-}
 </script>
 
 <style scoped>
