@@ -32,29 +32,30 @@ userRouter.delete('/:id', (req, res) => {
 userRouter.post('/login', (req, res) => {
     users.login(req, res)
 })
+
 // Booking
-userRouter.get('/:uid/booking', (req, res) => {
+userRouter.get('/:uid/bookings', verifyAToken, (req, res) => {
     bookings.fetchBookings(req, res)
 })
 
-userRouter.get ('/:uid/booking/:bookingID', (req, res) => {
-    bookings.fetchBooking(req, res)
+userRouter.get('/:uid/booking', (req, res) => {
+    bookings.fetchUserBookings(req, res)
 })
 
-userRouter.post('/:uid/:bookingID', (req, res) => {
+userRouter.post('/:uid/booking', (req, res) => {
     bookings.addBooking(req, res)
 })
 
-userRouter.patch('/:uid/:bookingID', verifyAToken, (req, res) => {
+userRouter.patch('/:uid/booking/:bookingID', verifyAToken, (req, res) => {
     bookings.updateBooking(req, res)
 })
 
-userRouter.delete('/:uid/:bookingID', verifyAToken, (req, res) => {
-    users.deleteBooking(req, res)
+userRouter.delete('/:uid/booking/:bookingID', (req, res) => {
+    bookings.deleteBooking(req, res)
 })
 
-userRouter.delete('/:uid', verifyAToken, (req, res) => {
-    users.deleteBookings(req, res)
+userRouter.delete('/:uid/bookings', (req, res) => {
+    bookings.deleteBookings(req, res)
 })
 
 export {

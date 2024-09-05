@@ -100,34 +100,34 @@
   </tr>
   <tr>
     <td>GET</td>
-    <td>/hotel</td>
-    <td>Retrieves a list of all hotels.</td>
+    <td>user/:uid/bookings</td>
+    <td>Retrieves a list of all bookings.</td>
   </tr>
   <tr>
     <tr>
       <td>GET</td>
-      <td>/hotel/recent</td>
-      <td>Retrieves the 4 most recent products.</td>
+      <td>user/:uid/booking</td>
+      <td>Retrieves all the bookings of a particular user.</td>
     </tr>
-    <tr>
-    <td>GET</td>
-    <td>/hotel/:id</td>
-    <td>Retrieves details of a specific hotel by ID.</td>
-  </tr>
   <tr>
     <td>POST</td>
-    <td>/hotel/add</td>
-    <td>Add a new hotel</td>
+    <td>user/:uid/booking</td>
+    <td>A user is able to add a booking.</td>
   </tr>
   <tr>
     <td>PATCH</td>
-    <td>/hotel/:id</td>
-    <td>Updates details of a specific hotel by ID.</td>
+    <td>user/:uid/booking/:bookingID</td>
+    <td>An admin is able to update booking.</td>
   </tr>
   <tr>
     <td>DELETE</td>
-    <td>/hotel/:id</td>
-    <td>Removes a hotel by ID.</td>
+    <td>user/:uid/booking/:bookingID</td>
+    <td>User is able to remove a single booking</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td>user/:uid/booking/:bookingID</td>
+    <td>User is able to remove all bookings</td>
   </tr>
 </table>
     

@@ -3,10 +3,13 @@ import { connection as db } from '../config/index.js';
 class Bookings {
     fetchBookings(req, res) {
         const strQry = `
-            SELECT b.bookingID, b.hotelID, b.roomID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.totalPrice
-            FROM Bookings b
-            INNER JOIN Users u ON b.userID = u.userID
-            INNER JOIN Hotels h ON b.hotelID = h.hotelID
+        SELECT b.bookingID, b.hotelID, b.roomID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, 
+        b.totalPrice
+        FROM Users u
+        INNER JOIN Bookings b
+        USING(userID)
+        INNER JOIN Hotels h 
+        USING(hotelID)
         `;
 
         db.query(strQry, (err, results) => {
@@ -23,27 +26,27 @@ class Bookings {
         });
     }
 
-    fetchBooking(req, res) {
-        try{
-            const stryQry = `
+    fetchUserBookings(req, res) {
+        const strQry = `
             SELECT b.bookingID, b.hotelID, b.roomID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.totalPrice
             FROM Bookings b
             INNER JOIN Users u ON b.userID = ${req.params.uid}
             INNER JOIN Hotels h ON b.hotelID = h.hotelID
-            WHERE u.userID = ${req.params.uid} AND b.bookingID = ${req.params.bookingID};`
-            db.query(stryQry, (err, result) => {
-                if (err) throw new Error(err.message)
-                    res.json({
-                   status: res.statusCode,
-                   result: result[0]  //result for a single product 
-                })
-            })
-        } catch (e) {
+            WHERE u.userID = ${req.params.uid};
+        `;
+
+        db.query(strQry, (err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    status: 500,
+                    error: err.message
+                });
+            }
             res.json({
-                status: 404,
-                err:e.message
-            })
-        }
+                status: 200,
+                results 
+            });
+        });
     }
 
     addBooking(req, res) {
@@ -73,10 +76,10 @@ class Bookings {
             const strQry = `
             UPDATE Bookings
             SET ?
-            WHERE userID = ${req.params.id} AND bookingID = ${req.params.id};
+            WHERE userID = ${req.params.uid} AND bookingID = ${req.params.bookingID};
             `  
             db.query (strQry, [req.body], (err) => {
-                if (err) throw new Error ('Unable to update a booking.')
+                if (err) throw new Error (err)
                     res.json({
                         status: res.statusCode,
                         msg: 'Booking was updated.'
@@ -94,7 +97,7 @@ class Bookings {
         try{
             const strQry = `
             DELETE FROM Bookings
-            WHERE bookingID = ${req.params.id} AND userID =  ${req.params.id};
+            WHERE userID = ${req.params.uid} AND bookingID = ${req.params.bookingID};
             `
             db.query (strQry, (err) => {
                 if(err) throw new Error('To delete a booking, please review your delete query.')
@@ -114,7 +117,8 @@ class Bookings {
     deleteBookings(req, res) {
         try{
             const strQry = `
-            DELETE FROM Bookings;
+            DELETE FROM Bookings
+            WHERE userID = ${req.params.uid};
             `
             db.query (strQry, (err) => {
                 if(err) throw new Error('To delete a bookings, please review your delete query.')
