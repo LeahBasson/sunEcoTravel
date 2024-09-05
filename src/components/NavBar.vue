@@ -34,7 +34,7 @@
                    <li class="nav-item mt-2">
                      <router-link to="/about" class="nav-link" aria-current="page">About Us</router-link>
                    </li>
-                   <li class="nav-item mt-2" v-if="isAdmin">
+                   <li class="nav-item mt-2">
                      <router-link to="/admin" class="nav-link" aria-current="page">Admin</router-link>
                    </li>
                    <li class="nav-item mt-2">
@@ -47,8 +47,13 @@
                   <router-link to="/login" class="nav-link" aria-current="page"><i class="bi bi-person-circle"></i></router-link>
                 </li>
                 <li class="nav-item mt-2 booking">
-                     <router-link to="/bookings" class="nav-link" aria-current="page"><i class="bi bi-suitcase-lg"></i></router-link>
+                     <router-link to="/bookings" class="nav-link" aria-current="page"><i class="bi bi-suitcase-lg"></i>
+                      <span class="badge rounded-pill" counter>
+                        0
+                      </span>
+                    </router-link>    
                 </li>
+                
                 <router-link to="/signin" class="mt-1 textDecor">
                 <button class="btn-signIn">
                 Sign up
@@ -66,16 +71,6 @@
  <script >
  export default {
   computed: {
-    isAdmin() {
-      return this.$store.state.user?.role === 'admin'; // Adjust based on your user object structure
-    },
-    watch: {
-    '$store.state.user': function(newUser) {
-      // React to user changes if necessary
-      // For example, you might want to trigger reactivity or force a re-render
-      console.log('User state has changed:', newUser);
-    }
-  },
     isDropdownActive() {
       const activeRoutes = ['/hotels', '/adventureRoulette'];
       return activeRoutes.includes(this.$route.path);
@@ -129,6 +124,7 @@ img[alt='logo']:hover {
 
 .dropdown-item:hover, .dropdown-item.active  {
     background-color: var(--awesome) !important;
+    color: var(--secondary);
 }
 
 .btn-signIn {
@@ -146,6 +142,10 @@ img[alt='logo']:hover {
 
 .booking{
   margin-right: 2rem;
+}
+
+.badge{
+  font-size: 1rem;
 }
 
 @media (max-width: 999px) {

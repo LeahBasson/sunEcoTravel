@@ -24,6 +24,7 @@
           <button class="account-button" data-bs-toggle="modal" :data-bs-target="'#updateAccountModal' + user.userID"><i class="bi bi-pen-fill"></i></button>
           <button class="account-button" @click="deleteUser(user.userID)"><i class="bi bi-trash-fill"></i></button>
         </div>
+        <router-link to="/"><button class="btnHome">Go back home</button></router-link>
       
       <!-- Ensure the modal is only rendered when user data is available -->
       <UpdateAccountModal :user="user" @update="handleUpdate" />
@@ -43,15 +44,24 @@ const route = useRoute()
 const user = computed(() => store.state.user)
 
 onMounted(() => {
-  const userID = route.params.id
-  if (userID) {
-    store.dispatch('fetchUser', userID)
+  // If there's no user, try to fetch it from the backend using the token
+  if (!user.value) {
+    store.dispatch('fetchCurrentUser');
+  } else {
+    const userID = route.params.id;
+    if (userID) {
+      store.dispatch('fetchUser', userID);
+    }
   }
-})
+});
 
 function handleUpdate() {
   // Refresh user data after update
   store.dispatch('fetchUser', route.params.id)
+}
+
+function deleteUser(userID) {
+  store.dispatch('deleteUser', userID);
 }
 
 // Optional: Watch for changes in user data to reactively update the UI
@@ -98,6 +108,22 @@ watch(user, (newUser) => {
     width: 24%;
 }
 
+.btnHome{
+  background-color: var(--alternative);
+  border: none;
+  border-radius: 0.5rem;
+  width: 22rem;
+  padding: 0.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: var(--secondary);
+  margin-top: 3rem;
+}
+
+.btnHome:hover{
+  background-color: var(--awesome);
+}
+
 @media (width < 999px)
 {
 .card{
@@ -113,6 +139,10 @@ watch(user, (newUser) => {
 
 .img-width{
     width: 100%;
+}
+
+.btnHome{
+  width: 85%;
 }
 }
 

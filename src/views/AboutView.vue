@@ -200,7 +200,7 @@ function scrollDown() {
   }
 
   #about-content-one{
-  width: 100%;
+    width: 92%;
   margin: auto;
   padding-top: 4rem;
 }
@@ -210,6 +210,39 @@ function scrollDown() {
   width: 100%;
   margin: auto;
   padding-top: 4rem;
+}
+
+#about-content-two{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 92%;
+  margin: auto;
+  padding-top: 4rem;
+}
+
+.imgDiv {
+  width: 100%;
+}
+
+.content{
+  width: 100%;
+  padding-top: 3rem;
+}
+
+#icons{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 97%;
+  margin: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.icons-content{
+  width: 100%;
+  margin: auto;
 }
 }
 </style>

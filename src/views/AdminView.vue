@@ -146,6 +146,7 @@
                  <th>Check In Date</th>
                  <th>Check Out Date</th>
                  <th>Amount</th>
+                 <th>Action</th>
                 </thead>
                 <tbody v-if="bookings">
                   <tr v-for="booking in bookings" :key="booking.bookingID">
@@ -167,8 +168,10 @@
                     <td>
                       {{ booking.totalPrice }}
                     </td>
-                  </tr>
-                   
+                  <td>
+                    <button class="table-button" data-bs-toggle="modal" :data-bs-target="'#updateBookingModal' + booking.bookingID"><i class="bi bi-pen-fill"></i></button>
+                  </td>   
+                   </tr>
                 </tbody>
                 <div v-else>
                   <Spinner />
@@ -177,7 +180,13 @@
     </div>
 
     </div>
+<div v-for="booking in bookings" :key="booking.bookingID">
+      <UpdateBookingModal :booking='booking'>
+                
+      </UpdateBookingModal> 
 
+    </div>
+    
     </div>
 </template>
 
@@ -189,6 +198,7 @@ import AddHotelModel from '@/components/AddHotelModel.vue';
 import AddUserModal from '@/components/AddUserModal.vue';
 import Spinner from '@/components/Spinner.vue';
 import UpdateUserModal from '@/components/UpdateUserModal.vue';
+import UpdateBookingModal from '@/components/UpdateBookingModal.vue';
 
 const store = useStore();
 const hotels = computed(() => store.state.hotels);
@@ -480,6 +490,7 @@ td:before {
 .tableContainer3 td:nth-of-type(4):before { content: "Check in date"; }
 .tableContainer3 td:nth-of-type(5):before { content: "Check out date"; }
 .tableContainer3 td:nth-of-type(6):before { content: "Amount"; }
+.tableContainer3 td:nth-of-type(7):before { content: "Action"; }
 .tableContainer3 .total-row td:before { content: ""; }
 .tableContainer3 .total-row td:before { content: ""; }
 

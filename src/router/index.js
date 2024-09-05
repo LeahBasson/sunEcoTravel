@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import store from '@/store'
 
 const routes = [
   {
@@ -93,35 +92,6 @@ const router = createRouter({
     }
   }
 })
-
-router.beforeEach(async (to, from, next) => {
-  // Fetch token directly from document.cookie or another method
-  const token = document.cookie.split('; ').find(row => row.startsWith('LegitUser='))?.split('=')[1]?.token
-
-  if (token) {
-    try {
-      await store.dispatch('fetchUserFromToken', token)
-    } catch (error) {
-      console.error('Failed to fetch user from token:', error)
-      document.cookie = 'LegitUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      store.commit('setUser', null)
-    }
-  }
-
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
-  const isAuthenticated = !!store.state.user
-  const isAdmin = store.state.user?.role === 'admin'
-
-  if (requiresAuth && !isAuthenticated) {
-    next({ name: 'login' })
-  } else if (requiresAdmin && !isAdmin) {
-    next('/')
-  } else {
-    next()
-  }
-})
-
 
 
 export default router

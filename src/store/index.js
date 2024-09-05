@@ -10,11 +10,15 @@ import router from '@/router'
 
 const apiURL = 'https://sunecotravel.onrender.com/'
 // Should you reload the page after logging in
-applyToken(cookies.get('LegitUser')?.token)
+const savedUser = cookies.get('LegitUser');
+if (savedUser && savedUser.token) {
+  applyToken(savedUser.token);
+}
+
 export default createStore({
   state: {
     users: null,
-    user: null,
+    user: savedUser ? savedUser.result : null, 
     hotels : null,
     hotel : null,
     recentHotels: null,
@@ -152,6 +156,27 @@ export default createStore({
         })
       }
     },
+    async fetchCurrentUser({ commit }) {
+      try {
+        const token = cookies.get('LegitUser')?.token;
+        if (!token) return;
+
+        const { result } = await (await axios.get(`${apiURL}user/me`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })).data;
+
+        if (result) {
+          commit('setUser', result);
+        } else {
+          cookies.remove('LegitUser');  // Clear the token if invalid
+        }
+      } catch (error) {
+        toast.error(`Error fetching user: ${error.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      }
+    },
     // ===== LOGIN =======
     async login({ commit }, payload) {
       try {
@@ -287,9 +312,10 @@ export default createStore({
       })
     }
   },
+  // ==== Bookings ========
   async fetchBookings(context, uid) {
     try {
-      const { results, msg } = await (await axios.get(`${apiURL}user/${uid}/booking`)).data
+      const { results, msg } = await (await axios.get(`${apiURL}user/${uid}/bookings`)).data
       if (results) {
         context.commit('setBookings', results)
       } else {
@@ -305,6 +331,42 @@ export default createStore({
       })
     }
   },
+  async updateBooking(context, payload) {
+    try {
+      const { msg } = await (await axios.patch(`${apiURL}user/${payload.userID}/booking/${payload.bookingID}`, payload)).data;
+      if (msg) {
+        context.dispatch('fetchBookings', payload.userID);
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      });
+    }
+  },
+  // In your Vuex store
+async addBooking(context, payload) {
+  try {
+      const response = await axios.post(`${apiURL}user/${payload.userID}/booking`, payload)
+      const { msg } = response.data
+      if (msg) {
+          await context.dispatch('fetchBookings')
+          toast.success(`${msg}`, {
+              autoClose: 2000,
+              position: toast.POSITION.BOTTOM_CENTER
+          })
+      }
+  } catch (e) {
+      toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+      })
+  }
+},
 
   },
   

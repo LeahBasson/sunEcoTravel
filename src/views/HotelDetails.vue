@@ -17,7 +17,7 @@
                     <p class="lead"><span class="fw-bold">Address</span>: {{ hotel.hotelAdd }}</p>
                     <p class="lead"><span class="fw-bold">Country</span>: {{ hotel.country }}</p>
                     <p class="lead"><span class="fw-bold">City</span>: {{ hotel.city }}</p>
-                    <p class="lead"><span class="fw-bold">Amount</span>: R{{ hotel.amount }}</p>
+                    <p class="lead"><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
                 </template>
             </Card>
         </div>
@@ -25,7 +25,7 @@
             <Spinner/>
         </div>
         <div class="detailsButtons">
-            <button class="detail-button">Book Now</button>
+            <button class="detail-button" @click="handleBooking">Book Now</button>
             <router-link to="/hotels" class="detail-width"><button class="detail-button">Explore More</button></router-link>
         </div>  
     </div>
@@ -34,17 +34,65 @@
 <script setup>
 import { useStore } from 'vuex'
 import { computed, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
-import { useRoute } from 'vue-router'
+import Swal from 'sweetalert2'
+
 const store = useStore()
 const route = useRoute()
-const hotel = computed(
-    () => store.state.hotel
-)
+const router = useRouter()
+
+const hotel = computed(() => store.state.hotel)
+const user = computed(() => store.state.user) // assuming you have a user object in Vuex store
+
 onMounted(() => {
     store.dispatch('fetchHotel', route.params.id)
-}) 
+})
+
+const handleBooking = async () => {
+    if (user.value) {  // Check if user is logged in
+        // User is logged in, proceed with booking
+        const booking = {
+            hotelID: hotel.value.hotelID,
+            checkInDate: new Date().toISOString(), // Replace with actual check-in date
+            checkOutDate: new Date().toISOString(), // Replace with actual check-out date
+            numberOfRooms: 1,  // Replace with actual room count
+            totalPrice: hotel.value.amount,
+            userID: user.value._id // Include userID in the booking
+        }
+
+        try {
+            await store.dispatch('addBooking', booking)
+            router.push('/bookings')
+        } catch (error) {
+            // Show an error message if booking fails
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'There was an issue processing your booking. Please try again.'
+            })
+        }
+    } else {
+        // User is not logged in, prompt them to log in
+        Swal.fire({
+            icon: 'warning',
+            title: 'Login Required',
+            text: 'Please log in to book a hotel.',
+            confirmButtonText: 'Login',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Store the intended route and redirect to login
+                sessionStorage.setItem('redirectAfterLogin', '/bookings')
+                router.push('/login')
+            }
+        })
+    }
+}
+
+
 </script>
 
 <style scoped>

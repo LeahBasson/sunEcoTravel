@@ -55,8 +55,17 @@ async function login() {
             throw new Error('Failed to retrieve user ID')
         }
 
-        // Navigate to the account page after successful login
-        router.push({ name: 'account', params: { id: userID } })
+        // Retrieve the stored redirect path
+        const redirectAfterLogin = sessionStorage.getItem('redirectAfterLogin')
+
+        if (redirectAfterLogin) {
+            // Remove the redirect path from storage and navigate to it
+            sessionStorage.removeItem('redirectAfterLogin')
+            router.push(redirectAfterLogin)
+        } else {
+            // Navigate to the account page or another default page
+            router.push({ name: 'account', params: { id: userID } })
+        }
     } catch (error) {
         // Handle login error (e.g., show an error message)
         console.error('Login failed:', error.message)
@@ -68,7 +77,7 @@ async function login() {
 .login-heading{
     color: var(--primary);
     font-family: "Poppins",sans-serif;
-    padding-top: 2rem;
+    padding-top: 6rem;
 }
 
 .form{
@@ -76,6 +85,7 @@ async function login() {
     padding-top: 1rem;
     text-align: left;
     font-family: "Poppins",sans-serif;
+    padding-bottom: 4rem;
 }
 
 .form-control-wrapper{
@@ -102,6 +112,9 @@ async function login() {
 
 @media (width < 999px)
 {
+.login-heading{
+padding-top: 2rem;
+}
 .form{
 width: 90%;
 padding-top: 1rem;
