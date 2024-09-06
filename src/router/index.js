@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router' 
 
 const routes = [
   {
@@ -30,7 +30,6 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('@/views/AdminView.vue'),
-    meta: { requiresAuth: true, requiresAdmin: true }
   },
   {
     path: '/contact',
@@ -79,7 +78,6 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // Scroll to top of the page on route navigation
     if (to.hash) {
       return {
         el: to.hash,
@@ -88,10 +86,9 @@ const router = createRouter({
     } else if (savedPosition) {
       return savedPosition;
     } else {
-      return { top: 0, behavior: 'smooth' }; // Ensure smooth scrolling to the top
+      return { top: 0, behavior: 'smooth' }; 
     }
   }
 })
-
 
 export default router

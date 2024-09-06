@@ -201,6 +201,7 @@ import UpdateUserModal from '@/components/UpdateUserModal.vue';
 import UpdateBookingModal from '@/components/UpdateBookingModal.vue';
 
 const store = useStore();
+
 const hotels = computed(() => store.state.hotels);
 const users = computed(() => store.state.users);
 const bookings = computed(() => store.state.bookings);
@@ -243,7 +244,7 @@ function scrollDown() {
 onMounted(() => {
   fetchHotels();
   fetchUsers();
-  fetchBookings()
+  fetchBookings();
 });
 </script>
 
