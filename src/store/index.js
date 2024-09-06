@@ -9,11 +9,14 @@ import router from '@/router'
 
 
 const apiURL = 'https://sunecotravel.onrender.com/'
-applyToken(cookies.get('LegitUser')?.token)
+const savedUser = cookies.get('LegitUser');
+if (savedUser && savedUser.token) {
+  applyToken(savedUser.token);
+}
 export default createStore({
   state: {
     users: null,
-    user: null, 
+    user: savedUser ? savedUser.result : null,
     hotels : null,
     hotel : null,
     recentHotels: null,
@@ -149,6 +152,27 @@ export default createStore({
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
+      }
+    },
+    async fetchCurrentUser({ commit }) {
+      try {
+        const token = cookies.get('LegitUser')?.token;
+        if (!token) return;
+
+        const { result } = await (await axios.get(`${apiURL}user/me`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })).data;
+
+        if (result) {
+          commit('setUser', result);
+        } else {
+          cookies.remove('LegitUser');  // Clear the token if invalid
+        }
+      } catch (error) {
+        toast.error(`Error fetching user: ${error.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        });
       }
     },
     // ===== LOGIN =======
