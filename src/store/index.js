@@ -21,7 +21,8 @@ export default createStore({
     hotel : null,
     recentHotels: null,
     bookings: null,
-    booking: null
+    booking: null,
+    redirectIntent: null
   },
   getters: {
   },
@@ -46,7 +47,10 @@ export default createStore({
     },
     setBooking(state, value) {
       state.booking = value;
-    }
+    },
+    setRedirectIntent(state, value) {
+      state.redirectIntent = value;
+    },
   },
   actions: {
      // ==== Hotel =====
@@ -179,20 +183,23 @@ export default createStore({
     async login(context, payload) {
       try {
         const { msg, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
-    
+
         if (result) {
           toast.success(`${msg}😎`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
-          context.commit('setUser', {
-            msg,
-            result
-          })
-          cookies.set('LegitUser', { token, msg, result })
-          applyToken(token)
-          // Redirect to the account page with user ID
-          router.push({ name: 'account', params: { id: result.userID } })
+          context.commit('setUser', result);
+          cookies.set('LegitUser', { token, msg, result });
+          applyToken(token);
+
+          if (context.state.redirectIntent === 'admin' && result.userRole === 'admin') {
+            router.push({ name: 'admin' })
+          } else {
+            router.push({ name: 'account', params: { id: result.userID } })
+          }
+
+          context.commit('setRedirectIntent', null)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -319,6 +326,24 @@ export default createStore({
       })
     }
   },
+  async fetchUserBookings(context, uid) {
+    try {
+      const { results, msg } = await (await axios.get(`${apiURL}user/${uid}/booking`)).data;
+      if (results) {
+        context.commit('setBookings', results);
+      } else {
+        toast.error(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      });
+    }
+  },
   async updateBooking(context, payload) {
     try {
       const { msg } = await (await axios.patch(`${apiURL}user/${payload.userID}/booking/${payload.bookingID}`, payload)).data;
@@ -336,7 +361,28 @@ export default createStore({
       });
     }
   },
-  
+  async addBooking(context, payload) {
+    try {
+      const { msg, booking } = await (await axios.post(`${apiURL}user/${payload.userID}/booking`, payload)).data;
+      if (booking) {
+        context.dispatch('fetchUserBookings', payload.userID);
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      } else {
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        });
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      });
+    }
+  },
 
   },
   

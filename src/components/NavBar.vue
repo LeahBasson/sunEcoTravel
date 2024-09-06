@@ -35,7 +35,7 @@
                      <router-link to="/about" class="nav-link" aria-current="page">About Us</router-link>
                    </li>
                    <li class="nav-item mt-2">
-                     <router-link to="/admin" class="nav-link" aria-current="page">Admin</router-link>
+                     <router-link to="/admin" class="nav-link" aria-current="page" >Admin</router-link>
                    </li>
                    <li class="nav-item mt-2">
                      <router-link to="/contact" class="nav-link" aria-current="page">Contact Us</router-link>
@@ -68,8 +68,8 @@
        </nav>
  </template>
  
- <script >
- export default {
+ <script>
+export default {
   computed: {
     isDropdownActive() {
       const activeRoutes = ['/hotels', '/adventureRoulette'];

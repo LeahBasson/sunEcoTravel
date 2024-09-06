@@ -4,7 +4,7 @@
         <h1 class="login-heading">Login</h1>
       </div>
       <div class="row my-2 justify-content-center">
-        <form class="form" @submit.prevent="login">
+        <form class="form" @submit.prevent="handleLogin">
           <div class="form-control-wrapper">
             <span>Enter Email address
               <input type="email" class="form-control" placeholder="Email" v-model="payload.emailAdd"
@@ -31,20 +31,26 @@
   </template>
   
   <script setup>
-  import { useStore } from 'vuex'
-  import { reactive } from 'vue'
-  
-  const store = useStore()
-  
-  const payload = reactive({
-    emailAdd: '',
-    userPass: ''
-  })
-  
-  function login() {
-    store.dispatch('login', payload)
+import { useStore } from 'vuex'
+import { reactive } from 'vue'
+
+const store = useStore()
+
+const payload = reactive({
+  emailAdd: '',
+  userPass: ''
+})
+
+const handleLogin = async () => {
+  try {
+    await store.dispatch('login', payload)
+   
+  } catch (error) {
+    console.error('Login failed:', error)
+    
   }
-  </script>
+}
+</script>
 
 <style scoped>
 .login-heading {
