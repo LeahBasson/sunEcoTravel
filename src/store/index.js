@@ -9,16 +9,11 @@ import router from '@/router'
 
 
 const apiURL = 'https://sunecotravel.onrender.com/'
-// Should you reload the page after logging in
-const savedUser = cookies.get('LegitUser');
-if (savedUser && savedUser.token) {
-  applyToken(savedUser.token);
-}
-
+applyToken(cookies.get('LegitUser')?.token)
 export default createStore({
   state: {
     users: null,
-    user: savedUser ? savedUser.result : null, 
+    user: null, 
     hotels : null,
     hotel : null,
     recentHotels: null,
@@ -156,68 +151,37 @@ export default createStore({
         })
       }
     },
-    async fetchCurrentUser({ commit, id}) {
-      try {
-        const token = cookies.get('LegitUser')?.token;
-        if (!token) return;
-
-        const { result } = await (await axios.get(`${apiURL}user/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        })).data;
-
-        if (result) {
-          commit('setUser', result);
-        } else {
-          cookies.remove('LegitUser'); // Clear the token if invalid
-        }
-      } catch (error) {
-        toast.error(`Error fetching user: ${error.message}`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        });
-      }
-    },
     // ===== LOGIN =======
-    async login({ commit }, payload) {
+    async login(context, payload) {
       try {
-        const response = await axios.post(`${apiURL}user/login`, payload)
-        const { msg, result, token } = response.data
-  
+        const { msg, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
+    
         if (result) {
-          toast.success(`${msg} 😎`, {
+          toast.success(`${msg}😎`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
-  
-          // Commit user details to Vuex store
-          commit('setUser', {
+          context.commit('setUser', {
             msg,
             result
           })
-  
-          // Save token and user data in cookies
           cookies.set('LegitUser', { token, msg, result })
-  
-          // Apply token for authenticated requests
           applyToken(token)
-  
-          // Return user ID or necessary info for redirection
-          return result.userID  // Ensure your API response includes userID or adjust accordingly
+          // Redirect to the account page with user ID
+          router.push({ name: 'account', params: { id: result.userID } })
         } else {
-          toast.error(msg, {
+          toast.error(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
           })
-          return null
         }
       } catch (e) {
-        toast.error(e.message, {
+        toast.error(`${e.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
-        return null
       }
-    },
+    },  
   // ==== User ========
   async fetchUsers(context) {
     try {
@@ -348,58 +312,6 @@ export default createStore({
       });
     }
   },
-  // Vuex Store
-async addBooking({ state, dispatch }, payload) {
-  try {
-    const userID = state.user?.userID; // Ensure you have the user's ID
-    if (!userID) {
-      // Redirect to login and store the booking info to be used after login
-      sessionStorage.setItem('bookingPayload', JSON.stringify(payload));
-      router.push({ name: 'login' });
-      return;
-    }
-
-    const response = await axios.post(`${apiURL}user/${userID}/booking`, payload);
-    const { msg } = response.data;
-
-    if (msg) {
-      await dispatch('fetchUserBookings', userID); // Fetch updated bookings for the user
-      toast.success(`${msg}`, {
-        autoClose: 2000,
-        position: toast.POSITION.BOTTOM_CENTER
-      });
-    }
-  } catch (e) {
-    toast.error(`${e.message}`, {
-      autoClose: 2000,
-      position: toast.POSITION.BOTTOM_CENTER
-    });
-  }
-},
-  async fetchUserBookings({ commit, state }) {
-    try {
-      const userID = state.user?.userID; // Ensure you have the user's ID
-      if (!userID) {
-        throw new Error('User is not logged in.');
-      }
-  
-      const { results, msg } = await axios.get(`${apiURL}user/${userID}/booking`);
-      if (results) {
-        commit('setBookings', results); // Update the store with the user's bookings
-      } else {
-        toast.error(`${msg}`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        });
-      }
-    } catch (e) {
-      toast.error(`${e.message}`, {
-        autoClose: 2000,
-        position: toast.POSITION.BOTTOM_CENTER
-      });
-    }
-  }
-  
   
 
   },
