@@ -6,7 +6,6 @@ import { verifyAToken } from '../middleware/AuthenticateUser.js'
 
 const userRouter = express.Router()
 
-
 userRouter.use(bodyParser.json())
 
 userRouter.get('/', (req, res) => {
