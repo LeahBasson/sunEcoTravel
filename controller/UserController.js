@@ -41,7 +41,7 @@ userRouter.get('/:uid/booking', (req, res) => {
     bookings.fetchUserBookings(req, res)
 })
 
-userRouter.post('/:uid/booking', (req, res) => {
+userRouter.post('/:uid/booking',  verifyAToken, (req, res) => {
     bookings.addBooking(req, res)
 })
 
