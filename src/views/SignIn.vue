@@ -8,48 +8,43 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your firstname: </label>
-                        <input class="form-control" type="text" placeholder="First name" v-model="payload.firstName"
-                            required />
+                        <input class="form-control" type="text" placeholder="First name" v-model="payload.firstName"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your lastname: </label>
-                        <input class="form-control" type="text" placeholder="Last name" v-model="payload.lastName"
-                            required />
+                        <input class="form-control" type="text" placeholder="Last name" v-model="payload.lastName"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your age: </label>
-                        <input class="form-control" type="text" placeholder="Age" v-model="payload.userAge" required />
+                        <input class="form-control" type="text" placeholder="Age" v-model="payload.userAge"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your gender: </label>
-                        <input class="form-control" type="text" placeholder="Gender" v-model="payload.Gender" required />
+                        <input class="form-control" type="text" placeholder="Gender" v-model="payload.Gender"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your email address: </label>
-                        <input class="form-control" type="email" placeholder="Email address" v-model="payload.emailAdd"
-                            required />
+                        <input class="form-control" type="email" placeholder="Email address" v-model="payload.emailAdd"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your password: </label>
-                        <input class="form-control" type="password" placeholder="Password" v-model="payload.userPass"
-                            required />
+                        <input class="form-control" type="password" placeholder="Password" v-model="payload.userPass"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your profile img url: </label>
-                        <input class="form-control" type="text" placeholder="User Profile" v-model="payload.userProfile"
-                            required />
+                        <input class="form-control" type="text" placeholder="User Profile" v-model="payload.userProfile"/>
                     </span>
                 </div>
                 <div class="form-button-wrapper">
@@ -75,18 +70,30 @@
 <script setup>
 import { reactive } from 'vue';
 import { useStore } from 'vuex';
-const store = useStore()
+import Swal from 'sweetalert2';
+
+const store = useStore();
 const payload = reactive({
-    firstName: '',
-    lastName: '',
-    userAge: '',
-    Gender: '',
-    emailAdd: '',
-    userPass: '',
-    userProfile: ''
-})
+  firstName: '',
+  lastName: '',
+  userAge: '',
+  Gender: '',
+  emailAdd: '',
+  userPass: '',
+  userProfile: ''
+});
+
 function addUser() {
-    store.dispatch('addUser', payload)
+  if (!payload.firstName || !payload.lastName || !payload.userAge || !payload.Gender || !payload.emailAdd || !payload.userPass || !payload.userProfile) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please fill in all fields before signing up!',
+    });
+    return;
+  }
+
+  store.dispatch('addUser', payload);
 }
 </script>
 

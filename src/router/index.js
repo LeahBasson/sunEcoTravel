@@ -71,6 +71,16 @@ const routes = [
     name: 'account',
     props: true,
     component: () => import('@/views/AccountView.vue')
+  },
+  {
+    path: '/all',
+    name: 'all',
+    component: () => import('@/views/AllHotelsView.vue')
+  },
+  {
+    path: '/stays',
+    name: 'stays',
+    component: () => import('@/views/StaysView.vue')
   }
 ]
 

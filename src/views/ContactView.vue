@@ -49,7 +49,6 @@
         <p class="fw-bold">Reservations Team</p>
           <p>Phone: +632 8657 1919</p>
           <p>Mobile: +63 917 521 4260 | +63 917 517 6638</p>
-          <p>Email: reservations@sunecotravel.com</p>
         <p class="fw-bold">Office Hours</p>
           <p>Mondays to Saturdays | 9:00 AM - 6:00 PM</p>
         <p>For any inquiries or further information, please fill out the form, and our team will get back to you as soon as possible.</p>
@@ -253,7 +252,6 @@ export default {
     text-align: center;
     margin: auto;
     padding-top: 3rem;
-    word-wrap: break-word;
   }
 
   .contact-button{

@@ -18,9 +18,7 @@
     </div>
 
     <div class="row" id="adventure-interaction">
-      <form class="adventure-search" role="search">
-        <input class="form-control" type="text" placeholder="Search by destination" id="searchInput" v-model="searchQuery" @input="performSearch">
-      </form>
+      <input class="form-control" type="text" placeholder="Search by destination" id="searchInput" v-model="searchQuery" @input="performSearch">
       <button class="price-button" @click="toggleSortOrder">{{ sortButtonText }}</button>
     </div>
 
@@ -80,7 +78,6 @@ const filteredHotels = computed(() => {
   } else if (sortOrder.value === 'highToLow') {
     filtered = filtered.sort((a, b) => b.amount - a.amount)
   }
-
   return filtered
 })
 
@@ -231,13 +228,10 @@ lord-icon {
     padding-top: 4rem;
 }
 
-.adventure-search{
-    width: 20rem;
-}
-
-.adventure-search .form-control{
-   border: 1px solid var(--borderColor);
+#adventure-interaction .form-control{
+  border: 1px solid var(--borderColor);
    font-family: "Poppins", sans-serif;
+   width: 20rem;
 }
 
 .price-button{
@@ -307,6 +301,15 @@ lord-icon {
     width: 80%;
   }
 
+  .banner-content{
+  position: relative;
+  z-index: 2;
+  width: 44rem;
+  margin: 3rem auto 3rem;
+  color: var(--secondary);
+  font-family: "Raleway", sans-serif;
+  }
+
   .scroll-btn{
     font-size: 1.4rem;
   }
@@ -314,6 +317,10 @@ lord-icon {
   .banner-content{
     margin-top: 5rem;
   }
+
+  lord-icon {
+    display: none;
+}
 
   #adventure-content{
     flex-direction: column;
@@ -335,8 +342,13 @@ lord-icon {
     gap: 2rem;
   }
 
+  #adventure-interaction .form-control{
+    width: 16rem;
+}
+
   .price-button{
-    margin: 0;
+    width: 16em;
+    margin: auto;
   }
 
   .banner-content{
