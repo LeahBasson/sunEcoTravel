@@ -349,6 +349,7 @@ table{
   margin: auto;
   margin-top: 2rem;
   color: var(--primary);
+  font-family: "Poppins",sans-serif;
 }
 
 .adminImages{
@@ -433,6 +434,7 @@ table, tbody, th, td, tr {
 
 table {
     margin-bottom: 1.5rem;
+    font-family: "Poppins",sans-serif;
 }
 
 thead tr {
