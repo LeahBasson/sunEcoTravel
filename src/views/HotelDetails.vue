@@ -13,6 +13,7 @@
           <p class="lead description">{{ hotel.hotelDescription }}</p>
           <p class="lead"><span class="fw-bold">Amenities</span>: {{ hotel.amenities }}</p>
           <p class="lead"><span class="fw-bold">Address</span>: {{ hotel.hotelAdd }}</p>
+          <p class="lead"><span class="fw-bold">Contact Information</span>: {{ hotel.contactInfo }}</p>
           <p class="lead"><span class="fw-bold">Country</span>: {{ hotel.country }}</p>
           <p class="lead"><span class="fw-bold">City</span>: {{ hotel.city }}</p>
           <p class="lead"><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
