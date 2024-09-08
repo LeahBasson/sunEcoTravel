@@ -4,41 +4,41 @@
         <div class="banner-overlay"></div>
         <div class="banner-image">
           <div class="banner-content">
-            <h1 class="animate__animated animate__fadeInDown">Hotels in Top Destinations</h1>
-            <p class="animate__animated animate__fadeInUp">Find the perfect hotel for your next adventure. Whether you’re seeking luxury in Paris, a cozy boutique in Tokyo, or a beachfront resort in Bali, we have handpicked the best accommodations to make your stay unforgettable.</p>
+            <h1 class="animate__animated animate__fadeInDown">Explore A Variety Of Stays</h1>
+            <p class="animate__animated animate__fadeInUp">Discover the perfect accommodation for every type of traveler. Whether you’re dreaming of a luxurious resort, a cozy boutique hotel, or a unique stay in an exotic location, we have handpicked options to suit your every need.</p>
             <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
           </div> 
         </div>
       </div>
   
-      <div class="row" id="topDestination">
-        <!-- Padma Hotel -->
+      <div class="row" id="stays">
+        <!-- Ellerman House -->
         <div class="content">
           <div class="carousel-hotels">
             <div id="carouselExample" class="carousel slide">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/padma-hotel-semarang.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ellermanHouseStay.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/main-pool.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ellerman-outdoor.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/one-bedroom-suite.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ellerman-sitting-area.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3" aria-label="Slide 4"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/premier-room-bathroom.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ellerman-room.jpg');"></button>
               </div>
   
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/padma-hotel-semarang.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ellermanHouseStay.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/main-pool.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ellerman-outdoor.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/one-bedroom-suite.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ellerman-sitting-area.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/premier-room-bathroom.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ellerman-room.jpg" class="img-fluid" alt="Slide">
                 </div>
               </div>
   
@@ -54,7 +54,7 @@
           </div>
   
           <div class="content-hotels" v-if="hotels">
-            <Card class="card" v-for="hotel in hotels.slice(0, 1)" :key="hotel.hotelID">
+            <Card class="card" v-for="hotel in hotels.slice(6, 7)" :key="hotel.hotelID">
               <template #cardBody>
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
@@ -71,10 +71,10 @@
           
         </div>
 
-         <!-- Ozen Reserve Bolifushi -->
+         <!-- Saint George Hotel -->
          <div class="content">
           <div class="content-hotels2" v-if="hotels">
-            <Card class="card" v-for="hotel in hotels.slice(1, 2)" :key="hotel.hotelID">
+            <Card class="card" v-for="hotel in hotels.slice(7, 8)" :key="hotel.hotelID">
               <template #cardBody>
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
@@ -91,27 +91,32 @@
             <div id="carouselExample2" class="carousel slide">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExample2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-reserve-bolifushi.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-hotel.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample2" data-bs-slide-to="1" aria-label="Slide 2"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-beach.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-room.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample2" data-bs-slide-to="2" aria-label="Slide 3"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-outdoor.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-outdoor.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample2" data-bs-slide-to="3" aria-label="Slide 4"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-room.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-restaurant.jpg');"></button>
+                <button type="button" data-bs-target="#carouselExample2" data-bs-slide-to="4" aria-label="Slide 5"
+                style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-sitting-area.jpg');"></button>
               </div>
   
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-reserve-bolifushi.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-hotel.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-beach.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-room.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-outdoor.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-outdoor.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/ozen-room.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-restaurant.jpg" class="img-fluid" alt="Slide">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/saint-george-sitting-area.jpg" class="img-fluid" alt="Slide">
                 </div>
               </div>
   
@@ -127,33 +132,33 @@
           </div>
         </div>
 
-        <!-- Margarenia -->
+        <!-- Four Seasons Resort Bora Bora -->
         <div class="content">
           <div class="carousel-hotels">
             <div id="carouselExample3" class="carousel slide">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExample3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/margeniaHotel.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/four-seasons-resort-bora.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample3" data-bs-slide-to="1" aria-label="Slide 2"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/margarenia-pool.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/bora-bora-pool.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample3" data-bs-slide-to="2" aria-label="Slide 3"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/margarenia-room.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/bora-bora-tennis.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample3" data-bs-slide-to="3" aria-label="Slide 4"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/margarenia-view.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/bora-bora-activities.jpg');"></button>
               </div>
   
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/margeniaHotel.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/four-seasons-resort-bora.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/margarenia-pool.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/bora-bora-pool.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/margarenia-room.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/bora-bora-tennis.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/margarenia-view.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/bora-bora-activities.jpg" class="img-fluid" alt="Slide">
                 </div>
               </div>
   
@@ -169,7 +174,7 @@
           </div>
   
           <div class="content-hotels" v-if="hotels">
-            <Card class="card" v-for="hotel in hotels.slice(2, 3)" :key="hotel.hotelID">
+            <Card class="card" v-for="hotel in hotels.slice(8, 9)" :key="hotel.hotelID">
               <template #cardBody>
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
@@ -186,10 +191,10 @@
           
         </div>
 
-        <!-- Le Bristol Paris -->
+        <!-- Simons Town  -->
         <div class="content">
           <div class="content-hotels2" v-if="hotels">
-            <Card class="card" v-for="hotel in hotels.slice(3, 4)" :key="hotel.hotelID">
+            <Card class="card" v-for="hotel in hotels.slice(9, 10)" :key="hotel.hotelID">
               <template #cardBody>
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
@@ -207,27 +212,27 @@
             <div id="carouselExample4" class="carousel slide">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExample4" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/bristolHotel.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/simonsTownStay.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample4" data-bs-slide-to="1" aria-label="Slide 2"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/le-bristol-bathroom.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/simonstown-outdoor.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample4" data-bs-slide-to="2" aria-label="Slide 3"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/le-bristol-paris-chambre.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/simonstown-bathroom.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample4" data-bs-slide-to="3" aria-label="Slide 4"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/le-bristol-paris-outdoor.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/simonstown-restaurant.jpg');"></button>
               </div>
   
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/bristolHotel.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/simonsTownStay.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/le-bristol-bathroom.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/simonstown-outdoor.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/le-bristol-paris-chambre.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/simonstown-bathroom.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/le-bristol-paris-outdoor.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/simonstown-restaurant.jpg" class="img-fluid" alt="Slide">
                 </div>
               </div>
   
@@ -243,33 +248,33 @@
           </div>
         </div>
 
-        <!-- Hotel Colline de France -->
+        <!-- Groove Stay  -->
         <div class="content">
             <div class="carousel-hotels">
             <div id="carouselExample5" class="carousel slide">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExample5" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/hotel-colline-de-france.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/GrooveStay.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample5" data-bs-slide-to="1" aria-label="Slide 2"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/colline-room.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/shinjuku-room.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample5" data-bs-slide-to="2" aria-label="Slide 3"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/colline-outdoor.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/shinjuku-bathroom.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample5" data-bs-slide-to="3" aria-label="Slide 4"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/colline-pool.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/shinjuku-laundry.jpg');"></button>
               </div>
   
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/hotel-colline-de-france.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/GrooveStay.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/colline-room.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/shinjuku-room.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/colline-outdoor.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/shinjuku-bathroom.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/colline-pool.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/shinjuku-laundry.jpg" class="img-fluid" alt="Slide">
                 </div>
               </div>
   
@@ -285,7 +290,7 @@
           </div>
 
           <div class="content-hotels" v-if="hotels">
-            <Card class="card" v-for="hotel in hotels.slice(4, 5)" :key="hotel.hotelID">
+            <Card class="card" v-for="hotel in hotels.slice(10, 11)" :key="hotel.hotelID">
               <template #cardBody>
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
@@ -302,10 +307,10 @@
           
         </div>
 
-        <!-- Grayson Hotel -->
+        <!-- One And Only -->
         <div class="content">
           <div class="content-hotels2" v-if="hotels">
-            <Card class="card" v-for="hotel in hotels.slice(5, 6)" :key="hotel.hotelID">
+            <Card class="card" v-for="hotel in hotels.slice(11, 12)" :key="hotel.hotelID">
               <template #cardBody>
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
@@ -323,27 +328,32 @@
             <div id="carouselExample6" class="carousel slide">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExample6" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/graysonHotel.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-hotel.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample6" data-bs-slide-to="1" aria-label="Slide 2"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/grayson-gym.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-gym.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample6" data-bs-slide-to="2" aria-label="Slide 3"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/grayson-room.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-room.jpg');"></button>
                 <button type="button" data-bs-target="#carouselExample6" data-bs-slide-to="3" aria-label="Slide 4"
-                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/grayson-room2.jpg');"></button>
+                  style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-lounge.jpg');"></button>
+                <button type="button" data-bs-target="#carouselExample6" data-bs-slide-to="4" aria-label="Slide 4"
+                style="background-image: url('https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-restaurant.jpg');"></button>
               </div>
   
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/graysonHotel.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-hotel.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/grayson-gym.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-gym.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/grayson-room.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-room.jpg" class="img-fluid" alt="Slide">
                 </div>
                 <div class="carousel-item">
-                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/grayson-room2.jpg" class="img-fluid" alt="Slide">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-lounge.jpg" class="img-fluid" alt="Slide">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/one-and-only-restaurant.jpg" class="img-fluid" alt="Slide">
                 </div>
               </div>
   
@@ -378,7 +388,7 @@
   
   function scrollDown() {
     window.scrollTo({
-      top: document.getElementById('topDestination').offsetTop,
+      top: document.getElementById('stays').offsetTop,
       behavior: 'smooth'
     })
   }
@@ -391,7 +401,7 @@
   }
   
   .banner-image {
-    background-image: url("https://leahbasson.github.io/MyImages/sunEcoTravel/topDestinations.jpg");
+    background-image: url("https://leahbasson.github.io/MyImages/sunEcoTravel/banner.jpeg");
     background-size: cover;
     background-position: center; 
     position: relative;
@@ -403,7 +413,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(30, 35, 40, 0.4); 
+    background-color: rgba(30, 35, 40, 0.6); 
     z-index: 1;
   }
   
@@ -458,11 +468,6 @@
   .carousel-hotels {
     width: 55%;
   }
-
-  .carousel-hotels2 {
-    width: 55%;
-    order: 1;
-  }
   
   .carousel-inner {
     max-width: 100%;
@@ -497,9 +502,6 @@
   background-color: var(--awesome);
 }
   
-.content-hotels2{
-  order: 1;
-}
   .card{
     width: 36rem;
     font-family: "Poppins",sans-serif;

@@ -26,6 +26,7 @@
                      <ul class="dropdown-menu">
                        <li><router-link to="/hotels" class="dropdown-item" :class="{ active: $route.path === '/hotels' }">Hotels</router-link></li>
                        <li><router-link to="/adventureRoulette" class="dropdown-item" :class="{ active: $route.path === '/adventureRoulette' }">Adventure Roulette</router-link></li>
+                       <li><router-link to="/all" class="dropdown-item" :class="{ active: $route.path === '/all' }">All Destinations</router-link></li>
                      </ul>
                    </li>
                    <li class="nav-item mt-2">
@@ -72,7 +73,7 @@
 export default {
   computed: {
     isDropdownActive() {
-      const activeRoutes = ['/hotels', '/adventureRoulette'];
+      const activeRoutes = ['/hotels', '/adventureRoulette','/all'];
       return activeRoutes.includes(this.$route.path);
     },
   }
@@ -146,6 +147,10 @@ img[alt='logo']:hover {
 
 .badge{
   font-size: 1rem;
+}
+
+.dropdown-menu li{
+  font-family: "Poppins",sans-serif;
 }
 
 @media (max-width: 999px) {

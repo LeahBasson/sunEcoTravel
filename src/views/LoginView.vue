@@ -8,13 +8,12 @@
           <div class="form-control-wrapper">
             <span>Enter Email address
               <input type="email" class="form-control" placeholder="Email" v-model="payload.emailAdd"
-                pattern="^[A-Za-z0-9]+@[a-z0-9]+\.[a-z]{2,4}$" required />
+                pattern="^[A-Za-z0-9]+@[a-z0-9]+\.[a-z]{2,4}$" />
             </span>
           </div>
           <div class="form-control-wrapper">
             <span>Enter Password
-              <input type="password" class="form-control" placeholder="Password" v-model="payload.userPass"
-               required />
+              <input type="password" class="form-control" placeholder="Password" v-model="payload.userPass"/>
             </span>
           </div>
           <div class="form-control-wrapper">
@@ -33,6 +32,7 @@
   <script setup>
 import { useStore } from 'vuex'
 import { reactive } from 'vue'
+import Swal from 'sweetalert2'
 
 const store = useStore()
 
@@ -42,12 +42,19 @@ const payload = reactive({
 })
 
 const handleLogin = async () => {
+  if (!payload.emailAdd || !payload.userPass) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please fill in both the email and password fields!',
+    })
+    return
+  }
+
   try {
     await store.dispatch('login', payload)
-   
   } catch (error) {
     console.error('Login failed:', error)
-    
   }
 }
 </script>

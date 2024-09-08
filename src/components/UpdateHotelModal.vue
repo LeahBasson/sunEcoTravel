@@ -17,11 +17,11 @@
                 </div>
                 <div class="mb-3">
                   <label for="hotelDescription" class="form-label">Hotel Description</label>
-                  <input type="text" class="form-control" id="hotelDescription" placeholder="Enter hotel description" v-model="hotelDescription">
+                  <textarea type="text" class="form-control" id="hotelDescription" placeholder="Enter hotel description" v-model="hotelDescription"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="hotelAdd" class="form-label">Hotel Address</label>
-                  <input type="text" class="form-control" id="hotelAdd" placeholder="Enter hotel address" v-model="hotelAdd">
+                  <textarea type="text" class="form-control" id="hotelAdd" placeholder="Enter hotel address" v-model="hotelAdd"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="country" class="form-label">Hotel Country</label>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="amenities" class="form-label">Hotel Amenities</label>
-                  <input type="text" class="form-control" id="amenities" placeholder="Enter the hotel amenities" v-model="amenities">
+                  <textarea type="text" class="form-control" id="amenities" placeholder="Enter the hotel amenities" v-model="amenities"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="contactInfo" class="form-label">Hotel Contact Info</label>

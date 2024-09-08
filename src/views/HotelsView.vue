@@ -35,7 +35,7 @@
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
           <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
           <div class="button-wrapper justify-content-center">
-            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btn">View</button></router-link>
+            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
           </div>
         </template>
         </Card>
@@ -59,7 +59,7 @@
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
           <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
           <div class="button-wrapper justify-content-center">
-            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btn">View</button></router-link>
+            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
           </div>
         </template>
           </Card>
@@ -76,7 +76,7 @@
 
       <div class="row" id="hotel-content">
         <div class="hotel-link">
-          <router-link to="/topDestination" class="lnk">See All</router-link>
+          <router-link to="/stays" class="lnk">See All</router-link>
         </div>
 
         <div class="hotel-cards" v-if="hotels">
@@ -88,7 +88,7 @@
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
           <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
           <div class="button-wrapper justify-content-center">
-            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btn">View</button></router-link>
+            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
           </div>
         </template>
           </Card>
@@ -340,7 +340,7 @@ function scrollDown() {
   padding-top: 3rem;
 }
 
-.hotel-cards .card{
+.card{
   border: 1px solid var(--borderColor);
   border-radius: 0.5rem;
   padding: 0;
@@ -355,12 +355,17 @@ function scrollDown() {
   font-size: 1.1rem;
 }
 
-.btn{
+.btnView{
   background-color: var(--alternative);
   color: var(--secondary);
+  width: 5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 0.3rem;
+  font-weight: 600;
 }
 
-.btn:hover{
+.btnView:hover{
   background-color: var(--awesome);
 }
 

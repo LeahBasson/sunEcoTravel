@@ -28,7 +28,8 @@
     </div>
 
     <div v-else>
-      <p>No bookings found.</p>
+      <p class="text-book">No bookings yet</p>
+      <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/travelIcon.png" class="img-fluid" alt="bookingImage" loading="eager">
     </div>
   </div>
 </template>
@@ -58,5 +59,24 @@ onMounted(() => {
   font-family: "Poppins", sans-serif;
   color: var(--primary);
   padding-top: 2rem;
+}
+
+.text-book{
+  font-family: "Poppins", sans-serif;
+  color: var(--primary);
+  padding-top: 8rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+img[alt="bookingImage"]{
+  width: 14rem;
+}
+
+@media (width < 999px)
+{
+  .text-book{
+    padding-top: 3rem;
+  }
 }
 </style>
