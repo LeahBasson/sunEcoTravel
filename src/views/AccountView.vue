@@ -24,8 +24,11 @@
           <button class="account-button" data-bs-toggle="modal" :data-bs-target="'#updateAccountModal' + user.userID"><i class="bi bi-pen-fill"></i></button>
           <button class="account-button" @click="deleteUser(user.userID)"><i class="bi bi-trash-fill"></i></button>
         </div>
-        <router-link to="/"><button class="btnHome">Go back home</button></router-link>
-      
+        <div class="buttons">
+          <router-link to="/"><button class="btnHome">Go back home</button></router-link>
+        <button class="btnHome" @click="logout">Logout</button>
+        </div>
+        
       <!-- Ensure the modal is only rendered when user data is available -->
       <UpdateAccountModal :user="user" @update="handleUpdate" />
     </div>
@@ -37,14 +40,17 @@ import { computed, onMounted, watch } from 'vue'
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
 import UpdateAccountModal from '@/components/UpdateAccountModal.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useCookies } from 'vue3-cookies'
 
 const store = useStore()
+const router = useRouter()
 const route = useRoute()
+const { cookies } = useCookies()
+
 const user = computed(() => store.state.user)
 
 onMounted(() => {
-  // If there's no user, try to fetch it from the backend using the token
   if (!user.value) {
     store.dispatch('fetchCurrentUser');
   } else {
@@ -56,22 +62,25 @@ onMounted(() => {
 });
 
 function handleUpdate() {
-  // Refresh user data after update
-  store.dispatch('fetchUser', route.params.id)
+  store.dispatch('fetchCurrentUser');
 }
 
 function deleteUser(userID) {
   store.dispatch('deleteUser', userID);
 }
 
-// Optional: Watch for changes in user data to reactively update the UI
+function logout() {
+  // Remove the cookie
+  cookies.remove('LegitUser');  // Make sure to use the correct cookie name
+  
+  // Redirect to the home page
+  router.push('/');
+}
+
 watch(user, (newUser) => {
-  // Do something when the user data changes
   console.log("User data updated:", newUser);
 })
-
 </script>
-
 
 <style scoped>
 .account-button{
@@ -113,15 +122,25 @@ watch(user, (newUser) => {
   border: none;
   border-radius: 0.5rem;
   width: 22rem;
+  margin: auto;
   padding: 0.5rem;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   color: var(--secondary);
-  margin-top: 3rem;
 }
 
 .btnHome:hover{
   background-color: var(--awesome);
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 24%;
+  margin: auto;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 @media (width < 999px)
@@ -142,7 +161,18 @@ watch(user, (newUser) => {
 }
 
 .btnHome{
-  width: 85%;
+  width: 100%;
+  margin: auto;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 84%;
+  margin: auto;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 }
 

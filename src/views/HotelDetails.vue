@@ -31,7 +31,7 @@
     </div>
     <div class="detailsButtons">
       <button class="detail-button" @click="bookNow">Book Now</button>
-      <router-link to="/hotels" class="detail-width">
+      <router-link to="/all" class="detail-width">
         <button class="detail-button">Explore More</button>
       </router-link>
     </div>
@@ -93,7 +93,7 @@ const bookNow = async () => {
           checkInDate: formatDate(checkInDate.value),
           checkOutDate: formatDate(checkOutDate.value),
           numberOfRooms: numberOfRooms.value,
-          totalPrice: hotel.value.amount * numberOfRooms.value
+          amount: hotel.value.amount * numberOfRooms.value
         }))
         router.push('/login')
       }
@@ -107,11 +107,12 @@ const bookNow = async () => {
     checkInDate: checkInDate.value,
     checkOutDate: checkOutDate.value,
     numberOfRooms: numberOfRooms.value,
-    totalPrice: hotel.value.amount * numberOfRooms.value
+    amount: hotel.value.amount * numberOfRooms.value
   }
 
   try {
     await store.dispatch('addBooking', bookingData)
+    await store.dispatch('fetchUserBookings', userId);
     router.push('/bookings') // Redirect to the bookings page
   } catch (error) {
     console.error(error)

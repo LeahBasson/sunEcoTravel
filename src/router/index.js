@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router' 
+import { useCookies } from 'vue3-cookies'
+const { cookies } = useCookies()
 
 const routes = [
   {
@@ -30,6 +32,22 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('@/views/AdminView.vue'),
+    // beforeEnter(){
+    //   console.log(cookies.get('LegitUser'));
+      
+    //   const result = cookies.get('LegitUser')?.result
+    //   console.log(result);
+      
+    //   // if(result){
+    //   //   if(result.userRole.toLowerCase() == 'admin') {
+    //   //     router.push({name: 'admin'})
+    //   //   }else{
+    //   //     router.push({name: 'hotels'})
+    //   //   }
+    //   // }else{
+    //   //   router.push({name: 'login'})
+    //   // }
+    // }
   },
   {
     path: '/contact',
@@ -69,8 +87,15 @@ const routes = [
   {
     path: '/account/:id',
     name: 'account',
-    props: true,
-    component: () => import('@/views/AccountView.vue')
+    component: () => import('@/views/AccountView.vue'),
+    beforeEnter: (to, from, next) => {
+      const result = cookies.get('LegitUser')?.result;
+      if (result) {
+        next();
+      } else {
+        next({ name: 'login' });
+      }
+    }
   },
   {
     path: '/all',
@@ -87,17 +112,8 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth',
-      };
-    } else if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { top: 0, behavior: 'smooth' }; 
-    }
+  scrollBehavior() {
+    window.scrollTo(0,0)
   }
 })
 

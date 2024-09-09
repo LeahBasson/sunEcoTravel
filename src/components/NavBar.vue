@@ -35,7 +35,7 @@
                    <li class="nav-item mt-2">
                      <router-link to="/about" class="nav-link" aria-current="page">About Us</router-link>
                    </li>
-                   <li class="nav-item mt-2">
+                   <li class="nav-item mt-2" v-show="isAdmin">
                      <router-link to="/admin" class="nav-link" aria-current="page" >Admin</router-link>
                    </li>
                    <li class="nav-item mt-2">
@@ -44,14 +44,17 @@
                </ul>
                
                <ul class="navbar-nav justify-content-end">
-                <li class="nav-item mt-2">
-                  <router-link to="/login" class="nav-link" aria-current="page"><i class="bi bi-person-circle"></i></router-link>
-                </li>
+                <li class="nav-item dropdown mt-2">
+                     <a class="nav-link nav-link-hover" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" :class="{ active: isDropdownActive }">
+                      <i class="bi bi-person-circle"></i>
+                     </a>
+                     <ul class="dropdown-menu">
+                       <li><router-link to="/login" class="dropdown-item" :class="{ active: $route.path === '/login' }">Login</router-link></li>
+                       <li><router-link :to="'/account/' + userID" class="dropdown-item" :class="{ active: $route.path === '/account' }">Account</router-link></li>
+                     </ul>
+                   </li>
                 <li class="nav-item mt-2 booking">
                      <router-link to="/bookings" class="nav-link" aria-current="page"><i class="bi bi-suitcase-lg"></i>
-                      <span class="badge rounded-pill" counter>
-                        0
-                      </span>
                     </router-link>    
                 </li>
                 
@@ -73,9 +76,22 @@
 export default {
   computed: {
     isDropdownActive() {
-      const activeRoutes = ['/hotels', '/adventureRoulette','/all'];
+      const activeRoutes = ['/hotels', '/adventureRoulette', '/all', '/login', '/account'];
       return activeRoutes.includes(this.$route.path);
     },
+    user() {
+      return this.$store.state.user;
+    },
+    userID() {
+      return this.user ? this.user.userID : null;
+    },
+    // isAdmin() {
+    //   return this.user?.userRole?.toLowerCase() === 'admin';
+    // },
+    bookingCount() {
+      // Replace with your actual logic to get booking count
+      return this.$store.state.bookingCount || 0;
+    }
   }
 }
 </script>
