@@ -1,5 +1,6 @@
 import { userRouter, express } from './controller/UserController.js'
 import { hotelRouter  } from './controller/HotelController.js'
+import { storyRouter } from './controller/StoryController.js';
 import path from 'path'
 import cors from 'cors';
 
@@ -31,6 +32,7 @@ app.use(cors());
    
 app.use('/user', userRouter) //to get all the endpoints  //Brackets to parse a string
 app.use('/hotel' , hotelRouter)
+app.use('/story' , storyRouter)
 //Endpoint // the get endpoint allows you to retrieve something
 app.get('^/$|/booking', (req, res) => {
     res.status(200).sendFile(path.resolve('./static/html/index.html'))

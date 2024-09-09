@@ -104,11 +104,10 @@
     <td>Retrieves a list of all bookings.</td>
   </tr>
   <tr>
-    <tr>
       <td>GET</td>
       <td>user/:uid/booking</td>
       <td>Retrieves all the bookings of a particular user.</td>
-    </tr>
+  </tr>
   <tr>
     <td>POST</td>
     <td>user/:uid/booking</td>
@@ -128,6 +127,36 @@
     <td>DELETE</td>
     <td>user/:uid/booking/:bookingID</td>
     <td>User is able to remove all bookings</td>
+  </tr>
+</table>
+
+<h2>Stories Table</h2>
+
+<table>
+  <tr>
+    <th>HTTP Methods</th>
+    <th>Path</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/story</td>
+    <td>Retrieves a list of all reviews.</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>story/addStory</td>
+    <td>A user is able to add a review.</td>
+  </tr>
+  <tr>
+    <td>PATCH</td>
+    <td>story/:id</td>
+    <td>A user is able to edit their review.</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td>story/:id</td>
+    <td>User is able to remove a review.</td>
   </tr>
 </table>
     
