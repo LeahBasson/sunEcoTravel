@@ -103,8 +103,8 @@ class Users {
     async updateUser(req, res) {
         try {
             let data = req.body
-            if (data.pwd) {
-                data.pwd = await hash (data.pwd, 12)
+            if (data.userPass) {
+                data.userPass = await hash (data.userPass, 12)
             }
             const strQry = `
             UPDATE Users
