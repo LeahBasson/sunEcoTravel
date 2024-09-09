@@ -3,7 +3,7 @@ import { connection as db} from '../config/index.js'
 class Stories {
     fetchStories(req, res) {
         try {           //try statement is used to handle errors
-            const strQry = `SELECT storyID, picture, tile, typeOfStory, story, dateOfStory
+            const strQry = `SELECT storyID, picture, title, typeOfStory, story, dateOfStory
             FROM Stories;
             `
     
