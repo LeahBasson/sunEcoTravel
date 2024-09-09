@@ -166,7 +166,7 @@
                       {{ booking.checkOutDate }}
                     </td>
                     <td>
-                      {{ booking.totalPrice }}
+                      {{ booking.amount }}
                     </td>
                   <td>
                     <button class="table-button" data-bs-toggle="modal" :data-bs-target="'#updateBookingModal' + booking.bookingID"><i class="bi bi-pen-fill"></i></button>

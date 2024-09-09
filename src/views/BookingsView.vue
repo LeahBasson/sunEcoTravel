@@ -4,15 +4,16 @@
       <h1>Bookings</h1>
     </div>
 
-    <div v-if="bookings.length">
-      <table class="table">
+    <div v-if="bookings.length" class="table">
+      <table>
         <thead>
           <tr>
             <th>Hotel ID</th>
             <th>Check-in Date</th>
             <th>Check-out Date</th>
             <th>Number of Rooms</th>
-            <th>Total Price</th>
+            <th>Amount</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -21,7 +22,12 @@
             <td>{{ booking.checkInDate }}</td>
             <td>{{ booking.checkOutDate }}</td>
             <td>{{ booking.numberOfRooms }}</td>
-            <td>{{ booking.totalPrice }}</td>
+            <td>{{ booking.amount }}</td>
+            <td>
+              <div class="adminButtons">
+                <button class="table-button" @click="deleteBooking(booking.userID)"><i class="bi bi-trash-fill"></i></button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -44,6 +50,10 @@ const { cookies } = useCookies()
 
 // Fetch only the logged-in user's bookings
 const bookings = computed(() => store.state.bookings || [])
+
+function deleteBooking(userID) {
+  store.dispatch('deleteBooking', userID);
+}
 
 onMounted(() => {
   const userId = cookies.get('LegitUser')?.result?.userID
@@ -69,8 +79,36 @@ onMounted(() => {
   font-size: 1.2rem;
 }
 
+/* Table Styling*/
+th, td{
+    padding: 0.6rem 2rem;
+    margin: 0;
+}
+
+table{
+  width: 90.5%;
+  margin: auto;
+  margin-top: 2rem;
+  color: var(--primary);
+  font-family: "Poppins",sans-serif;
+}
+
 img[alt="bookingImage"]{
   width: 14rem;
+}
+
+.table-button{
+  background-color: var(--alternative);
+  color: var(--secondary);
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.table-button:hover{
+  background-color: var(--awesome);
 }
 
 @media (width < 999px)
@@ -78,5 +116,69 @@ img[alt="bookingImage"]{
   .text-book{
     padding-top: 3rem;
   }
+
+  table{
+  width: 85%;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+th, td{
+    border: 1px solid black;
+    padding: 0.8rem 0.8rem;
+    margin: 0;
+}
+
+thead{
+  display: none;
+}
+
+table, tbody, th, td, tr {
+    display: block;
+    word-wrap: break-word;
+}
+
+table {
+    margin-bottom: 1.5rem;
+    font-family: "Poppins",sans-serif;
+}
+
+thead tr {
+    display: none;
+}
+
+tr {
+    margin-bottom: 15px;
+}
+
+th{
+  word-wrap: break-word;
+}
+
+td {
+    position: relative;
+    padding-left: 50%;
+}
+
+td:before {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: wrap;
+    transform: translateY(-50%);
+}
+
+  /* Bookings Table Mobile */
+.table td:nth-of-type(1):before { content: "Hotel ID"; }
+.table td:nth-of-type(2):before { content: "Check in date"; }
+.table td:nth-of-type(3):before { content: "Check out date"; }
+.table td:nth-of-type(4):before { content: "Number of rooms"; }
+.table td:nth-of-type(5):before { content: "Amount"; }
+.table td:nth-of-type(6):before { content: "Action"; }
+.table .total-row td:before { content: ""; }
+.table .total-row td:before { content: ""; }
+
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="ourStoryHome">
+    <!-- <div class="container" id="ourStoryHome">
         <div class="row">
             <h2>Top Stories</h2>
             
@@ -49,8 +49,51 @@
 
         </div>
         
+    </div> -->
+
+    <div class="container" id="ourStoryHome">
+        <div class="row">
+            <h2>Top Stories</h2>
+            
+            <div class="storyCards" v-if="stories">
+                <Card v-for="story in stories" :key="story.storyID" class="card">
+            <template #cardHeader>
+              <img :src="story.picture" loading="lazy" class="img-fluid" :alt="story.title">
+            </template>
+            <template #cardBody>
+              <h5 class="card-title">{{ story.title }}</h5>
+              <p>{{ story.typeOfStory }}</p>
+              <p>{{ story.story.length > 80 ? story.story.slice(0, 80) + '...' : story.story }}</p>
+              <div class="button-wrapper justify-content-center">
+                <router-link >
+                  <router-link to="/topstory"><button class="btn-ReadMore">Read More</button></router-link>
+                </router-link>
+              </div>
+            </template>
+          </Card>
+            </div>
+            <div v-else>
+          <Spinner />
+        </div>
+
+        </div>
+        
     </div>
 </template>
+
+<script setup>
+import { useStore } from 'vuex'
+import { computed, onMounted } from 'vue'
+import Spinner from '@/components/Spinner.vue'
+import Card from '@/components/Card.vue'
+const store = useStore()
+const stories = computed(
+    () => store.state.stories
+)
+onMounted(() => {
+    store.dispatch('fetchStories')
+}) 
+</script>
 
 <style scoped>
 #ourStoryHome{
@@ -77,6 +120,10 @@ img[alt="cardImage"] {
 #ourStoryHome .card{
     width: 18rem;
    text-align: left;
+   border: 1px solid var(--borderColor);
+   border-radius: 0.3rem;
+   font-family: "Poppins",sans-serif;
+   color: var(--primary);
 }
 
 .btn-ReadMore{

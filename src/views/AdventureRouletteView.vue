@@ -312,6 +312,7 @@ lord-icon {
 
   .scroll-btn{
     font-size: 1.4rem;
+    display: none;
   }
   
   .banner-content{

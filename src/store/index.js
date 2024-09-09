@@ -10,7 +10,7 @@ import router from '@/router'
 
 const apiURL = 'https://sunecotravel.onrender.com/'
 const savedUser = cookies.get('LegitUser');
-if (savedUser && savedUser.token) {
+if (savedUser && savedUser?.token) {
   applyToken(savedUser.token);
 }
 export default createStore({
@@ -22,7 +22,9 @@ export default createStore({
     recentHotels: null,
     bookings: null,
     booking: null,
-    redirectIntent: null
+    redirectIntent: null,
+    stories: null,
+    bookingCount: 0,
   },
   getters: {
   },
@@ -50,6 +52,12 @@ export default createStore({
     },
     setRedirectIntent(state, value) {
       state.redirectIntent = value;
+    },
+    setStories(state, value) {
+      state.stories = value;
+    },
+    setBookingCount(state, count) {
+      state.bookingCount = count;
     },
   },
   actions: {
@@ -381,6 +389,40 @@ export default createStore({
         autoClose: 2000,
         position: toast.POSITION.BOTTOM_CENTER
       });
+    }
+  },
+  async deleteBooking(context, payload) {
+    try {
+      const { msg } = await (await axios.delete(`${apiURL}user/${payload.userID}/booking/${payload.bookingID}`, payload)).data
+      if (msg) {
+        context.dispatch('fetchUserBookings', payload.userID, payload.bookingID)
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+    }
+  },
+
+  // ==== Story =====
+  async fetchStories(context) {
+    try {
+      const { results } = await (await axios.get(`${apiURL}story`)).data
+      if (results) {
+        context.commit('setStories', results)
+      } else {
+        router.push({ name: 'login' })
+      }
+    } catch (err) {
+      toast.error(`${err}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      })
     }
   },
 
