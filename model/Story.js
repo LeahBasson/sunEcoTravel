@@ -45,48 +45,6 @@ class Stories {
         }
     }
 
-    updateStory(req, res) {
-        try {
-            const strQry = `
-            UPDATE Stories
-            SET ?
-            WHERE storyID = ${req.params.id}
-            `  
-            db.query (strQry, [req.body], (err) => {
-                if (err) throw new Error ('Unable to update a review')
-                    res.json({
-                        status: res.statusCode,
-                        msg: 'Review was updated.'
-                })
-            })
-        } catch(e) {
-            res.json({
-                status: 400,
-                err: e.message //The error message from the if statement
-        })
-        }
-    }
-
-    deleteStory(req, res) {
-        try{
-            const strQry = `
-            DELETE FROM Stories
-            WHERE storyID = ${req.params.id};
-            `
-            db.query (strQry, (err) => {
-                if(err) throw new Error('To delete a review, please review your delete query.')
-                    res.json({
-                        status: res.statusCode,
-                        msg: 'A review was removed.'
-                })
-            })
-        } catch(e) {
-            res.json({
-                status: 404, //Resource not found
-                err: e.message
-            })
-        }
-    }
 }
 
 export {
