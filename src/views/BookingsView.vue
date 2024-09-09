@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="booking in bookings" :key="booking._id">
+          <tr v-for="booking in bookings" :key="booking.bookingID">
             <td>{{ booking.hotelID }}</td>
             <td>{{ booking.checkInDate }}</td>
             <td>{{ booking.checkOutDate }}</td>
@@ -25,7 +25,7 @@
             <td>{{ booking.amount }}</td>
             <td>
               <div class="adminButtons">
-                <button class="table-button" @click="deleteBooking(booking.userID)"><i class="bi bi-trash-fill"></i></button>
+                <button class="table-button" @click="deleteBooking(booking)"><i class="bi bi-trash-fill"></i></button>
               </div>
             </td>
           </tr>
@@ -51,8 +51,12 @@ const { cookies } = useCookies()
 // Fetch only the logged-in user's bookings
 const bookings = computed(() => store.state.bookings || [])
 
-function deleteBooking(userID) {
-  store.dispatch('deleteBooking', userID);
+function deleteBooking(booking) {
+  // Pass both bookingID and userID to the store action
+  store.dispatch('deleteBooking', {
+    userID: cookies.get('LegitUser')?.result?.userID,
+    bookingID: booking.bookingID
+  });
 }
 
 onMounted(() => {

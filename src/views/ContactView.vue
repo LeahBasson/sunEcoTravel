@@ -32,7 +32,7 @@
               </div>
               <div class="form-group form-group-textarea mb-md-0">
                 <label class="labelText">Enter your inquiry:</label>
-                <textarea class="form-control mb-2" id="message" name="Message" placeholder="Message" v-model="message"></textarea>
+                <textarea class="form-control mb-2" id="message" name="Message" placeholder="Inquiry" v-model="message"></textarea>
                 <label class="contact-label" v-if="errors.message">{{ errors.message }}</label>
               </div>
             </div>

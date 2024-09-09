@@ -23,7 +23,7 @@
       </div>
   
       <!-- Display filtered hotels if search query is not empty -->
-      <div class="row" id="hotel-searched" v-if="searchQuery.trim() && filteredHotels.length > 0">
+      <div class="row" id="hotel-searched" v-if="searchTriggered && filteredHotels.length > 0">
         <Card v-for="hotel in filteredHotels" :key="hotel.hotelID" class="card">
           <template #cardHeader>
             <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
@@ -96,6 +96,7 @@
   const filteredHotels = ref([])
   const sortOrder = ref('default')
   const selectedCountry = ref('All')
+  const searchTriggered = ref(false) 
   
   const hotels = computed(() => store.state.hotels)
   const originalHotels = ref([])
@@ -106,29 +107,35 @@
   })
   
   // Function to handle search on button click
-  async function searchHotels() {
-    if (searchQuery.value.trim() === '') {
-      // Clear the filteredHotels array and hide the 'No Results' message if the input is empty
-      filteredHotels.value = [];
-      noResults.value = false;
-    } else {
-      // Filter the hotels based on the search query
-      filteredHotels.value = hotels.value.filter(hotel =>
-        hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase())
-      );
-  
-      // Display 'No Results' message if no hotels match
-      noResults.value = filteredHotels.value.length === 0;
-  
+  // Function to handle search on button click
+async function searchHotels() {
+  searchTriggered.value = false;  // Reset flag
+
+  if (searchQuery.value.trim() === '') {
+    // Clear the filteredHotels array and hide the 'No Results' message if the input is empty
+    filteredHotels.value = [];
+    noResults.value = false;
+  } else {
+    // Filter the hotels based on the search query
+    filteredHotels.value = hotels.value.filter(hotel =>
+      hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase())
+    );
+
+    // Display 'No Results' message if no hotels match
+    noResults.value = filteredHotels.value.length === 0;
+
+    // Set searchTriggered to true after the search is completed
+    if (filteredHotels.value.length > 0 || noResults.value) {
+      searchTriggered.value = true;
+      
       // Scroll to the hotel-searched section if results are found
-      if (filteredHotels.value.length > 0) {
-        await nextTick(); // Ensure DOM updates are complete
-        const hotelSearchedElement = document.getElementById('hotel-searched');
-        if (hotelSearchedElement) {
-          hotelSearchedElement.scrollIntoView({ behavior: 'smooth' });
-        }
+      await nextTick(); // Ensure DOM updates are complete
+      const hotelSearchedElement = document.getElementById('hotel-searched');
+      if (hotelSearchedElement) {
+        hotelSearchedElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  }
   }
   
   const sortButtonText = computed(() => {

@@ -23,8 +23,7 @@ export default createStore({
     bookings: null,
     booking: null,
     redirectIntent: null,
-    stories: null,
-    bookingCount: 0,
+    stories: null
   },
   getters: {
   },
@@ -393,9 +392,9 @@ export default createStore({
   },
   async deleteBooking(context, payload) {
     try {
-      const { msg } = await (await axios.delete(`${apiURL}user/${payload.userID}/booking/${payload.bookingID}`, payload)).data
+      const { msg } = await (await axios.delete(`${apiURL}user/${payload.userID}/booking/${payload.bookingID}`)).data
       if (msg) {
-        context.dispatch('fetchUserBookings', payload.userID, payload.bookingID)
+        context.dispatch('fetchUserBookings', payload.userID)
         toast.success(`${msg}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
@@ -408,7 +407,6 @@ export default createStore({
       })
     }
   },
-
   // ==== Story =====
   async fetchStories(context) {
     try {

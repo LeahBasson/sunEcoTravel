@@ -45,7 +45,7 @@
                
                <ul class="navbar-nav justify-content-end">
                 <li class="nav-item dropdown mt-2">
-                     <a class="nav-link nav-link-hover" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" :class="{ active: isDropdownActive }">
+                     <a class="nav-link nav-link-hover" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" :class="{ active: isLoginActive }">
                       <i class="bi bi-person-circle"></i>
                      </a>
                      <ul class="dropdown-menu">
@@ -76,7 +76,11 @@
 export default {
   computed: {
     isDropdownActive() {
-      const activeRoutes = ['/hotels', '/adventureRoulette', '/all', '/login', '/account'];
+      const activeRoutes = ['/hotels', '/adventureRoulette', '/all'];
+      return activeRoutes.includes(this.$route.path);
+    },
+    isLoginActive() {
+      const activeRoutes = ['/login', '/account'];
       return activeRoutes.includes(this.$route.path);
     },
     user() {
@@ -198,6 +202,4 @@ img[alt='logo']:hover {
   margin-right: 0rem;
 }
 }
-
-
 </style>
