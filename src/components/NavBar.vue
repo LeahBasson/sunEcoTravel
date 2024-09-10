@@ -35,7 +35,7 @@
                    <li class="nav-item mt-2">
                      <router-link to="/about" class="nav-link" aria-current="page">About Us</router-link>
                    </li>
-                   <li class="nav-item mt-2">
+                   <li class="nav-item mt-2" v-show="isAdmin">
                      <router-link to="/admin" class="nav-link" aria-current="page" >Admin</router-link>
                    </li>
                    <li class="nav-item mt-2">
@@ -89,9 +89,9 @@ export default {
     userID() {
       return this.user ? this.user.userID : null;
     },
-    // isAdmin() {
-    //   return this.user?.userRole?.toLowerCase() === 'admin';
-    // },
+    isAdmin() {
+      return this.user?.userRole?.toLowerCase() === 'admin';
+    },
     bookingCount() {
       // Replace with your actual logic to get booking count
       return this.$store.state.bookingCount || 0;

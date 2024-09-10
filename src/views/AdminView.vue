@@ -3,7 +3,7 @@
         <div class="row" id="AdventureRoulette">
       <div class="banner-overlay"></div>
       <div class="banner-image">
-        <div class="banner-content">
+        <div class="banner-content" loading="eager">
           <h1 class="animate__animated animate__fadeInDown">Admin</h1>
           <p class="animate__animated animate__fadeInUp">Add, Update & Delete</p>
           <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
@@ -40,7 +40,7 @@
                       <img :src="hotel.imgUrl" :alt="hotel.hotelName" loading="eager" class="img-fluid adminImages">
                     </td>
                     <td>
-                      R{{ hotel.amount }}
+                      R{{ hotel.amount }} p/n
                     </td>
                     <td>
                       <div class="adminButtons">
@@ -145,7 +145,7 @@
                  <th>Number of rooms</th>
                  <th>Check In Date</th>
                  <th>Check Out Date</th>
-                 <th>Amount</th>
+                 <th>Total Price</th>
                  <th>Action</th>
                 </thead>
                 <tbody v-if="bookings">
@@ -166,7 +166,7 @@
                       {{ booking.checkOutDate }}
                     </td>
                     <td>
-                      {{ booking.amount }}
+                      {{ booking.totalPrice }}
                     </td>
                   <td>
                     <button class="table-button" data-bs-toggle="modal" :data-bs-target="'#updateBookingModal' + booking.bookingID"><i class="bi bi-pen-fill"></i></button>
@@ -496,6 +496,10 @@ tr {
     margin-bottom: 15px;
 }
 
+th{
+  font-weight: 700;
+}
+
 td {
     position: relative;
     padding-left: 50%;
@@ -508,7 +512,7 @@ td:before {
     left: 10px;
     width: 45%;
     padding-right: 10px;
-    white-space: nowrap;
+    white-space: wrap;
     transform: translateY(-50%);
 }
 

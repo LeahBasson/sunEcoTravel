@@ -3,7 +3,7 @@
     <div class="row" id="AdventureRoulette">
       <div class="banner-overlay"></div>
       <div class="banner-image">
-        <div class="banner-content">
+        <div class="banner-content" loading="eager">
           <h1 class="animate__animated animate__fadeInDown">Let the Adventure Choose You!</h1>
           <p class="animate__animated animate__fadeInUp">Feeling adventurous? Every 8 seconds, our Adventure Roulette refreshes with a new, thrilling destination. For explorers who like spontaneous adventures try it now, you never know where you'll end up.</p>
           <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
@@ -30,9 +30,9 @@
         </template>
         <template #cardBody>
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
-          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }} p/n</p>
           <div class="button-wrapper justify-content-center">
-            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btn">View</button></router-link>
+            <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
           </div>
         </template>
       </Card>
@@ -190,6 +190,20 @@ function scrollDown() {
     align-items: center;
     padding-top: 4rem;
 }
+
+.btnView{
+    background-color: var(--alternative);
+    color: var(--secondary);
+    width: 5rem;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-weight: 600;
+  }
+  
+  .btnView:hover{
+    background-color: var(--awesome);
+  }
 
 lord-icon {
     padding-top: 1rem; /* Ensure icon aligns with text */

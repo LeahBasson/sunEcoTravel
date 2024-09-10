@@ -3,7 +3,7 @@
     <div class="row" id="AdventureRoulette">
       <div class="banner-overlay"></div>
       <div class="banner-image">
-        <div class="banner-content">
+        <div class="banner-content" loading="eager">
           <h1 class="animate__animated animate__fadeInDown">Contact Us</h1>
           <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
         </div> 

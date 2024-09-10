@@ -410,6 +410,23 @@ export default createStore({
       })
     }
   },
+  async deleteBookings(context, payload) {
+    try {
+      const { msg } = await (await axios.delete(`${apiURL}user/${payload.userID}/bookings`)).data
+      if (msg) {
+        context.dispatch('fetchUserBookings', payload.userID)
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+    }
+  },
   // ==== Story =====
   async fetchStories(context) {
     try {

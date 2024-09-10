@@ -22,15 +22,21 @@
             <td>{{ booking.checkInDate }}</td>
             <td>{{ booking.checkOutDate }}</td>
             <td>{{ booking.numberOfRooms }}</td>
-            <td>{{ booking.amount }}</td>
+            <td>R{{ booking.amount }}</td>
             <td>
               <div class="adminButtons">
                 <button class="table-button" @click="deleteBooking(booking)"><i class="bi bi-trash-fill"></i></button>
               </div>
             </td>
           </tr>
+          <tr class="last-row">
+            <td>Total Price:</td>
+          </tr>
         </tbody>
       </table>
+      <div class="button-wrapper">
+        <button class="delete-all-button" @click="deleteBookings(bookings)">Delete All</button>
+      </div>
     </div>
 
     <div v-else>
@@ -112,6 +118,28 @@ img[alt="bookingImage"]{
 }
 
 .table-button:hover{
+  background-color: var(--awesome);
+}
+
+.button-wrapper{
+  display: flex;
+  justify-content: end;
+  width: 95%;
+}
+
+.delete-all-button{
+  background-color: var(--alternative);
+    color: var(--secondary);
+    width: 10rem;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-weight: 600;
+    font-family: "Poppins",sans-serif;
+    margin-top: 1rem;
+}
+
+.delete-all-button:hover{
   background-color: var(--awesome);
 }
 

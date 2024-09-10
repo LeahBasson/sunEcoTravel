@@ -3,7 +3,7 @@
     <div class="row" id="AdventureRoulette">
       <div class="banner-overlay"></div>
       <div class="banner-image">
-        <div class="banner-content">
+        <div class="banner-content" loading="eager">
           <h1 class="animate__animated animate__fadeInDown">About Us</h1>
           <p class="animate__animated animate__fadeInUp">At Sun Eco Travel, we make finding and booking the ideal hotel a breeze.</p>
           <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
@@ -18,7 +18,7 @@
 
     <div class="row" id="about-content-two">
      <div class="imgDiv">
-      <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/aboutImage.png" class="img-fluid" alt="aboutImage">
+      <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/aboutImage.png" class="img-fluid" alt="aboutImage" loading="eager">
      </div>
      <div class="content">
       <h2>About </h2>

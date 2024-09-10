@@ -16,7 +16,7 @@
           <p class="lead"><span class="fw-bold">Contact Information</span>: {{ hotel.contactInfo }}</p>
           <p class="lead"><span class="fw-bold">Country</span>: {{ hotel.country }}</p>
           <p class="lead"><span class="fw-bold">City</span>: {{ hotel.city }}</p>
-          <p class="lead"><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+          <p class="lead"><span class="fw-bold">Amount</span>: R{{ hotel.amount }} per night</p>
         </template>
       </Card>
     </div>
@@ -206,5 +206,9 @@ const bookNow = async () => {
   .detail-width {
     width: 100%;
   }
+
+  .booking-inputs {
+  width: 90%;
+}
 }
 </style>

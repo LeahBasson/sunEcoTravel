@@ -33,7 +33,7 @@
         </template>
         <template #cardBody>
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
-          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }} p/n</p>
           <div class="button-wrapper justify-content-center">
             <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
           </div>
@@ -57,7 +57,7 @@
         </template>
         <template #cardBody>
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
-          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }} p/n</p>
           <div class="button-wrapper justify-content-center">
             <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
           </div>
@@ -86,7 +86,7 @@
         </template>
         <template #cardBody>
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
-          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+          <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }} p/n</p>
           <div class="button-wrapper justify-content-center">
             <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
           </div>

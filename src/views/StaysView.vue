@@ -59,7 +59,7 @@
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
                 <p><span class="fw-bold">Amenities</span>: {{ hotel.amenities }}</p>
-                <p><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+                <p><span class="fw-bold">Amount</span>: R{{ hotel.amount }} per night</p>
                 <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
               </template>
             </Card>
@@ -79,7 +79,7 @@
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
                 <p><span class="fw-bold">Amenities</span>: {{ hotel.amenities }}</p>
-                <p><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+                <p><span class="fw-bold">Amount</span>: R{{ hotel.amount }} per night</p>
                 <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
               </template>
             </Card>
@@ -179,7 +179,7 @@
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
                 <p><span class="fw-bold">Amenities</span>: {{ hotel.amenities }}</p>
-                <p><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+                <p><span class="fw-bold">Amount</span>: R{{ hotel.amount }} per night</p>
                 <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
               </template>
             </Card>
@@ -199,7 +199,7 @@
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
                 <p><span class="fw-bold">Amenities</span>: {{ hotel.amenities }}</p>
-                <p><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+                <p><span class="fw-bold">Amount</span>: R{{ hotel.amount }} per night</p>
                 <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
               </template>
             </Card>
@@ -295,7 +295,7 @@
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
                 <p><span class="fw-bold">Amenities</span>: {{ hotel.amenities }}</p>
-                <p><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+                <p><span class="fw-bold">Amount</span>: R{{ hotel.amount }} per night</p>
                 <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
               </template>
             </Card>
@@ -315,7 +315,7 @@
                 <h3 class="card-title fw-bold">{{ hotel.hotelName }}</h3>
                 <p class="description">{{ hotel.hotelDescription }}</p>
                 <p><span class="fw-bold">Amenities</span>: {{ hotel.amenities }}</p>
-                <p><span class="fw-bold">Amount</span>: R {{ hotel.amount }}</p>
+                <p><span class="fw-bold">Amount</span>: R{{ hotel.amount }} per night</p>
                 <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }"><button class="btnView">View</button></router-link>
               </template>
             </Card>

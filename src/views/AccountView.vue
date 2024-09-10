@@ -26,7 +26,11 @@
         </div>
         <div class="buttons">
           <router-link to="/"><button class="btnHome">Go back home</button></router-link>
-        <button class="btnHome" @click="logout">Logout</button>
+          <router-link to="/logout">
+
+            <button class="btnHome" >Logout</button>
+            <!-- @click="logout" -->
+          </router-link>
         </div>
         
       <!-- Ensure the modal is only rendered when user data is available -->
@@ -40,13 +44,13 @@ import { computed, onMounted, watch } from 'vue'
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
 import UpdateAccountModal from '@/components/UpdateAccountModal.vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useCookies } from 'vue3-cookies'
+import { useRoute } from 'vue-router'
+// import { useCookies } from 'vue3-cookies'
 
 const store = useStore()
-const router = useRouter()
+// const router = useRouter()
 const route = useRoute()
-const { cookies } = useCookies()
+// const { cookies } = useCookies()
 
 const user = computed(() => store.state.user)
 
@@ -69,13 +73,13 @@ function deleteUser(userID) {
   store.dispatch('deleteUser', userID);
 }
 
-function logout() {
-  // Remove the cookie
-  cookies.remove('LegitUser');  // Make sure to use the correct cookie name\
-  store.state.bookings = []
-  // Redirect to the home page
-  router.push('/');
-}
+// function logout() {
+//   // Remove the cookie
+//   cookies.remove('LegitUser');  // Make sure to use the correct cookie name\
+//   store.state.bookings = []
+//   // Redirect to the home page
+//   router.push('/');
+// }
 
 watch(user, (newUser) => {
   console.log("User data updated:", newUser);

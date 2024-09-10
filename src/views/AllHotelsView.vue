@@ -3,7 +3,7 @@
       <div class="row" id="hotelBanner">
         <div class="banner-overlay"></div>
         <div class="banner-image">
-          <div class="banner-content">
+          <div class="banner-content" loading="eager">
             <h1 class="animate__animated animate__fadeInDown">All Destinations</h1>
             <div class="alignment">
               <form class="adventure-search" role="search">
@@ -30,7 +30,7 @@
           </template>
           <template #cardBody>
             <h5 class="card-title">{{ hotel.hotelName }}</h5>
-            <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+            <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }} p/n</p>
             <div class="button-wrapper justify-content-center">
               <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }">
                 <button class="btnView">View</button>
@@ -64,7 +64,7 @@
             </template>
             <template #cardBody>
               <h5 class="card-title">{{ hotel.hotelName }}</h5>
-              <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }}</p>
+              <p class="lead text-black"><span class="text">Amount:</span> R{{ hotel.amount }} p/n</p>
               <div class="button-wrapper justify-content-center">
                 <router-link :to="{ name: 'hotelDetails', params: { id: hotel.hotelID } }">
                   <button class="btnView">View</button>

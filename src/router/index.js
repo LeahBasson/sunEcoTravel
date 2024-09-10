@@ -80,6 +80,16 @@ const routes = [
     component: () => import('@/views/LoginView.vue')
   },
   {
+    path: '/logout',
+    name: 'logout',
+    component: ()=> import('@/views/HomeView.vue'),
+    beforeEnter() {
+      location.reload()
+      cookies.remove('LegitUser')
+      router.push({name: 'home'})
+    }
+  },
+  {
     path: '/hotelDetails/:id',
     name: 'hotelDetails',
     component: () => import('@/views/HotelDetails.vue')
