@@ -145,7 +145,7 @@
                  <th>Number of rooms</th>
                  <th>Check In Date</th>
                  <th>Check Out Date</th>
-                 <th>Total Price</th>
+                 <th>Amount</th>
                  <th>Action</th>
                 </thead>
                 <tbody v-if="bookings">
@@ -166,7 +166,7 @@
                       {{ booking.checkOutDate }}
                     </td>
                     <td>
-                      {{ booking.totalPrice }}
+                      {{ booking.amount }}
                     </td>
                   <td>
                     <button class="table-button" data-bs-toggle="modal" :data-bs-target="'#updateBookingModal' + booking.bookingID"><i class="bi bi-pen-fill"></i></button>

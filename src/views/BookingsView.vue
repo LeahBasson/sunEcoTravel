@@ -29,8 +29,8 @@
               </div>
             </td>
           </tr>
-          <tr class="last-row">
-            <td>Total Price:</td>
+          <tr>
+            <td>Total Price: R{{ totalPrice }}</td>
           </tr>
         </tbody>
       </table>
@@ -56,6 +56,15 @@ const { cookies } = useCookies()
 
 // Fetch only the logged-in user's bookings
 const bookings = computed(() => store.state.bookings || [])
+
+// Final total for all bookings
+const totalPrice = computed(() => {
+  let total = 0;
+  bookings.value.forEach(booking => {
+    total += booking.amount;
+  });
+  return total;
+});
 
 function deleteBooking(booking) {
   // Pass both bookingID and userID to the store action
