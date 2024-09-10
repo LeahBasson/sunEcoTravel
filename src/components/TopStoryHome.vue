@@ -1,62 +1,10 @@
 <template>
-    <!-- <div class="container" id="ourStoryHome">
-        <div class="row">
-            <h2>Top Stories</h2>
-            
-            <div class="storyCards">
-
-            <div class="card">
-            <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/greece3.jpg" class="card-img-top" alt="cardImage">
-            <div class="card-body">
-                <h5 class="card-title">“athens and the greek isles”</h5>
-                <p>Review of Greece</p>
-                <p class="card-text">We had absolutely no problems traveling to Greece this past September...</p>
-                <router-link to="topstory"><button class="btn-ReadMore">Read More</button></router-link>
-            </div>
-            </div>
-
-            <div class="card">
-            <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/greece6.jpg" class="card-img-top" alt="cardImage">
-            <div class="card-body">
-                <h5 class="card-title">“Minos Magic - Greece trip”</h5>
-                <p>Review of Greece</p>
-                <p class="card-text">My husband and I have never been to Greece but we wanted to see a lot in 16...</p>
-                <router-link to="topstory"><button class="btn-ReadMore">Read More</button></router-link>
-            </div>
-            </div>
-
-            <div class="card">
-            <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/athens2.jpg" class="card-img-top" alt="cardImage">
-            <div class="card-body">
-                <h5 class="card-title">“Our first European vacation - GREECE”</h5>
-                <p>Review of Greece</p>
-                <p class="card-text">After an uneventful flight from Omaha to Newark to Athens...</p>
-                <router-link to="topstory"><button class="btn-ReadMore">Read More</button></router-link>
-            </div>
-            </div>
-
-            <div class="card">
-            <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/Bali3.jpg" class="card-img-top" alt="cardImage">
-            <div class="card-body">
-                <h5 class="card-title">Relaxing weekend - can recommend!</h5>
-                <p>Review of Greece</p>
-                <p class="card-text">Just a short but great weekend trip jenough to relax and...</p>
-                <router-link to="topstory"><button class="btn-ReadMore">Read More</button></router-link>
-            </div>
-            </div>
-
-            </div>
-
-        </div>
-        
-    </div> -->
-
     <div class="container" id="ourStoryHome">
         <div class="row">
             <h2>Top Stories</h2>
             
             <div class="storyCards" v-if="stories">
-                <Card v-for="story in stories" :key="story.storyID" class="card">
+                <Card v-for="story in stories.slice(0, 4)" :key="story.storyID" class="card">
             <template #cardHeader>
               <img :src="story.picture" loading="lazy" class="img-fluid" :alt="story.title">
             </template>
@@ -65,8 +13,8 @@
               <p>{{ story.typeOfStory }}</p>
               <p>{{ story.story.length > 80 ? story.story.slice(0, 80) + '...' : story.story }}</p>
               <div class="button-wrapper justify-content-center">
-                <router-link >
-                  <router-link to="/topstory"><button class="btn-ReadMore">Read More</button></router-link>
+                <router-link :to="{ name: 'topstory', params: { id: story.storyID } }">
+                <button class="btn-ReadMore">Read More</button>
                 </router-link>
               </div>
             </template>
@@ -77,7 +25,6 @@
         </div>
 
         </div>
-        
     </div>
 </template>
 

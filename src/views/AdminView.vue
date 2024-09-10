@@ -187,6 +187,47 @@
 
     </div>
     
+
+    <!----------------- Stories Table --------------------->
+    <div class="row" id="admin-hotels">
+      <h1 class="admin-heading">Stories Table</h1>
+
+    <div class="tableContainer3">
+              <table>
+                <thead>
+                 <th>Story ID</th>
+                 <th>Title</th>
+                 <th>Type of Review</th>
+                 <th>Date</th>
+                 <th>Action</th>
+                </thead>
+                <tbody v-if="stories">
+                  <tr v-for="story in stories" :key="story.storyID">
+                    <td>
+                      {{ story.storyID }}
+                    </td>
+                    <td>
+                      {{ story.title }}
+                    </td>
+                    <td>
+                      {{ story.typeOfStory }}
+                    </td>
+                    <td>
+                      {{ story.dateOfStory }}
+                    </td>
+                  <td>
+                    <button class="table-button" @click="deleteStory(story.storyID)"><i class="bi bi-trash-fill"></i></button>
+                  </td>   
+                   </tr>
+                </tbody>
+                <div v-else>
+                  <Spinner />
+                </div>
+             </table>
+    </div>
+
+    </div>
+
     </div>
 </template>
 
@@ -205,9 +246,14 @@ const store = useStore();
 const hotels = computed(() => store.state.hotels);
 const users = computed(() => store.state.users);
 const bookings = computed(() => store.state.bookings);
+const stories = computed(() => store.state.stories);
 
 function fetchHotels() {
   store.dispatch('fetchHotels');
+}
+
+function fetchStories() {
+  store.dispatch('fetchStories');
 }
 
 function fetchUsers() {
@@ -220,6 +266,10 @@ function fetchBookings() {
 
 function deleteHotel(hotelID) {
   store.dispatch('deleteHotel', hotelID);
+}
+
+function deleteStory(storyID) {
+  store.dispatch('deleteStory', storyID);
 }
 
 function deleteUser(userID) {
@@ -245,6 +295,7 @@ onMounted(() => {
   fetchHotels();
   fetchUsers();
   fetchBookings();
+  fetchStories();
 });
 </script>
 
