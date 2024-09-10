@@ -23,7 +23,8 @@ export default createStore({
     bookings: null,
     booking: null,
     redirectIntent: null,
-    stories: null
+    stories: null,
+    story: null
   },
   getters: {
   },
@@ -54,6 +55,9 @@ export default createStore({
     },
     setStories(state, value) {
       state.stories = value;
+    },
+    setStory(state, value) {
+      state.story = value;
     },
     setBookingCount(state, count) {
       state.bookingCount = count;
@@ -147,7 +151,6 @@ export default createStore({
         })
       }
     },
-
     async deleteHotel(context, id) {
       try {
         const { msg } = await (await axios.delete(`${apiURL}hotel/${id}`)).data
@@ -418,6 +421,40 @@ export default createStore({
       }
     } catch (err) {
       toast.error(`${err}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+    }
+  },
+  async addStory(context, payload) {
+    try {
+      const { msg } = await (await axios.post(`${apiURL}story/addStory`, payload)).data
+      if (msg) {
+        context.dispatch('fetchStories')
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER
+      })
+    }
+  },
+  async deleteStory(context, id) {
+    try {
+      const { msg } = await (await axios.delete(`${apiURL}story/${id}`)).data
+      if (msg) {
+        context.dispatch('fetchStories')
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
         autoClose: 2000,
         position: toast.POSITION.BOTTOM_CENTER
       })

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row" id="AdventureRoulette">
       <div class="banner-overlay"></div>
-      <div class="banner-image">
+      <div class="banner-image" loading="eager">
         <div class="banner-content">
           <h1 class="animate__animated animate__fadeInDown">Gallery</h1>
           <p class="animate__animated animate__fadeInUp">Discover the world’s most captivating destinations through our curated gallery. From serene beaches to bustling cities, our collection offers a glimpse into the unique experiences each location has to offer. Browse through stunning images and detailed information to find your perfect getaway. Let Sun Eco Travel be your guide to unforgettable adventures.</p>
@@ -18,7 +18,7 @@
     <div class="row">
       <div class="gallery-content">
         <div class="card mb-3">
-  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/image 1.jpg" class="card-img-top" alt="CardImage">
+  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/image 1.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Cape Town</h5>
     <p class="card-text">Being home to iconic mountain ranges, stunning natural wonders, thrilling landscapes and ocean vistas, Cape Town offers no shortage of adventures.</p>
@@ -26,7 +26,7 @@
   <router-link :to="{ name: 'hotels', hash: '#hotelBanner' }"><button class="btnDiscover">Discover</button></router-link>
 </div>
 <div class="card mb-3">
-  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/image 10.jpg" class="card-img-top" alt="CardImage">
+  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/image 10.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Switzerland</h5>
     <p class="card-text">Switzerland is a mountainous Central European country, home to numerous lakes, villages and the high peaks of the Alps. Switzerland is famous for its mountains, clocks and its food – especially cheese and chocolates.</p>
@@ -34,7 +34,7 @@
   </div>
 </div>
 <div class="card mb-3">
-  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/venice.jpg" class="card-img-top" alt="CardImage">
+  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/venice.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Venice</h5>
     <p class="card-text">Venice known as the 'City of Canals' is famous for including its beautiful bridges, gondola rides, atmospheric streets and carnival celebrations.</p>
@@ -42,7 +42,7 @@
   </div>
 </div>
 <div class="card mb-3">
-  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/japan.jpg" class="card-img-top" alt="CardImage">
+  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/japan.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Japan</h5>
     <p class="card-text">Japan is known for everything from onsen hot springs and kabuki baths, to all-night neon-lit dance parties, anime, and sushi boat restaurants.</p>
@@ -50,7 +50,7 @@
   </div>
 </div>
 <div class="card mb-3">
-  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/canada.jpg" class="card-img-top" alt="CardImage">
+  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/canada.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Canada</h5>
     <p class="card-text">Canada is a country filled with famous landmarks, historical wonders, delicious food, incredible culture,endless outdoor exploration, and maple syrup.</p>
@@ -58,7 +58,7 @@
   </div>
 </div>
 <div class="card mb-3">
-  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/dubai.jpg" class="card-img-top" alt="CardImage">
+  <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/dubai.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Dubai</h5>
     <p class="card-text">Dubai is famous for the record-breaking Burj Khalifa, Dubai Creek, Dubai Mall, and the Palm, its vibrant culture, turbulent history, and modern infrastructure.</p>

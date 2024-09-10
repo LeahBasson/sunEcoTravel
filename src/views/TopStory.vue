@@ -31,6 +31,12 @@
  
       </div>
 
+      <div class="row">
+        <button type="button" class="admin-button" data-bs-toggle="modal" data-bs-target="#addStoryModal">
+          Add A Review
+        </button>
+      </div>
+      <AddStoryModal />
     </div>
 </template>
 
@@ -39,10 +45,13 @@ import { useStore } from 'vuex'
 import { computed, onMounted } from 'vue'
 import Spinner from '@/components/Spinner.vue'
 import Card from '@/components/Card.vue'
+import AddStoryModal from '@/components/AddStoryModal.vue'
+
 const store = useStore()
 const stories = computed(
     () => store.state.stories
 )
+
 onMounted(() => {
     store.dispatch('fetchStories')
 }) 
@@ -147,6 +156,22 @@ onMounted(() => {
     font-weight: 500;
  }
 
+ .admin-button{
+  background-color: var(--alternative);
+  border: none;
+  border-radius: 0.5rem;
+  width: 14rem;
+  padding: 0.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin: auto;
+  color: var(--secondary);
+}
+
+.admin-button:hover{
+  background-color: var(--awesome);
+}
+
  @media (width < 999px)
 {
   #storyCards{
@@ -187,6 +212,10 @@ onMounted(() => {
 
   .card img{
     margin-bottom: 1rem;
+ }
+
+ .admin-button{
+  width: 80%;
  }
 }
   </style>

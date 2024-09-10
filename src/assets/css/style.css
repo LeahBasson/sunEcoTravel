@@ -29,6 +29,18 @@
   display: grid;
 }
 
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+html::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--alternative);
+  border-radius: 5rem;
+}
+
 
 /* APP */
 #app {
