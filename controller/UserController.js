@@ -33,7 +33,7 @@ userRouter.post('/login', (req, res) => {
 })
 
 // Booking
-userRouter.get('/:uid/bookings', verifyAToken, (req, res) => {
+userRouter.get('/:uid/bookings', (req, res) => {
     bookings.fetchBookings(req, res)
 })
 
@@ -41,11 +41,11 @@ userRouter.get('/:uid/booking', (req, res) => {
     bookings.fetchUserBookings(req, res)
 })
 
-userRouter.post('/:uid/booking',  verifyAToken, (req, res) => {
+userRouter.post('/:uid/booking', (req, res) => {
     bookings.addBooking(req, res)
 })
 
-userRouter.patch('/:uid/booking/:bookingID', verifyAToken, (req, res) => {
+userRouter.patch('/:uid/booking/:bookingID', (req, res) => {
     bookings.updateBooking(req, res)
 })
 
