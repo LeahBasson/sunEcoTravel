@@ -40,8 +40,12 @@
                     <input type="datetime" class="form-control" id="checkOutDDate" placeholder="Enter the hotel amenities" v-model="checkOutDate">
                   </div>
                   <div class="mb-3">
-                    <label for="amount" class="form-label">Total Price</label>
+                    <label for="amount" class="form-label">Amount</label>
                     <input type="number" class="form-control" id="amount" placeholder="Enter the hotel contact info" v-model="amount">
+                  </div>
+                  <div class="mb-3">
+                    <label for="totalPrice" class="form-label">Total Price</label>
+                    <input type="number" class="form-control" id="totalPrice" placeholder="Enter the hotel contact info" v-model="totalPrice">
                   </div>
                 </form>
               </div>
@@ -76,7 +80,8 @@
         numberOfRooms: this.booking.numberOfRooms,
         checkInDate: this.booking.checkInDate,
         checkOutDate: this.booking.checkOutDate,
-        amount: this.booking.amount
+        amount: this.booking.amount,
+        total: this.booking.totalPrice
       };
     },
     methods: {
@@ -89,7 +94,8 @@
           numberOfRooms: this.numberOfRooms,
           checkInDate: this.checkInDate,
           checkOutDate: this.checkOutDate,
-          amount: this.amount
+          amount: this.amount,
+          total: this.totalPrice
         };
   
         try {
@@ -116,7 +122,7 @@
           this.checkInDate = newBooking.checkInDate;
           this.checkOutDate = newBooking.checkOutDate;
           this.amount = newBooking.amount;
-
+          this.totalPrice = newBooking.totalPrice
         },
         deep: true,
         immediate: true,

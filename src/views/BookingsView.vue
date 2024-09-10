@@ -35,7 +35,7 @@
         </tbody>
       </table>
       <div class="button-wrapper">
-        <button class="delete-all-button" @click="deleteBookings(bookings)">Delete All</button>
+        <button class="delete-all-button"  @click="deleteAllBookings">Delete All</button>
       </div>
     </div>
 
@@ -57,7 +57,7 @@ const { cookies } = useCookies()
 // Fetch only the logged-in user's bookings
 const bookings = computed(() => store.state.bookings || [])
 
-// Final total for all bookings
+// Calculate the total price for all bookings
 const totalPrice = computed(() => {
   let total = 0;
   bookings.value.forEach(booking => {
@@ -66,8 +66,14 @@ const totalPrice = computed(() => {
   return total;
 });
 
+function deleteAllBookings() {
+  const userId = cookies.get('LegitUser')?.result?.userID;
+  if (userId) {
+    store.dispatch('deleteBookings', { userID: userId });
+  }
+}
+
 function deleteBooking(booking) {
-  // Pass both bookingID and userID to the store action
   store.dispatch('deleteBooking', {
     userID: cookies.get('LegitUser')?.result?.userID,
     bookingID: booking.bookingID
@@ -77,7 +83,6 @@ function deleteBooking(booking) {
 onMounted(() => {
   const userId = cookies.get('LegitUser')?.result?.userID
   if (userId) {
-    // Dispatch an action to fetch bookings for the specific user
     store.dispatch('fetchUserBookings', userId)
   }
 })
