@@ -344,6 +344,7 @@ function scrollDown() {
   border: 1px solid var(--borderColor);
   border-radius: 0.5rem;
   padding: 0;
+  font-family: "Poppins",sans-serif;
 }
 
 .card-title {

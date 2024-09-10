@@ -71,8 +71,8 @@ function deleteUser(userID) {
 
 function logout() {
   // Remove the cookie
-  cookies.remove('LegitUser');  // Make sure to use the correct cookie name
-  
+  cookies.remove('LegitUser');  // Make sure to use the correct cookie name\
+  store.state.bookings = []
   // Redirect to the home page
   router.push('/');
 }

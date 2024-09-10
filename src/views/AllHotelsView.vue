@@ -15,7 +15,7 @@
                 </div>
                 <p v-if="noResults" class="no-results">Hotel doesn't exist</p>
               </form>
-              <button class="btn-findHotel" @click="searchHotels">Find Hotels</button>
+              <button class="btn-findHotel" @click="findHotels">Find Hotels</button>
             </div>
             <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
           </div>
@@ -23,7 +23,7 @@
       </div>
   
       <!-- Display filtered hotels if search query is not empty -->
-      <div class="row" id="hotel-searched" v-if="searchTriggered && filteredHotels.length > 0">
+      <div class="row" id="hotel-searched" v-if="showHotels">
         <Card v-for="hotel in filteredHotels" :key="hotel.hotelID" class="card">
           <template #cardHeader>
             <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
@@ -83,120 +83,126 @@
   </template>
   
   
-  <script setup>
-  import { useStore } from 'vuex'
-  import { computed, ref, onMounted } from 'vue'
-  import Spinner from '@/components/Spinner.vue'
-  import Card from '@/components/Card.vue'
-  import { nextTick } from 'vue';
-  
-  const store = useStore()
-  const searchQuery = ref('') 
-  const noResults = ref(false)  
-  const filteredHotels = ref([])
-  const sortOrder = ref('default')
-  const selectedCountry = ref('All')
-  const searchTriggered = ref(false) 
-  
-  const hotels = computed(() => store.state.hotels)
-  const originalHotels = ref([])
-  
-  onMounted(async () => {
-    await store.dispatch('fetchHotels')
-    originalHotels.value = [...hotels.value]  // Initialize with all hotels
-  })
-  
-  // Function to handle search on button click
-  // Function to handle search on button click
-async function searchHotels() {
-  searchTriggered.value = false;  // Reset flag
+<script setup>
+import { useStore } from 'vuex'
+import { computed, ref, onMounted, watch } from 'vue'
+import Spinner from '@/components/Spinner.vue'
+import Card from '@/components/Card.vue'
 
-  if (searchQuery.value.trim() === '') {
-    // Clear the filteredHotels array and hide the 'No Results' message if the input is empty
-    filteredHotels.value = [];
-    noResults.value = false;
-  } else {
-    // Filter the hotels based on the search query
-    filteredHotels.value = hotels.value.filter(hotel =>
+const store = useStore()
+const searchQuery = ref('')
+const showHotels = ref(false) 
+const sortOrder = ref('default')
+const selectedCountry = ref('All')
+
+const hotels = computed(() => store.state.hotels || []);
+const originalHotels = ref([])
+
+onMounted(async () => {
+  await store.dispatch('fetchHotels')
+  originalHotels.value = [...hotels.value] 
+})
+
+const filteredHotels = computed(() => {
+  // Ensure hotels is not null or undefined before filtering
+  if (hotels.value && Array.isArray(hotels.value)) {
+    return hotels.value.filter(hotel =>
       hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase())
     );
-
-    // Display 'No Results' message if no hotels match
-    noResults.value = filteredHotels.value.length === 0;
-
-    // Set searchTriggered to true after the search is completed
-    if (filteredHotels.value.length > 0 || noResults.value) {
-      searchTriggered.value = true;
-      
-      // Scroll to the hotel-searched section if results are found
-      await nextTick(); // Ensure DOM updates are complete
-      const hotelSearchedElement = document.getElementById('hotel-searched');
-      if (hotelSearchedElement) {
-        hotelSearchedElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
   }
-  }
-  
-  const sortButtonText = computed(() => {
-    if (sortOrder.value === 'lowToHigh') {
-      return 'Price: Low to High'
-    } else if (sortOrder.value === 'highToLow') {
-      return 'Price: High to Low'
-    }
-    return 'Sort Price'
-  })
-  
-  function toggleSortOrder() {
-    if (sortOrder.value === 'default') {
-      sortOrder.value = 'lowToHigh'
-    } else if (sortOrder.value === 'lowToHigh') {
-      sortOrder.value = 'highToLow'
-    } else {
-      sortOrder.value = 'default'
-    }
-  }
-  
-  const sortedHotels = computed(() => {
-    let sorted = [...originalHotels.value]  // Always work with the original list
-  
-    // Apply sorting
-    if (sortOrder.value === 'lowToHigh') {
-      sorted = sorted.sort((a, b) => a.amount - b.amount)
-    } else if (sortOrder.value === 'highToLow') {
-      sorted = sorted.sort((a, b) => b.amount - a.amount)
-    }
-    return sorted
-  })
-  
-  const filteredByCountryHotels = computed(() => {
-    if (selectedCountry.value === 'All' || !selectedCountry.value) {
-        return sortedHotels.value;
-    }
-    return sortedHotels.value.filter(hotel => hotel.country === selectedCountry.value);
+  return []; // Return an empty array if hotels is null or not an array
 });
 
-  
-  function updateCountry(country) {
-    selectedCountry.value = country;
-    if (country === 'All') {
-        filteredHotels.value = [...originalHotels.value]; // Show all hotels
+
+// Computed property to determine if there are no results
+const noResults = computed(() => {
+  return filteredHotels.value.length === 0 && searchQuery.value.trim() !== ''
+})
+
+// Function to handle the "Find Hotels" button click
+function findHotels() {
+  if (searchQuery.value.trim()) {
+    if (!noResults.value) {
+      showHotels.value = true
+      // Scroll down to the hotel-searched div
+      setTimeout(() => {
+        const hotelSearchedElement = document.getElementById('hotel-searched')
+        if (hotelSearchedElement) {
+          window.scrollTo({
+            top: hotelSearchedElement.offsetTop,
+            behavior: 'smooth'
+          })
+        }
+      }, 300)
     } else {
-        filteredHotels.value = originalHotels.value.filter(hotel => hotel.country === country);
+      showHotels.value = false
     }
+  } else {
+    showHotels.value = false
+  }
 }
 
-  
-  function scrollDown() {
-    window.scrollTo({
-      top: document.getElementById('hotel-interaction').offsetTop,
-      behavior: 'smooth'
-    })
+// Watcher to hide the hotel-searched div and no-results message when the search query is emptied
+watch(searchQuery, (newQuery) => {
+  if (!newQuery.trim()) {
+    showHotels.value = false
   }
-  </script>
-  
+})
 
-  <style scoped>
+
+// Sort functionality
+const sortButtonText = computed(() => {
+  if (sortOrder.value === 'lowToHigh') {
+    return 'Price: Low to High'
+  } else if (sortOrder.value === 'highToLow') {
+    return 'Price: High to Low'
+  }
+  return 'Sort Price'
+})
+
+function toggleSortOrder() {
+  if (sortOrder.value === 'default') {
+    sortOrder.value = 'lowToHigh'
+  } else if (sortOrder.value === 'lowToHigh') {
+    sortOrder.value = 'highToLow'
+  } else {
+    sortOrder.value = 'default'
+  }
+}
+
+// Sorting hotels based on price
+const sortedHotels = computed(() => {
+  let sorted = [...originalHotels.value] 
+  if (sortOrder.value === 'lowToHigh') {
+    sorted = sorted.sort((a, b) => a.amount - b.amount)
+  } else if (sortOrder.value === 'highToLow') {
+    sorted = sorted.sort((a, b) => b.amount - a.amount)
+  }
+  return sorted
+})
+
+// Filter hotels by selected country
+const filteredByCountryHotels = computed(() => {
+  if (selectedCountry.value === 'All' || !selectedCountry.value) {
+    return sortedHotels.value;
+  }
+  return sortedHotels.value.filter(hotel => hotel.country === selectedCountry.value);
+})
+
+function updateCountry(country) {
+  selectedCountry.value = country;
+}
+
+function scrollDown() {
+  window.scrollTo({
+    top: document.getElementById('hotel-interaction').offsetTop,
+    behavior: 'smooth'
+  })
+}
+</script>
+
+
+<style scoped>
   #hotelBanner{
     position: relative;
     z-index: 1;
@@ -344,6 +350,7 @@ async function searchHotels() {
     border: 1px solid var(--borderColor);
     border-radius: 0.5rem;
     padding: 0;
+    font-family: "Poppins",sans-serif;
   }
   
   .card-title {
