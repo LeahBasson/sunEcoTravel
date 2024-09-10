@@ -45,6 +45,27 @@ class Stories {
         }
     }
 
+    deleteStory(req, res) {
+        try{
+            const strQry = `
+            DELETE FROM Stories
+            WHERE storyID = ${req.params.id};
+            `
+            db.query (strQry, (err) => {
+                if(err) throw new Error('To delete a story, please review your delete query.')
+                    res.json({
+                        status: res.statusCode,
+                        msg: 'A story was removed.'
+                })
+            })
+        } catch(e) {
+            res.json({
+                status: 404, //Resource not found
+                err: e.message
+            })
+        }
+    }
+
 }
 
 export {

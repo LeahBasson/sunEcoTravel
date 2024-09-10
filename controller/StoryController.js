@@ -14,6 +14,10 @@ storyRouter.post('/addStory', (req, res) => {
     stories.addStory(req, res)
 })
 
+storyRouter.delete('/:id', (req, res) => { 
+    stories.deleteStory(req, res)
+})
+
 export {
     express,
     storyRouter
