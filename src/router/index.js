@@ -82,11 +82,11 @@ const routes = [
   {
     path: '/logout',
     name: 'logout',
-    component: ()=> import('@/views/HomeView.vue'),
+    component: ()=> import('@/views/LoginView.vue'),
     beforeEnter() {
       location.reload()
       cookies.remove('LegitUser')
-      router.push({name: 'home'})
+      router.push({name: 'login'})
     }
   },
   {

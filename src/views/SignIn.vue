@@ -8,13 +8,13 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your firstname: </label>
-                        <input class="form-control" type="text" placeholder="First name" v-model="payload.firstName"/>
+                        <input class="form-control" type="text" placeholder="First name" v-model="payload.firstName" pattern="[A-Za-z ]+" />
                     </span>
                 </div>
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your lastname: </label>
-                        <input class="form-control" type="text" placeholder="Last name" v-model="payload.lastName"/>
+                        <input class="form-control" type="text" placeholder="Last name" pattern="[A-Za-z ]+" v-model="payload.lastName"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
