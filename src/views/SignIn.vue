@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <h1 class="register-heading">Register</h1>
+            <h1 class="register-heading animate__animated animate__fadeInDown">Register</h1>
         </div>
         <div class="row sign-in-alignment">
             <form class="form" @submit.prevent="register">

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row" id="booking-heading">
+    <div class="row animate__animated animate__fadeInDown" id="booking-heading">
       <h1>Bookings</h1>
     </div>
 
@@ -29,12 +29,14 @@
               </div>
             </td>
           </tr>
-          <tr>
-            <td>Total Price: R{{ totalPrice }}</td>
-          </tr>
         </tbody>
       </table>
       <div class="button-wrapper">
+        <div class="total-display">
+          <p>
+            Total Price: R{{ totalPrice }}
+          </p>
+        </div>
         <button class="delete-all-button"  @click="deleteAllBookings">Delete All</button>
       </div>
     </div>
@@ -137,8 +139,9 @@ img[alt="bookingImage"]{
 
 .button-wrapper{
   display: flex;
-  justify-content: end;
-  width: 95%;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
 }
 
 .delete-all-button{
@@ -157,16 +160,29 @@ img[alt="bookingImage"]{
   background-color: var(--awesome);
 }
 
+.total-display p{
+  text-align: left;
+  font-family: "Poppins",sans-serif;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
 @media (width < 999px)
 {
   .text-book{
     padding-top: 3rem;
   }
 
-  table{
-  width: 85%;
+.total-display p{
+  text-align: center;
+}
+
+.button-wrapper{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 90%;
   margin: auto;
-  margin-top: 2rem;
 }
 
 th, td{
@@ -181,12 +197,13 @@ thead{
 
 table, tbody, th, td, tr {
     display: block;
-    word-wrap: break-word;
 }
 
 table {
     margin-bottom: 1.5rem;
     font-family: "Poppins",sans-serif;
+    width: 89%;
+    border-bottom: none;
 }
 
 thead tr {
@@ -216,6 +233,15 @@ td:before {
     transform: translateY(-50%);
 }
 
+.table-button{
+  width: 100%;
+}
+
+.delete-all-button{
+  margin: auto;
+  width: 95%;
+}
+
   /* Bookings Table Mobile */
 .table td:nth-of-type(1):before { content: "Hotel ID"; }
 .table td:nth-of-type(2):before { content: "Check in date"; }
@@ -225,6 +251,5 @@ td:before {
 .table td:nth-of-type(6):before { content: "Action"; }
 .table .total-row td:before { content: ""; }
 .table .total-row td:before { content: ""; }
-
 }
 </style>

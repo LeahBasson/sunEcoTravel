@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="row">
-        <h1 class="login-heading">Login</h1>
+        <h1 class="login-heading animate__animated animate__fadeInDown">Login</h1>
       </div>
       <div class="row my-2 justify-content-center">
         <form class="form" @submit.prevent="handleLogin">

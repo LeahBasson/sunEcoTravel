@@ -13,7 +13,7 @@
               <p>{{ story.typeOfStory }}</p>
               <p>{{ story.story.length > 80 ? story.story.slice(0, 80) + '...' : story.story }}</p>
               <div class="button-wrapper justify-content-center">
-                <router-link :to="{ name: 'topstory', params: { id: story.storyID } }">
+                <router-link to="/topStory">
                 <button class="btn-ReadMore">Read More</button>
                 </router-link>
               </div>

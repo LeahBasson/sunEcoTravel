@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="row">
-        <h1 class="account-heading">Account</h1>
+        <h1 class="account-heading animate__animated animate__fadeInDown">Account</h1>
       </div>
       <div class="row justify-content-center" v-if="user">
         <Card class="card">

@@ -169,6 +169,9 @@
                       {{ booking.amount }}
                     </td>
                   <td>
+                    <div class="adminButtons">
+                      
+                    </div>
                     <button class="table-button" data-bs-toggle="modal" :data-bs-target="'#updateBookingModal' + booking.bookingID"><i class="bi bi-pen-fill"></i></button>
                   </td>   
                    </tr>
@@ -448,6 +451,10 @@ table{
   .admin-button{
   width: 85%;
   margin: auto;
+}
+
+.table-button{
+  width: 100%;
 }
 
 .adminButtons{

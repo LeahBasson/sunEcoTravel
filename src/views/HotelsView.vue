@@ -7,7 +7,7 @@
             <h1 class="animate__animated animate__fadeInDown">Where do you want to stay ? </h1>
             <div class="alignment">
 
-              <form class="adventure-search" role="search">
+              <form class="adventure-search animate__animated animate__fadeInDown" role="search">
               <div class="input-wrapper">
                 <input class="form-control" type="text" placeholder="Search hotel name" id="searchInput" v-model="searchQuery">
                 <span class="search-icon">
@@ -17,7 +17,7 @@
               <p v-if="noResults" class="no-results">Hotel doesn't exist</p>
             </form>
 
-            <button class="btn-findHotel"  @click="findHotels">Find Hotels</button>
+            <button class="btn-findHotel animate__animated animate__fadeInDown"  @click="findHotels">Find Hotels</button>
             </div>
          
             <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
@@ -406,7 +406,7 @@ function scrollDown() {
   #hotel-heading h1{
     text-align: center;
     padding-left: 0rem;
-    padding-top: 2rem;
+    padding-top: 3rem;
   }
 
   #hotel-heading2 h1{
