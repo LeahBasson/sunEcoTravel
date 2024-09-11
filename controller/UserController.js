@@ -2,7 +2,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { users } from '../model/index.js'
 import { bookings } from '../model/index.js'
-import { verifyAToken } from '../middleware/AuthenticateUser.js'
 
 const userRouter = express.Router()
 
@@ -12,7 +11,7 @@ userRouter.get('/', (req, res) => {
     users.fetchUsers(req, res)
 })
 
-userRouter.get ('/:id', verifyAToken, (req, res) => {
+userRouter.get ('/:id', (req, res) => {
     users.fetchUser(req, res)
 })
 
