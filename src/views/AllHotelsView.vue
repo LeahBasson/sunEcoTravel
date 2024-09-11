@@ -6,7 +6,7 @@
           <div class="banner-content" loading="eager">
             <h1 class="animate__animated animate__fadeInDown">All Destinations</h1>
             <div class="alignment">
-              <form class="adventure-search" role="search">
+              <form class="adventure-search animate__animated animate__fadeInDown" role="search">
                 <div class="input-wrapper">
                   <input class="form-control" type="text" placeholder="Search hotel name" id="searchInput" v-model="searchQuery">
                   <span class="search-icon">
@@ -15,7 +15,7 @@
                 </div>
                 <p v-if="noResults" class="no-results">Hotel doesn't exist</p>
               </form>
-              <button class="btn-findHotel" @click="findHotels">Find Hotels</button>
+              <button class="btn-findHotel animate__animated animate__fadeInDown" @click="findHotels">Find Hotels</button>
             </div>
             <button @click="scrollDown" class="scroll-btn animate__animated animate__fadeInUp">↓</button>
           </div>

@@ -24,7 +24,7 @@
          <div class="overlay"></div>
          <div class="carousel-caption">
         <h1 class="animate__animated animate__fadeInDown">Explore our Top Destinations</h1>
-        <p class="animate__animated animate__fadeInUp">This year, do more than just dream about the Best in Travel. Get inspired and discover new trip planning tools powered by our years of travel expertise.</p>
+        <p class="animate__animated animate__fadeInUp">This year, do more than just dream about the Best in Travel.</p>
         <router-link to="/topDestination"><button class="hb-button animate__animated animate__fadeInUp">Explore Now</button></router-link>
         <div class="hb-bannerLinks animate__animated animate__fadeInUp">
         <a class="lnk text-white" href="mailto:your-email@example.com" alt="outlook icon" target="_blank"><i class="bi bi-envelope"></i></a>
