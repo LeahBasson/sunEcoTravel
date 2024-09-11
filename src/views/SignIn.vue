@@ -8,7 +8,7 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your firstname: </label>
-                        <input class="form-control" type="text" placeholder="First name" v-model="payload.firstName" pattern="[A-Za-z ]+" />
+                        <input class="form-control" type="text" autocomplete="given-name" placeholder="First name" v-model="payload.firstName" pattern="[A-Za-z ]+" />
                     </span>
                 </div>
                 <div class="form-control-wrapper">
@@ -32,7 +32,7 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your email address: </label>
-                        <input class="form-control" type="email" placeholder="Email address" v-model="payload.emailAdd"/>
+                        <input class="form-control" type="email"  autocomplete="email" placeholder="Email address" v-model="payload.emailAdd"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
@@ -44,7 +44,7 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your profile img url: </label>
-                        <input class="form-control" type="text" placeholder="User Profile" v-model="payload.userProfile"/>
+                        <input class="form-control" type="text" placeholder="User Profile" autocomplete="img-url" v-model="payload.userProfile"/>
                     </span>
                 </div>
                 <div class="form-button-wrapper">
@@ -84,6 +84,7 @@ const payload = reactive({
 });
 
 function addUser() {
+  // Check if all fields are filled
   if (!payload.firstName || !payload.lastName || !payload.userAge || !payload.Gender || !payload.emailAdd || !payload.userPass || !payload.userProfile) {
     Swal.fire({
       icon: 'error',
@@ -93,9 +94,22 @@ function addUser() {
     return;
   }
 
+  // Validate first name and last name (ensure no numbers)
+  const namePattern = /^[A-Za-z ]+$/;
+  if (!namePattern.test(payload.firstName) || !namePattern.test(payload.lastName)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Name',
+      text: 'First name and Last name should contain only letters',
+    });
+    return;
+  }
+
+  // If validation passes, dispatch the action to store the user
   store.dispatch('addUser', payload);
 }
 </script>
+
 
 <style scoped>
 .register-heading{

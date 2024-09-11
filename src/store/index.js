@@ -192,37 +192,50 @@ export default createStore({
     // ===== LOGIN =======
     async login(context, payload) {
       try {
-        const { msg, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
-
+        const response = await axios.post(`${apiURL}user/login`, payload);
+        const { msg, result, token } = response.data;
+    
         if (result) {
+          // Successful login
           toast.success(`${msg}😎`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
-          })
+          });
+    
+          // Commit user data to Vuex store
           context.commit('setUser', result);
+    
+          // Set token in cookies
           cookies.set('LegitUser', { token, msg, result });
+    
+          // Apply token for authorization
           applyToken(token);
-
+    
+          // Redirect based on user role and redirectIntent
           if (context.state.redirectIntent === 'admin' && result.userRole === 'admin') {
-            router.push({ name: 'admin' })
+            router.push({ name: 'admin' });
           } else {
-            router.push({ name: 'account', params: { id: result.userID } })
+            router.push({ name: 'account', params: { id: result.userID } });
           }
-
-          context.commit('setRedirectIntent', null)
+    
+          // Clear redirectIntent after successful login
+          context.commit('setRedirectIntent', null);
         } else {
+          // Login failed
           toast.error(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
-          })
+          });
         }
-      } catch (e) {
-        toast.error(`${e.message}`, {
+      } catch (error) {
+        // Handle error during login
+        console.error("Login error:", error); // Log error for debugging
+        toast.error(`Login failed: ${error.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
-        })
+        });
       }
-    },  
+    },   
   // ==== User ========
   async fetchUsers(context) {
     try {
