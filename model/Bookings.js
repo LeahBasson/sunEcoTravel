@@ -3,7 +3,7 @@ import { connection as db } from '../config/index.js';
 class Bookings {
     fetchBookings(req, res) {
         const strQry = `
-        SELECT b.bookingID, b.hotelID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.amount, b.totalPrice
+        SELECT b.bookingID, b.hotelID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.amount
         FROM Users u
         INNER JOIN Bookings b
         USING(userID)
@@ -27,7 +27,7 @@ class Bookings {
 
     fetchUserBookings(req, res) {
         const strQry = `
-            SELECT b.bookingID, b.hotelID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.amount, b.totalPrice
+            SELECT b.bookingID, b.hotelID, b.userID, b.numberOfRooms, b.checkInDate, b.checkOutDate, b.amount
             FROM Bookings b
             INNER JOIN Users u ON b.userID = ${req.params.uid}
             INNER JOIN Hotels h ON b.hotelID = h.hotelID
