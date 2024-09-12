@@ -100,31 +100,56 @@ class Users {
     }
     
     
-    async updateUser(req, res) {
+    updateUser(req, res) {
         try {
-            let data = req.body
-            if (data.userPass) {
-                data.userPass = await hash (data.userPass, 12)
-            }
+          let data = req.body
+          if (data.userPass) {
             const strQry = `
-            UPDATE Users
-            SET ?
-            WHERE userID = ${req.params.id}
-            `  
-            db.query (strQry, [data], (err) => {
-                if (err) throw new Error ('Unable to update a user')
+                  select userPass
+                  from Users
+                  where userID = ${req.params.id}
+                  `;
+            db.query(strQry, async (error, result)=>{
+              if (error) throw new Error(error.message);
+                if (req.body.userPass == result[0].userPass) {
+                  console.log('same pwd');
+                  const Query = `
+                    update Users
+                    set ?
+                    where userID = ${req.params.id}
+                    `;
+                  db.query(Query, [data], (err) => {
+                    if (err) throw new Error(err.message);
                     res.json({
-                        status: res.statusCode,
-                        msg: 'The user record was updated.'
-                })
+                      status: res.statusCode,
+                      msg: 'User details updated successfully :arrows_counterclockwise:',
+                    })
+                  })
+                  return 'same pwd'
+                } else{
+                  data.userPass = await hash(data.userPass, 12)
+                  const Query = `
+                    update Users
+                    set ?
+                    where userID = ${req.params.id}
+                    `;
+                  db.query(Query, [data], (err) => {
+                    if (err) throw new Error(err.message);
+                    res.json({
+                      status: res.statusCode,
+                      msg: 'User details updated successfully :arrows_counterclockwise:',
+                    })
+                  })
+                }
             })
-        } catch(e) {
-            res.json({
-                status: 400,
-                msg: e.message //The error message from the if statement
-        })
+          }
+        } catch (e) {
+          res.json({
+            status: 404,
+            msg: e.message,
+          })
         }
-    }
+      }
 
     deleteUser(req, res) {
         try{
@@ -185,6 +210,8 @@ class Users {
                     }
                 }
             } )
+            
+              
         } catch (e) {
             res.json({
                 status: 404,
