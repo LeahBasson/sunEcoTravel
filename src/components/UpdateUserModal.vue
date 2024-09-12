@@ -13,35 +13,35 @@
                 <form id="updateUserForm" name="updateUserForm">
                   <div class="mb-3">
                     <label for="firstName" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="firstName" pattern="[A-Za-z ]+" placeholder="Enter user first name" v-model="firstName">
+                    <input type="text" class="form-control" id="firstName" pattern="[A-Za-z ]+" v-model="firstName">
                   </div>
                   <div class="mb-3">
                     <label for="lastName" class="form-label">Last name</label>
-                    <input type="text" class="form-control" id="lastName" pattern="[A-Za-z ]+" placeholder="Enter user last name" v-model="lastName">
+                    <input type="text" class="form-control" id="lastName" pattern="[A-Za-z ]+" v-model="lastName">
                   </div>
                   <div class="mb-3">
                     <label for="userAge" class="form-label">User Age</label>
-                    <input type="number" class="form-control" id="userAge" placeholder="Enter user age" v-model="userAge">
+                    <input type="number" class="form-control" id="userAge"  v-model="userAge">
                   </div>
                   <div class="mb-3">
                     <label for="Gender" class="form-label">Gender</label>
-                    <input type="text" class="form-control" id="Gender" placeholder="Enter user gender" v-model="Gender">
+                    <input type="text" class="form-control" id="Gender"  v-model="Gender">
                   </div>
                   <div class="mb-3">
                     <label for="userRole" class="form-label">User role</label>
-                    <input type="text" class="form-control" id="userRole" placeholder="Enter user role" v-model="userRole">
+                    <input type="text" class="form-control" id="userRole"  v-model="userRole">
                   </div>
                   <div class="mb-3">
                     <label for="emailAdd" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="emailAdd" placeholder="Enter user role" v-model="emailAdd" required>
+                    <input type="email" class="form-control" id="emailAdd"  v-model="emailAdd" required>
                   </div>
                   <div class="mb-3">
                     <label for="userPass" class="form-label">User password</label>
-                    <input type="password" class="form-control" id="userPass" placeholder="Enter user password" v-model="userPass">
+                    <input type="password" class="form-control" id="userPass"  v-model="userPass">
                   </div>
                   <div class="mb-3">
                     <label for="userProfile" class="form-label">User profile</label>
-                    <input type="text" class="form-control" id="userProfile" placeholder="Enter user profile" v-model="userProfile">
+                    <input type="text" class="form-control" id="userProfile" v-model="userProfile">
                   </div>
                 </form>
               </div>

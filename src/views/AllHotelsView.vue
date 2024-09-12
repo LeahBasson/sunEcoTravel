@@ -84,6 +84,7 @@
   
   
 <script setup>
+import Swal from 'sweetalert2'
 import { useStore } from 'vuex'
 import { computed, ref, onMounted, watch } from 'vue'
 import Spinner from '@/components/Spinner.vue'
@@ -104,7 +105,6 @@ onMounted(async () => {
 })
 
 const filteredHotels = computed(() => {
-  // Ensure hotels is not null or undefined before filtering
   if (hotels.value && Array.isArray(hotels.value)) {
     return hotels.value.filter(hotel =>
       hotel.hotelName.toLowerCase().includes(searchQuery.value.toLowerCase())
@@ -139,6 +139,12 @@ function findHotels() {
     }
   } else {
     showHotels.value = false
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please enter a hotel name before searching!',
+      confirmButtonColor: '#FF9A00',
+    });
   }
 }
 

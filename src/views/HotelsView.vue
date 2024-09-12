@@ -103,6 +103,7 @@
 </template>
 
 <script setup>
+import Swal from 'sweetalert2'
 import { useStore } from 'vuex'
 import { ref, computed, onMounted, watch } from 'vue'
 import Spinner from '@/components/Spinner.vue'
@@ -153,6 +154,12 @@ function findHotels() {
     }
   } else {
     showHotels.value = false
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please enter a hotel name before searching!',
+      confirmButtonColor: '#FF9A00',
+    });
   }
 }
 

@@ -49,6 +49,7 @@ const handleLogin = async () => {
       icon: 'error',
       title: 'Oops...',
       text: 'Please fill in both the email and password fields!',
+      confirmButtonColor: '#FF9A00',
     });
     return;
   }
@@ -61,6 +62,7 @@ const handleLogin = async () => {
       icon: 'error',
       title: 'Login failed',
       text: error.message,
+      confirmButtonColor: '#FF9A00',
     });
   }
 };

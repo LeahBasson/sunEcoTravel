@@ -91,10 +91,6 @@ export default {
     },
     isAdmin() {
       return this.user?.userRole?.toLowerCase() === 'admin';
-    },
-    bookingCount() {
-      // Replace with your actual logic to get booking count
-      return this.$store.state.bookingCount || 0;
     }
   }
 }

@@ -108,12 +108,14 @@ export default createStore({
           context.commit('setRecentHotels', results)
         } else {
           toast.error(`${ msg }`)  , {  //its going to be success if the request was successful. Its style
-            autoClose: 2000
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
           }  //Used to display an error message
         }
       } catch (e) {
         toast.error(`${e.message}`, {
-          autoClose: 2000
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
         }) // Toast is used to display an error message
       }
     },

@@ -13,39 +13,39 @@
                 <form id="updateBookingForm" name="updateBookingForm">
                   <div class="mb-3">
                     <label for="bookingID" class="form-label">Booking ID</label>
-                    <input type="number" class="form-control" id="bookingID" placeholder="Enter a hotel name" v-model="bookingID">
+                    <input type="number" class="form-control" id="bookingID"  v-model="bookingID">
                   </div>
                   <div class="mb-3">
                     <label for="hotelID" class="form-label">Hotel ID</label>
-                    <input type="number" class="form-control" id="hotelID" placeholder="Enter hotel description" v-model="hotelID">
+                    <input type="number" class="form-control" id="hotelID"  v-model="hotelID">
                   </div>
                   <div class="mb-3">
                     <label for="roomID" class="form-label">Room ID</label>
-                    <input type="number" class="form-control" id="roomID" placeholder="Enter hotel address" v-model="roomID">
+                    <input type="number" class="form-control" id="roomID" v-model="roomID">
                   </div>
                   <div class="mb-3">
                     <label for="userID" class="form-label">User ID</label>
-                    <input type="number" class="form-control" id="userID" placeholder="Enter the hotel country" v-model="userID">
+                    <input type="number" class="form-control" id="userID" v-model="userID">
                   </div>
                   <div class="mb-3">
                     <label for="numberOfRooms" class="form-label">Number of rooms</label>
-                    <input type="number" class="form-control" id="numberOfRooms" placeholder="Enter the hotel city" v-model="numberOfRooms">
+                    <input type="number" class="form-control" id="numberOfRooms"  v-model="numberOfRooms">
                   </div>
                   <div class="mb-3">
                     <label for="checkInDate" class="form-label">Check in date</label>
-                    <input type="datetime" class="form-control" id="checkInDate" placeholder="Enter the hotel image URL" v-model="checkInDate">
+                    <input type="datetime" class="form-control" id="checkInDate"  v-model="checkInDate">
                   </div>
                   <div class="mb-3">
                     <label for="checkOutDDate" class="form-label">Check out date</label>
-                    <input type="datetime" class="form-control" id="checkOutDDate" placeholder="Enter the hotel amenities" v-model="checkOutDate">
+                    <input type="datetime" class="form-control" id="checkOutDDate"  v-model="checkOutDate">
                   </div>
                   <div class="mb-3">
                     <label for="amount" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="amount" placeholder="Enter the hotel contact info" v-model="amount">
+                    <input type="number" class="form-control" id="amount"  v-model="amount">
                   </div>
                   <div class="mb-3">
                     <label for="totalPrice" class="form-label">Total Price</label>
-                    <input type="number" class="form-control" id="totalPrice" placeholder="Enter the hotel contact info" v-model="totalPrice">
+                    <input type="number" class="form-control" id="totalPrice"  v-model="totalPrice">
                   </div>
                 </form>
               </div>

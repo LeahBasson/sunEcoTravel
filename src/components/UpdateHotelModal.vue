@@ -13,39 +13,39 @@
               <form id="updateHotelForm" name="updateHotelForm">
                 <div class="mb-3">
                   <label for="hotelName" class="form-label">Hotel Name</label>
-                  <input type="text" class="form-control" id="hotelName" placeholder="Enter a hotel name" v-model="hotelName">
+                  <input type="text" class="form-control" id="hotelName" v-model="hotelName">
                 </div>
                 <div class="mb-3">
                   <label for="hotelDescription" class="form-label">Hotel Description</label>
-                  <textarea type="text" class="form-control" id="hotelDescription" placeholder="Enter hotel description" v-model="hotelDescription"></textarea>
+                  <textarea type="text" class="form-control" id="hotelDescription"  v-model="hotelDescription"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="hotelAdd" class="form-label">Hotel Address</label>
-                  <textarea type="text" class="form-control" id="hotelAdd" placeholder="Enter hotel address" v-model="hotelAdd"></textarea>
+                  <textarea type="text" class="form-control" id="hotelAdd"  v-model="hotelAdd"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="country" class="form-label">Hotel Country</label>
-                  <input type="text" class="form-control" id="country" placeholder="Enter the hotel country" v-model="country">
+                  <input type="text" class="form-control" id="country"  v-model="country">
                 </div>
                 <div class="mb-3">
                   <label for="city" class="form-label">Hotel City</label>
-                  <input type="text" class="form-control" id="city" placeholder="Enter the hotel city" v-model="city">
+                  <input type="text" class="form-control" id="city"  v-model="city">
                 </div>
                 <div class="mb-3">
                   <label for="imgUrl" class="form-label">Hotel Image Url</label>
-                  <input type="text" class="form-control" id="imgUrl" placeholder="Enter the hotel image URL" v-model="imgUrl">
+                  <input type="text" class="form-control" id="imgUrl"  v-model="imgUrl">
                 </div>
                 <div class="mb-3">
                   <label for="amenities" class="form-label">Hotel Amenities</label>
-                  <textarea type="text" class="form-control" id="amenities" placeholder="Enter the hotel amenities" v-model="amenities"></textarea>
+                  <textarea type="text" class="form-control" id="amenities"  v-model="amenities"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="contactInfo" class="form-label">Hotel Contact Info</label>
-                  <input type="number" class="form-control" id="contactInfo" placeholder="Enter the hotel contact info" v-model="contactInfo">
+                  <input type="number" class="form-control" id="contactInfo"  v-model="contactInfo">
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">Hotel Amount</label>
-                  <input type="number" class="form-control" id="amount" placeholder="Enter the hotel amount" v-model="amount">
+                  <input type="number" class="form-control" id="amount"  v-model="amount">
                 </div>
               </form>
             </div>

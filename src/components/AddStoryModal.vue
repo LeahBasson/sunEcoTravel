@@ -64,6 +64,7 @@
         icon: "error",
         title: "Oops...",
         text: "Please fill in all the fields",
+        confirmButtonColor: '#FF9A00'
       });
       return;
     }

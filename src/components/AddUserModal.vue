@@ -83,6 +83,7 @@ function addUser() {
       icon: "error",
       title: "Oops...",
       text: "First name must contain only letters",
+      confirmButtonColor: '#FF9A00'
     });
     return;
   }
@@ -92,6 +93,7 @@ function addUser() {
       icon: "error",
       title: "Oops...",
       text: "Last name must contain only letters",
+      confirmButtonColor: '#FF9A00',
     });
     return;
   }
@@ -102,6 +104,7 @@ function addUser() {
       icon: "error",
       title: "Invalid Email",
       text: "Please enter a valid Gmail address ending with '@gmail.com'.",
+      confirmButtonColor: '#FF9A00',
     });
     return;
   }
@@ -112,6 +115,7 @@ function addUser() {
       icon: "error",
       title: "Oops...",
       text: "Please fill in all the fields",
+      confirmButtonColor: '#FF9A00',
     });
     return;
   }

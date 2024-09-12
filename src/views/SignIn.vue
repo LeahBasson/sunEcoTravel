@@ -32,7 +32,7 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your email address: </label>
-                        <input class="form-control" type="email" placeholder="Email address" v-model="payload.emailAdd"/>
+                        <input class="form-control" type="text" placeholder="Email address" v-model="payload.emailAdd"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
@@ -90,6 +90,7 @@ function addUser() {
       icon: 'error',
       title: 'Oops...',
       text: 'Please fill in all fields before signing up!',
+      confirmButtonColor: '#FF9A00',
     });
     return;
   }
@@ -101,6 +102,18 @@ function addUser() {
       icon: 'error',
       title: 'Invalid Name',
       text: 'First name and Last name should contain only letters',
+      confirmButtonColor: '#FF9A00',
+    });
+    return;
+  }
+
+   // Validate email address to contain @gmail.com
+  if (!payload.emailAdd.includes('@gmail.com')) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Email',
+      text: 'Please enter a valid Gmail address (must include @gmail.com)',
+      confirmButtonColor: '#FF9A00',
     });
     return;
   }

@@ -43,7 +43,9 @@
         <router-link to="/confirmation">
           <button class="confirm-button">Confirm</button>
         </router-link>
-        <button class="delete-all-button"  @click="deleteAllBookings">Cancel</button>
+        <div>
+          <button class="delete-all-button"  @click="deleteAllBookings">Cancel</button>
+        </div>
       </div>
     </div>
     </div>
@@ -162,7 +164,7 @@ img[alt="bookingImage"]{
   background-color: var(--alternative);
     color: var(--secondary);
     width: 10rem;
-    padding: 0.1rem 0.8rem;
+    padding: 0.6rem 0.8rem;
     border: none;
     border-radius: 0.3rem;
     font-weight: 600;

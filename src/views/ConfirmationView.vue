@@ -96,10 +96,23 @@ export default {
     .confirmation{
     display: flex;
     margin: auto;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     width: 90%;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.content{
+    display: none;
+}
+
+.content-two{
+    width: 100%;
+    font-family: "Poppins",sans-serif;
+    padding-top: 3rem;
+    color: var(--primary);
+    font-size: 1.1rem;
 }
 }
 </style>

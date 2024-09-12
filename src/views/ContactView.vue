@@ -216,6 +216,10 @@ export default {
     padding-bottom: 2rem;
   }
 
+  .contact-label{
+    color: red;
+  }
+
   @media (width < 999px)
 {
   img[alt="banner-img"]{
