@@ -121,7 +121,7 @@ class Users {
                     if (err) throw new Error(err.message);
                     res.json({
                       status: res.statusCode,
-                      msg: 'User details updated successfully :arrows_counterclockwise:',
+                      msg: 'User details updated successfully',
                     })
                   })
                   return 'same pwd'
@@ -136,7 +136,7 @@ class Users {
                     if (err) throw new Error(err.message);
                     res.json({
                       status: res.statusCode,
-                      msg: 'User details updated successfully :arrows_counterclockwise:',
+                      msg: 'User details updated successfully',
                     })
                   })
                 }
