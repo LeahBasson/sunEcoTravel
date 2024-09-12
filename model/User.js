@@ -99,7 +99,6 @@ class Users {
         }
     }
     
-    
     updateUser(req, res) {
         try {
           let data = req.body
