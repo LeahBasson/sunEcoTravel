@@ -90,4 +90,16 @@ export default {
 .continue-button:hover{
   background-color: var(--awesome);
 }
+
+@media (width < 999px)
+{
+    .confirmation{
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    width: 90%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+}
 </style>
