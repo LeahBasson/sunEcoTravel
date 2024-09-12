@@ -12,11 +12,6 @@
               <h5 class="card-title">{{ story.title }}</h5>
               <p>{{ story.typeOfStory }}</p>
               <p>{{ story.story.length > 80 ? story.story.slice(0, 80) + '...' : story.story }}</p>
-              <div class="button-wrapper justify-content-center">
-                <router-link to="/topStory">
-                <button class="btn-ReadMore">Read More</button>
-                </router-link>
-              </div>
             </template>
           </Card>
             </div>
@@ -24,6 +19,11 @@
           <Spinner />
         </div>
 
+        </div>
+        <div class="row justify-content-center pt-4">
+            <router-link to="/topStory">
+                <button class="btn-ReadMore">Read More</button>
+            </router-link>   
         </div>
     </div>
 </template>
@@ -81,6 +81,7 @@ img[alt="cardImage"] {
     color: var(--secondary);
     font-family: "Poppins", sans-serif;
     font-weight: 500;
+    width: 10rem;
 }
 
 .btn-ReadMore:hover{

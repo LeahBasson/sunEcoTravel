@@ -42,30 +42,33 @@ import { computed, onMounted, watch } from 'vue'
 import Card from '@/components/Card.vue'
 import Spinner from '@/components/Spinner.vue'
 import UpdateAccountModal from '@/components/UpdateAccountModal.vue'
-import { useRoute } from 'vue-router'
+// import { useRoute } from 'vue-router'
+import { useCookies } from 'vue3-cookies'
 
 const store = useStore()
-const route = useRoute()
+// const route = useRoute()
+const { cookies } = useCookies()
 
-const user = computed(() => store.state.user)
+const user = computed(() => store.state.user || cookies.get('LegitUser') )
 
 onMounted(() => {
 if (!user.value) {
   store.dispatch('fetchCurrentUser');
 } else {
-  const userID = route.params.id;
+  const userID = this?.user.userID;
   if (userID) {
-    store.dispatch('fetchUser', userID);
+    // store.dispatch('fetchUser', userID);
   }
 }
 });
 
 function handleUpdate() {
-store.dispatch('fetchCurrentUser');
+//  store.dispatch('fetchCurrentUser');
 }
 
 function deleteUser(userID) {
 store.dispatch('deleteUser', userID);
+cookies.remove('LegitUser')
 }
 
 watch(user, (newUser) => {

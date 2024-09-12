@@ -116,6 +116,11 @@ const routes = [
     path: '/stays',
     name: 'stays',
     component: () => import('@/views/StaysView.vue')
+  },
+  {
+    path: '/confirmation',
+    name: 'confirmation',
+    component: () => import('@/views/ConfirmationView.vue')
   }
 ]
 

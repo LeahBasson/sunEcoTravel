@@ -173,7 +173,7 @@ export default createStore({
         const token = cookies.get('LegitUser')?.token;
         if (!token) return;
 
-        const { result } = await (await axios.get(`${apiURL}user/me`, {
+        const { result } = await (await axios.get(`${apiURL}user/account`, {
           headers: { Authorization: `Bearer ${token}` }
         })).data;
 
@@ -189,14 +189,13 @@ export default createStore({
         });
       }
     },
+
     // ===== LOGIN =======
     async login(context, payload) {
       try {
         const response = await axios.post(`${apiURL}user/login`, payload);
         const { msg, result, token } = response.data;
-    
         if (result) {
-          // Successful login
           toast.success(`${msg}😎`, {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER
@@ -217,7 +216,6 @@ export default createStore({
           } else {
             router.push({ name: 'account', params: { id: result.userID } });
           }
-    
           // Clear redirectIntent after successful login
           context.commit('setRedirectIntent', null);
         } else {
@@ -228,14 +226,14 @@ export default createStore({
           });
         }
       } catch (error) {
-        // Handle error during login
-        console.error("Login error:", error); // Log error for debugging
+        console.error("Login error:", error);
         toast.error(`Login failed: ${error.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         });
       }
     },   
+    
   // ==== User ========
   async fetchUsers(context) {
     try {
@@ -291,14 +289,22 @@ export default createStore({
     }
   },
   async updateUser(context, payload) {
+    console.log(payload);
     try {
-      const { msg, err } = await (await axios.patch(`${apiURL}user/${payload.userID}`, payload)).data
+      const { msg, err} = await(await axios.patch(`${apiURL}user/${payload.userID}`, payload)).data
       if (msg) {
         context.dispatch('fetchUsers')
-        toast.success(`${msg}`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        })
+        cookies.set('LegitUser', {
+            token: savedUser.token,
+            result: payload
+          })
+          setTimeout(() => {
+            location.reload();
+        }, 3000);
+          toast.success(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
       } else {
         toast.error(`${err}`, {
           autoClose: 2000,
@@ -312,6 +318,7 @@ export default createStore({
       })
     }
   },
+  
   async deleteUser(context, id) {
     try {
       const { msg, err } = await (await axios.delete(`${apiURL}user/${id}`)).data

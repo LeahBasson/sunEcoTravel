@@ -4,11 +4,11 @@
             <h1 class="register-heading animate__animated animate__fadeInDown">Register</h1>
         </div>
         <div class="row sign-in-alignment">
-            <form class="form" @submit.prevent="register">
+            <form class="form" @submit.prevent="register" autocomplete="on">
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your firstname: </label>
-                        <input class="form-control" type="text" autocomplete="given-name" placeholder="First name" v-model="payload.firstName" pattern="[A-Za-z ]+" />
+                        <input class="form-control" type="text" placeholder="First name" v-model="payload.firstName" pattern="[A-Za-z ]+" />
                     </span>
                 </div>
                 <div class="form-control-wrapper">
@@ -32,7 +32,7 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your email address: </label>
-                        <input class="form-control" type="email"  autocomplete="email" placeholder="Email address" v-model="payload.emailAdd"/>
+                        <input class="form-control" type="email" placeholder="Email address" v-model="payload.emailAdd"/>
                     </span>
                 </div>
                 <div class="form-control-wrapper">
@@ -44,7 +44,7 @@
                 <div class="form-control-wrapper">
                     <span>
                         <label class="form-label">Enter your profile img url: </label>
-                        <input class="form-control" type="text" placeholder="User Profile" autocomplete="img-url" v-model="payload.userProfile"/>
+                        <input class="form-control" type="text" placeholder="User Profile" v-model="payload.userProfile"/>
                     </span>
                 </div>
                 <div class="form-button-wrapper">

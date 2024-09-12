@@ -31,20 +31,29 @@
           </tr>
         </tbody>
       </table>
-      <div class="button-wrapper">
+      <div class="wrapper">
         <div class="total-display">
           <p>
             Total Price: R{{ totalPrice }}
           </p>
         </div>
-        <button class="delete-all-button"  @click="deleteAllBookings">Delete All</button>
       </div>
+      <div class="row">
+      <div class="button-wrapper">
+        <router-link to="/confirmation">
+          <button class="confirm-button">Confirm</button>
+        </router-link>
+        <button class="delete-all-button"  @click="deleteAllBookings">Cancel</button>
+      </div>
+    </div>
     </div>
 
     <div v-else>
       <p class="text-book">No bookings yet</p>
       <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/travelIcon.png" class="img-fluid" alt="bookingImage" loading="eager">
     </div>
+
+    
   </div>
 </template>
 
@@ -137,6 +146,11 @@ img[alt="bookingImage"]{
   background-color: var(--awesome);
 }
 
+.wrapper{
+  width: 90%;
+  margin: auto;
+}
+
 .button-wrapper{
   display: flex;
   justify-content: space-between;
@@ -148,15 +162,29 @@ img[alt="bookingImage"]{
   background-color: var(--alternative);
     color: var(--secondary);
     width: 10rem;
-    padding: 0.4rem 0.8rem;
+    padding: 0.1rem 0.8rem;
     border: none;
     border-radius: 0.3rem;
     font-weight: 600;
     font-family: "Poppins",sans-serif;
-    margin-top: 1rem;
 }
 
 .delete-all-button:hover{
+  background-color: var(--awesome);
+}
+
+.confirm-button{
+  background-color: var(--alternative);
+    color: var(--secondary);
+    width: 10rem;
+    padding: 0.6rem 0.8rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-weight: 600;
+    font-family: "Poppins",sans-serif;
+}
+
+.confirm-button:hover{
   background-color: var(--awesome);
 }
 
@@ -183,6 +211,7 @@ img[alt="bookingImage"]{
   flex-direction: column;
   width: 90%;
   margin: auto;
+  gap: 1rem;
 }
 
 th, td{

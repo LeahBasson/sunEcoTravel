@@ -27,7 +27,9 @@
       </form>
     </div>
   </div>
-</template>
+</template> 
+
+
 
 <script setup>
 import { useStore } from 'vuex'
@@ -42,22 +44,29 @@ userPass: ''
 })
 
 const handleLogin = async () => {
-if (!payload.emailAdd || !payload.userPass) {
-  Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: 'Please fill in both the email and password fields!',
-  })
-  return
-}
+  if (!payload.emailAdd || !payload.userPass) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please fill in both the email and password fields!',
+    });
+    return;
+  }
 
-try {
-  await store.dispatch('login', payload)
-} catch (error) {
-  console.error('Login failed:', error)
-}
-}
+  try {
+    await store.dispatch('login', payload);
+  } catch (error) {
+    console.error('Login failed:', error.message); // This will log the error message in the console
+    Swal.fire({
+      icon: 'error',
+      title: 'Login failed',
+      text: error.message,
+    });
+  }
+};
+
 </script>
+
 
 <style scoped>
 .login-heading {
