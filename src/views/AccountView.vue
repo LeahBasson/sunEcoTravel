@@ -10,8 +10,8 @@
           <img :src="user.userProfile" loading="lazy" class="img-fluid img-width" :alt="user.firstName">
         </div>
         <div class="account-detail">
-          <h3 class="fw-bold">First Name: {{ user.firstName }}</h3>
-          <h3 class="fw-bold">Last Name: {{ user.lastName }}</h3>
+          <h3 class="lead"><span class="fw-bold">First Name:</span> {{ user.firstName }}</h3>
+          <h3 class="lead"><span class="fw-bold">Last Name:</span> {{ user.lastName }}</h3>
           <p class="lead"><span class="fw-bold">Email Address</span>: {{ user.emailAdd }}</p>
           <p class="lead"><span class="fw-bold">Age</span>: {{ user.userAge }}</p>
           <p class="lead"><span class="fw-bold">Gender</span>: {{ user.Gender }}</p>

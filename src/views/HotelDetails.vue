@@ -14,8 +14,11 @@
           <p class="description lead">{{ hotel.hotelDescription }}</p>
            <!-- Booking Inputs -->
           <div class="booking-inputs">
+          <label>Check in Date</label>
           <input type="datetime-local" v-model="checkInDate" placeholder="Check-in Date" class="form-control" />
+          <label>Check out Date</label>
           <input type="datetime-local" v-model="checkOutDate" placeholder="Check-out Date" class="form-control" />
+          <label>Number of Rooms</label>
           <input type="number" v-model="numberOfRooms" min="1" placeholder="Number of Rooms" class="form-control" />
           </div>
           <div class="detailsButtons">
