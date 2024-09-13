@@ -54,6 +54,7 @@ const user = computed(() => store.state.user || cookies.get('LegitUser') )
 onMounted(() => {
 if (!user.value) {
   store.dispatch('fetchCurrentUser');
+  
 } else {
   const userID = this?.user.userID;
   if (userID) {

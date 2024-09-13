@@ -102,9 +102,11 @@ const routes = [
       const result = cookies.get('LegitUser')?.result;
       if (result) {
         next();
+
       } else {
         next({ name: 'login' });
-      }
+      } 
+
     }
   },
   {

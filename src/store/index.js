@@ -184,12 +184,18 @@ export default createStore({
         } else {
           cookies.remove('LegitUser');  // Clear the token if invalid
         }
+      //   setTimeout(() => {
+      //     location.reload();
+      // }, 3000);
       } catch (error) {
         toast.error(`Error fetching user: ${error.message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         });
       }
+      setTimeout(() => {
+        location.reload();
+    }, 4000)
     },
 
     // ===== LOGIN =======
@@ -216,7 +222,9 @@ export default createStore({
           if (context.state.redirectIntent === 'admin' && result.userRole === 'admin') {
             router.push({ name: 'admin' });
           } else {
-            router.push({ name: 'account', params: { id: result.userID } });
+            await router.push({ name: 'account', params: { id: result.userID } });
+            location.reload();
+
           }
           // Clear redirectIntent after successful login
           context.commit('setRedirectIntent', null);
