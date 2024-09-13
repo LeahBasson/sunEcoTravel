@@ -268,9 +268,14 @@ td:before {
   width: 100%;
 }
 
+.confirm-button{
+  margin: auto;
+  width: 100%;
+}
+
 .delete-all-button{
   margin: auto;
-  width: 95%;
+  width: 100%;
 }
 
   /* Bookings Table Mobile */
