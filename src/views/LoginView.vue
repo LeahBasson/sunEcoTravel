@@ -3,7 +3,7 @@
     <div class="row">
       <h1 class="login-heading animate__animated animate__fadeInDown">Login</h1>
     </div>
-    <div class="row my-2 justify-content-center">
+    <div class="row my-2 justify-content-center" data-aos="fade-up"  data-aos-duration="3000">
       <form class="form" @submit.prevent="handleLogin">
         <div class="form-control-wrapper">
           <span>Enter Email address
@@ -32,9 +32,11 @@
 
 
 <script setup>
+import { onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { reactive } from 'vue'
 import Swal from 'sweetalert2'
+import AOS from 'aos';
 
 const store = useStore()
 
@@ -66,6 +68,10 @@ const handleLogin = async () => {
     });
   }
 };
+
+onMounted(async () => {
+  AOS.init();
+})
 
 </script>
 

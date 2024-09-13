@@ -41,11 +41,15 @@
         </Card>
       </div>
 
-      <div class="row" id="hotel-heading">
+      <div class="row" id="hotel-heading" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
         <h1>Hotels in Top Destinations</h1> 
       </div>
 
-      <div class="row" id="hotel-content">
+      <div class="row" id="hotel-content" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
         <div class="hotel-link">
           <router-link to="/topDestination" class="lnk">See All</router-link>
         </div>
@@ -70,11 +74,15 @@
         
       </div>
 
-      <div class="row" id="hotel-heading2">
+      <div class="row" id="hotel-heading2" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
         <h1>Explore a variety of stays</h1> 
       </div>
 
-      <div class="row" id="hotel-content">
+      <div class="row" id="hotel-content" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
         <div class="hotel-link">
           <router-link to="/stays" class="lnk">See All</router-link>
         </div>
@@ -103,6 +111,7 @@
 </template>
 
 <script setup>
+import AOS from 'aos';
 import Swal from 'sweetalert2'
 import { useStore } from 'vuex'
 import { ref, computed, onMounted, watch } from 'vue'
@@ -174,6 +183,7 @@ watch(searchQuery, (newQuery) => {
 onMounted(async () => {
   await store.dispatch('fetchHotels')
   loading.value = false // Update loading state
+  AOS.init();
 })
 
 // Handle additional scrolling functionality

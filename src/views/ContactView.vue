@@ -43,7 +43,7 @@
           </div>
         </form>
       </div>
-      <div class="rightContent">
+      <div class="rightContent" data-aos="fade-up"  data-aos-duration="3000">
         <h1>Get in Touch</h1>
         <p>We’d love to hear from you! Whether you have questions about your booking, need assistance with your travel plans, or want to learn more about our eco-friendly initiatives, our team is here to help.</p>
         <p class="fw-bold">Reservations Team</p>
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import AOS from 'aos';
+
 export default {
   name: "ContactView",
   data() {
@@ -97,7 +99,10 @@ export default {
         behavior: 'smooth'
       });
     }
-  }
+  },
+  mounted() {
+      AOS.init();
+    }
 }
 </script>
 

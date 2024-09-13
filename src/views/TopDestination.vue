@@ -13,7 +13,7 @@
   
       <div class="row" id="topDestination">
         <!-- Padma Hotel -->
-        <div class="content">
+        <div class="content" data-aos="fade-up"  data-aos-duration="3000">
           <div class="carousel-hotels">
             <div id="carouselExample" class="carousel slide">
               <div class="carousel-indicators">
@@ -72,7 +72,7 @@
         </div>
 
          <!-- Ozen Reserve Bolifushi -->
-         <div class="content">
+         <div class="content" data-aos="fade-up"  data-aos-duration="4000">
           <div class="content-hotels2" v-if="hotels">
             <Card class="card" v-for="hotel in hotels.slice(1, 2)" :key="hotel.hotelID">
               <template #cardBody>
@@ -128,7 +128,7 @@
         </div>
 
         <!-- Margarenia -->
-        <div class="content">
+        <div class="content" data-aos="fade-up"  data-aos-duration="5000">
           <div class="carousel-hotels">
             <div id="carouselExample3" class="carousel slide">
               <div class="carousel-indicators">
@@ -187,7 +187,7 @@
         </div>
 
         <!-- Le Bristol Paris -->
-        <div class="content">
+        <div class="content" data-aos="fade-up"  data-aos-duration="6000">
           <div class="content-hotels2" v-if="hotels">
             <Card class="card" v-for="hotel in hotels.slice(3, 4)" :key="hotel.hotelID">
               <template #cardBody>
@@ -244,7 +244,7 @@
         </div>
 
         <!-- Hotel Colline de France -->
-        <div class="content">
+        <div class="content" data-aos="fade-up"  data-aos-duration="7000">
             <div class="carousel-hotels">
             <div id="carouselExample5" class="carousel slide">
               <div class="carousel-indicators">
@@ -303,7 +303,7 @@
         </div>
 
         <!-- Grayson Hotel -->
-        <div class="content">
+        <div class="content" data-aos="fade-up"  data-aos-duration="8000">
           <div class="content-hotels2" v-if="hotels">
             <Card class="card" v-for="hotel in hotels.slice(5, 6)" :key="hotel.hotelID">
               <template #cardBody>
@@ -365,6 +365,7 @@
   </template>
   
   <script setup>
+  import AOS from 'aos';
   import { useStore } from 'vuex'
   import { computed, onMounted } from 'vue'
   import Spinner from '@/components/Spinner.vue'
@@ -373,7 +374,8 @@
   const hotels = computed(() => store.state.hotels)
   
   onMounted(() => {
-    store.dispatch('fetchHotels')
+    store.dispatch('fetchHotels');
+    AOS.init();
   }) 
   
   function scrollDown() {

@@ -40,7 +40,7 @@
         </Card>
       </div>
   
-      <div class="row" id="hotel-interaction">
+      <div class="row" id="hotel-interaction" data-aos="fade-up"  data-aos-duration="3000">
         <select class="form-select" aria-label="Default select example" v-model="selectedCountry"  @change="updateCountry(selectedCountry)">
   <option value="All">All</option>
   <option value="Indonesia">Indonesia</option>
@@ -56,7 +56,7 @@
         <button class="price-button" @click="toggleSortOrder">{{ sortButtonText }}</button>
       </div>
       
-      <div class="row" id="hotel-content">
+      <div class="row" id="hotel-content" data-aos="fade-up"  data-aos-duration="3000">
         <div class="hotel-cards" v-if="filteredByCountryHotels.length">
           <Card v-for="hotel in filteredByCountryHotels" :key="hotel.hotelID" class="card">
             <template #cardHeader>
@@ -84,6 +84,7 @@
   
   
 <script setup>
+import AOS from 'aos';
 import Swal from 'sweetalert2'
 import { useStore } from 'vuex'
 import { computed, ref, onMounted, watch } from 'vue'
@@ -102,6 +103,7 @@ const originalHotels = ref([])
 onMounted(async () => {
   await store.dispatch('fetchHotels')
   originalHotels.value = [...hotels.value] 
+  AOS.init();
 })
 
 const filteredHotels = computed(() => {

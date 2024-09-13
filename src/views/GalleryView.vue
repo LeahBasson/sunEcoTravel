@@ -11,13 +11,13 @@
       </div>
     </div>
 
-    <div class="row" id="gallery-heading">
+    <div class="row" id="gallery-heading" data-aos="fade-up"  data-aos-duration="3000">
       <h1>Destinations</h1>
     </div>
 
     <div class="row">
       <div class="gallery-content">
-        <div class="card mb-3">
+        <div class="card mb-3" data-aos="fade-up"  data-aos-duration="3000">
   <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/image 1.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Cape Town</h5>
@@ -25,7 +25,7 @@
   </div>
   <router-link :to="{ name: 'hotels', hash: '#hotelBanner' }"><button class="btnDiscover">Discover</button></router-link>
 </div>
-<div class="card mb-3">
+<div class="card mb-3" data-aos="fade-up"  data-aos-duration="3000">
   <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/image 10.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Switzerland</h5>
@@ -33,7 +33,7 @@
     <router-link :to="{ name: 'hotels', hash: '#hotelBanner' }"><button class="btnDiscover">Discover</button></router-link>
   </div>
 </div>
-<div class="card mb-3">
+<div class="card mb-3" data-aos="fade-up"  data-aos-duration="4000">
   <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/venice.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Venice</h5>
@@ -41,7 +41,7 @@
     <router-link :to="{ name: 'hotels', hash: '#hotelBanner' }"><button class="btnDiscover">Discover</button></router-link>
   </div>
 </div>
-<div class="card mb-3">
+<div class="card mb-3" data-aos="fade-up"  data-aos-duration="4000">
   <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/japan.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Japan</h5>
@@ -49,7 +49,7 @@
     <router-link :to="{ name: 'hotels', hash: '#hotelBanner' }"><button class="btnDiscover">Discover</button></router-link>
   </div>
 </div>
-<div class="card mb-3">
+<div class="card mb-3" data-aos="fade-up"  data-aos-duration="5000">
   <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/canada.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Canada</h5>
@@ -57,7 +57,7 @@
     <router-link :to="{ name: 'hotels', hash: '#hotelBanner' }"><button class="btnDiscover">Discover</button></router-link>
   </div>
 </div>
-<div class="card mb-3">
+<div class="card mb-3" data-aos="fade-up"  data-aos-duration="5000">
   <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/dubai.jpg" class="card-img-top" alt="CardImage" loading="eager">
   <div class="card-body">
     <h5 class="card-title">Dubai</h5>
@@ -72,6 +72,13 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import AOS from 'aos';
+
+onMounted(async () => {
+  AOS.init();
+})
+
 function scrollDown() {
   window.scrollTo({
     top: document.getElementById('gallery-heading').offsetTop,

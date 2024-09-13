@@ -15,7 +15,7 @@
       <h1 class="admin-heading">Hotels Table</h1>
     
     <div class="adminButtons">
-        <button class="admin-button" @click="sortByNameAsc">Sorting Alphabetically</button>
+        <button class="admin-button" @click="toggleSorting">{{ sortText }}</button>
       
         <button type="button" class="admin-button" data-bs-toggle="modal" data-bs-target="#addHotelModal">
           Add New Hotel
@@ -75,7 +75,7 @@
       <h1 class="admin-heading">Users Table</h1>
     
     <div class="adminButtons">
-        <button class="admin-button" @click="sortUserNameAsc">Sorting Alphabetically</button>
+        <button class="admin-button" @click="toggleSortingUser">{{ sortUser }}</button>
       
         <button type="button" class="admin-button" data-bs-toggle="modal" data-bs-target="#addUserModal">
           Add New User
@@ -235,7 +235,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import UpdateHotelModal from '@/components/UpdateHotelModal.vue';
 import AddHotelModel from '@/components/AddHotelModel.vue';
@@ -250,6 +250,60 @@ const hotels = computed(() => store.state.hotels);
 const users = computed(() => store.state.users);
 const bookings = computed(() => store.state.bookings);
 const stories = computed(() => store.state.stories);
+
+const sortText = ref('Sort Alphabetically'); // Initial button text
+let sortState = ref(0);
+const sortUser = ref('Sort Alphabetically');
+
+// Sort hotels by name
+function toggleSorting() {
+  if (!hotels.value || hotels.value.length === 0) {
+    alert('No hotels to sort.');
+    return;
+  }
+
+  if (sortState.value === 0) {
+    // Sort by name in ascending order (A to Z)
+    hotels.value.sort((a, b) => a.hotelName.localeCompare(b.hotelName));
+    sortText.value = 'NAME: A TO Z';
+    sortState.value = 1;
+  } else if (sortState.value === 1) {
+    // Sort by name in descending order (Z to A)
+    hotels.value.sort((a, b) => b.hotelName.localeCompare(a.hotelName));
+    sortText.value = 'NAME: Z TO A';
+    sortState.value = 2;
+  } else {
+    // Reset to default sorting (Sort Alphabetically)
+    fetchHotels(); // Re-fetch original data or reset the order
+    sortText.value = 'Sort Alphabetically';
+    sortState.value = 0;
+  }
+}
+
+// Sort users by name
+function toggleSortingUser() {
+  if (!users.value || users.value.length === 0) {
+    alert('No users to sort.');
+    return;
+  }
+
+  if (sortState.value === 0) {
+    // Sort by name in ascending order (A to Z)
+    users.value.sort((a, b) => a.firstName.localeCompare(b.firstName));
+    sortUser.value = 'NAME: A TO Z';
+    sortState.value = 1;
+  } else if (sortState.value === 1) {
+    // Sort by name in descending order (Z to A)
+    users.value.sort((a, b) => b.firstName.localeCompare(a.firstName));
+    sortUser.value = 'NAME: Z TO A';
+    sortState.value = 2;
+  } else {
+    // Reset to default sorting (Sort Alphabetically)
+    fetchUsers(); // Re-fetch original data or reset the order
+    sortUser.value = 'Sort Alphabetically';
+    sortState.value = 0;
+  }
+}
 
 function fetchHotels() {
   store.dispatch('fetchHotels');
@@ -277,14 +331,6 @@ function deleteStory(storyID) {
 
 function deleteUser(userID) {
   store.dispatch('deleteUser', userID);
-}
-
-function sortByNameAsc() {
-  hotels.value.sort((a, b) => a.hotelName.localeCompare(b.hotelName));
-}
-
-function sortUserNameAsc() {
-  users.value.sort((a, b) => a.firstName.localeCompare(b.firstName));
 }
 
 function scrollDown() {

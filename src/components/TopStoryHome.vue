@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="ourStoryHome">
+    <div class="container" id="ourStoryHome" data-aos="fade-up"  data-aos-duration="4000">
         <div class="row">
             <h2>Top Stories</h2>
             
@@ -29,6 +29,7 @@
 </template>
 
 <script setup>
+import AOS from 'aos';
 import { useStore } from 'vuex'
 import { computed, onMounted } from 'vue'
 import Spinner from '@/components/Spinner.vue'
@@ -38,7 +39,8 @@ const stories = computed(
     () => store.state.stories
 )
 onMounted(() => {
-    store.dispatch('fetchStories')
+    store.dispatch('fetchStories'),
+    AOS.init();
 }) 
 </script>
 

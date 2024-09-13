@@ -52,7 +52,7 @@
                     <button type="reset" class="btnSignIn">Reset</button>
                 </div>
             </form>
-            <div class="sign-in-content">
+            <div class="sign-in-content" data-aos="fade-up"  data-aos-duration="3000">
                 <h2>Sign up</h2>
                 <p>Book your next stay with us. Sign in to access your personalized hotel recommendations, exclusive deals, and more.</p>
                 <h5 class="sub-heading">Why Book with Sun Eco Travel?</h5>
@@ -68,6 +68,8 @@
 </template>
 
 <script setup>
+import AOS from 'aos';
+import { onMounted } from 'vue'
 import { reactive } from 'vue';
 import { useStore } from 'vuex';
 import Swal from 'sweetalert2';
@@ -121,6 +123,10 @@ function addUser() {
   // If validation passes, dispatch the action to store the user
   store.dispatch('addUser', payload);
 }
+
+onMounted(async () => {
+  AOS.init();
+})
 </script>
 
 

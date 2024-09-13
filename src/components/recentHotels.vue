@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="ourStoryHome">
+    <div class="container" id="ourStoryHome" data-aos="fade-up"  data-aos-duration="5000">
       <div class="row">
         <h2>Recently added hotels</h2>
         
@@ -28,6 +28,7 @@
   </template>
   
   <script>
+  import AOS from 'aos';
   import Card from '@/components/Card.vue'
   import Spinner from '@/components/Spinner.vue'
   
@@ -43,7 +44,8 @@
       }
     },
     mounted() {
-      this.$store.dispatch('fetchRecentHotels')
+      this.$store.dispatch('fetchRecentHotels'),
+      AOS.init();
     }
   }
   </script>

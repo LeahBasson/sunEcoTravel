@@ -11,19 +11,19 @@
       </div>
     </div>
 
-    <div class="row" id="adventureRoulette-heading">
+    <div class="row" id="adventureRoulette-heading" data-aos="fade-up"  data-aos-duration="3000">
       <h1>Unleash Spontaneity with Adventure Roulette
         <span><lord-icon src="https://cdn.lordicon.com/trkmlure.json" trigger="in" delay="1500" state="in-reveal" colors="primary:#000000,secondary:#ff9a00"></lord-icon></span>
       </h1> 
     </div>
 
-    <div class="row" id="adventure-interaction">
+    <div class="row" id="adventure-interaction" data-aos="fade-up"  data-aos-duration="3000">
       <input class="form-control" type="text" placeholder="Search by destination" id="searchInput" v-model="searchQuery" @input="performSearch">
       <button class="price-button" @click="toggleSortOrder">{{ sortButtonText }}</button>
     </div>
 
     <!-- Display hotels -->
-    <div class="row" id="adventure-content" v-if="displayedHotels.length">
+    <div class="row" id="adventure-content" v-if="displayedHotels.length" data-aos="fade-up"  data-aos-duration="3000">
       <Card v-for="hotel in displayedHotels" :key="hotel.hotelID">
         <template #cardHeader>
           <img :src="hotel.imgUrl" loading="lazy" class="img-fluid" :alt="hotel.hotelName">
@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+import AOS from 'aos';
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import Card from '@/components/Card.vue'
@@ -121,6 +122,7 @@ onMounted(() => {
   store.dispatch('fetchHotels').then(() => {
     updateDisplayedHotels() 
     setInterval(updateDisplayedHotels, 8000) // Switch to the next set every 8 seconds
+    AOS.init();
   })
 })
 

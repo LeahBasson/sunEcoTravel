@@ -11,12 +11,16 @@
       </div>
     </div>
 
-    <div class="row" id="about-content-one">
+    <div class="row" id="about-content-one" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
       <h1>Sun Eco Travel wants to offer you the best expericences and memories of your life !</h1>
       <p>Founded in 2002, we are a corporate travel company providing travel management solutions to large domestic and global companies.</p>
     </div>
 
-    <div class="row" id="about-content-two">
+    <div class="row" id="about-content-two" data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
      <div class="imgDiv">
       <img src="https://leahbasson.github.io/MyImages/sunEcoTravel/aboutImage.png" class="img-fluid" alt="aboutImage" loading="eager">
      </div>
@@ -28,7 +32,7 @@
      </div>
     </div>
 
-    <div class="row" id="icons">
+    <div class="row" id="icons" data-aos="fade-up"  data-aos-duration="3000">
       <div class="icons-content">
         <i class="bi bi-houses-fill"></i>
         <p>Wide Selection of Hotels</p>
@@ -51,6 +55,13 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import AOS from 'aos';
+
+onMounted(async () => {
+  AOS.init();
+})
+
 function scrollDown() {
   window.scrollTo({
     top: document.getElementById('about-content-one').offsetTop,

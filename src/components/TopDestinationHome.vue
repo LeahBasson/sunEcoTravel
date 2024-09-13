@@ -1,12 +1,12 @@
 <template>
   <div class="container" id="topDestinationHome">
-      <div class="leftContent">
+      <div class="leftContent" data-aos="fade-up"  data-aos-duration="1000">
           <h2>Hotels in Top Destinations</h2>
           <p>A few hotels made our list, as a remarkable piece of art, the size and scale of which boggles the imagination. While many of the team's picks are remote breathe-in-that-fresh-air kinds of places, our list doesn't skimp on cities where the hustle and bustle is part of the fun. There are never-ending reasons to travel, but many go to seek those awe-inspiring moments that stop them in their tracks, searching for the sights that will stay with them forever.</p>
           <router-link to="/topDestination" class="alignButton"><button class="btn-homeTopDest">Explore More</button></router-link>
       </div>
 
-      <div class="rightContent">
+      <div class="rightContent" data-aos="fade-up"  data-aos-duration="1000">
           <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 <div class="carousel-inner">
   <div class="carousel-item active">
@@ -59,8 +59,15 @@
 </template>
 
 <script>
+import AOS from 'aos';
+
 export default {
-   name: "TopDestinationHome"
+  name: "TopDestinationHome",
+  
+  mounted() {
+    AOS.init();
+  }
+
 }
 </script>
 
